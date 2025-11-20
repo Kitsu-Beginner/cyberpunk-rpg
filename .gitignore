@@ -1,0 +1,34 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+
+# --- Virtual Environments ---
+venv/
+env/
+.venv/
+
+# --- Secret config files ---
+config.py
+instance/
+*.env
+
+# --- Flask / Werkzeug ---
+*.pid
+
+# --- IDE / OS files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Node / Frontend ---
+node_modules/
+dist/
+
+# --- Database dumps ---
+*.sql
+*.backup

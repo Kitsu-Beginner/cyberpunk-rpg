@@ -1,0 +1,377 @@
+<div id="content-core-resolution" class="content-block">
+      <h2>Core Resolution System</h2>
+      <p>All actions in the game are resolved using dice pools made up of six-sided dice (d6). Each die that rolls a 5 or 6 counts as one hit. The number of hits rolled determines how successful an action is.</p>
+      <h3>Building the Dice Pool</h3>
+      <ul>
+        <li>Identify the relevant attribute or average of two attributes for the action.
+          <ul>
+            <li>When two attributes are used, calculate their average as (A + B) / 2, rounding up.</li>
+          </ul>
+        </li>
+        <li>Add the relevant skill rating to the result.
+          <ul>
+            <li>(Example: (Composure 4 + Reaction 3) / 2 = 3.5 → 4. Add Firearms 3 → Total Dice Pool 7.)</li>
+          </ul>
+        </li>
+        <li>Apply any situational modifiers (positive or negative) that affect the action.
+          <ul>
+            <li>Modifiers always adjust the number of dice rolled, never the success threshold.</li>
+          </ul>
+        </li>
+      </ul>
+      <h3>Rolling and Determining Success</h3>
+      <p>Roll the total number of dice in your dice pool. Each die that shows a 5 or 6 is counted as one hit. The total number of hits determines the outcome:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Difficulty</th>
+            <th>Required Hits</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Easy</td>
+            <td>1</td>
+            <td>Simple task with minimal risk.</td>
+          </tr>
+          <tr>
+            <td>Standard</td>
+            <td>2</td>
+            <td>Average challenge under normal conditions.</td>
+          </tr>
+          <tr>
+            <td>Hard</td>
+            <td>3</td>
+            <td>Demanding task or stressful conditions.</td>
+          </tr>
+          <tr>
+            <td>Very Hard</td>
+            <td>4</td>
+            <td>Complex or dangerous action.</td>
+          </tr>
+          <tr>
+            <td>Extreme</td>
+            <td>5</td>
+            <td>Nearly impossible without specialized gear or cyberware.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>If the number of hits meets or exceeds the required difficulty, the action succeeds. Extra hits may increase the quality, speed, or impact of the result, as determined by the GM.</p>
+      <h3>Opposed Rolls</h3>
+      <p>When two characters act directly against one another (e.g., attacker vs. defender, hacker vs. firewall), both sides build and roll their respective dice pools. Each side counts their total hits.</p>
+      <ul>
+        <li>The side with the higher number of hits wins the contest.</li>
+        <li>The difference in hits is called <strong>net hits</strong>, which represent the margin of success and can increase damage, effectiveness, or narrative advantage. (Example: Attacker rolls 4 hits, defender 2 → 2 net hits applied as bonus damage or effect.)</li>
+      </ul>
+      <h3>Modifiers</h3>
+      <p>Environmental conditions, equipment, cyberware, or situational advantages may apply modifiers to a roll. Modifiers always change the number of dice in the pool, not the target number or success threshold. Positive conditions add dice; negative conditions subtract them. Typical examples include:</p>
+      <ul>
+        <li>Smartlink system: +1 die to ranged attacks.</li>
+        <li>Poor visibility or smoke: –2 dice to perception or ranged attacks.</li>
+        <li>Superior tools or hardware: +1–2 dice depending on quality.</li>
+      </ul>
+    </div>
+
+
+    <div id="content-attributes-effects" class="content-block">
+      <h2>Attributes and Derived Effects</h2>
+      <p>Characters are defined by eight core attributes, grouped into three categories: Physical, Mental, and Social. Each attribute is rated from 1 to 5, with scores of 5 or higher representing enhanced or superhuman capability, often achievable only through cybernetic augmentation or genetic modification.</p>
+      <h3>Physical Attributes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stamina</td>
+            <td>Endurance, health, and resistance to fatigue, toxins, and injury.</td>
+          </tr>
+          <tr>
+            <td>Strength</td>
+            <td>Muscular power and the ability to lift, carry, or inflict physical force.</td>
+          </tr>
+          <tr>
+            <td>Agility</td>
+            <td>Bodily coordination, precision, and control of fine and gross motor skills.</td>
+          </tr>
+          <tr>
+            <td>Reaction</td>
+            <td>Reflex speed, balance, and overall motor response time.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Mental Attributes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Intuition</td>
+            <td>Perceptive awareness, pattern recognition, and instinctive understanding.</td>
+          </tr>
+          <tr>
+            <td>Logic</td>
+            <td>Analytical reasoning, problem-solving, and data processing.</td>
+          </tr>
+          <tr>
+            <td>Composure</td>
+            <td>Emotional control, stress tolerance, and ability to remain calm under pressure.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Social Attributes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Charisma</td>
+            <td>Presence, communication skill, and ability to influence others.</td>
+          </tr>
+          <tr>
+            <td>Humanity</td>
+            <td>The measure of one’s remaining empathy, emotion, and sense of self; diminished through cybernetic replacement.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Damage and Attribute Reduction</h3>
+      <p>Damage is represented by the temporary reduction of attributes. Instead of tracking separate damage boxes or points, physical and mental harm directly reduces a character’s effective capability.</p>
+      <h4>Physical Damage</h4>
+      <p>When a character suffers Physical Damage, they must reduce their Physical Attributes (Stamina, Strength, Agility, or Reaction) by a total equal to the damage received.</p>
+      <ul>
+        <li>The player (or defender) chooses which attributes to lower, reflecting how the injury manifests. (Example: a gunshot might lower Strength and Agility, while electric shock could reduce Reaction.)</li>
+        <li>Attribute reductions apply immediately and affect all derived rolls that use those attributes.</li>
+        <li>Attributes cannot be reduced below 0. If an attribute would be reduced below 0, the character is incapacitated or killed, depending on the source of damage and GM discretion.</li>
+      </ul>
+      <h4>Stun Damage</h4>
+      <p>When a character suffers Stun Damage (Brawl, stun weapons, Blasts or Drain), they must reduce their Mental Attributes (Intuition, Logic, or Composure) by a total equal to the damage taken.</p>
+      <ul>
+        <li>The player chooses which attributes are reduced, representing the mental impact of the effect.</li>
+        <li>If all three mental attributes are reduced to 0, the character loses consciousness or becomes mentally incapacitated.</li>
+      </ul>
+      <h4>Recovery</h4>
+      <p>Attribute losses from damage are temporary and can be restored through rest, medical care, or mental recovery. You heal 1 point of one physical attribute per night's rest. You recover 1 point of one mental attribute per combat round</p>
+      <h4>Humanity Loss</h4>
+      <p>Installing or upgrading cyberware reduces a character’s Humanity permanently. Each implant has a specified Humanity cost representing its invasive impact on the body and psyche. As Humanity decreases, the character becomes emotionally detached, increasingly mechanical in thought and behavior. A Humanity score of 0 represents total loss of empathy and self-awareness — the threshold of cyberpsychosis.</p>
+    </div>
+
+
+    <div id="content-secondary-attributes" class="content-block">
+      <h2>Secondary Attributes</h2>
+      <p>Secondary attributes represent composite measures derived from the core attributes. They determine how quickly a character reacts, moves, or defends in combat and other dynamic situations. Secondary attributes are recalculated automatically whenever the underlying attributes change due to damage, cyberware, or temporary effects.</p>
+      <h3>Defense Pool</h3>
+      <p><strong>Formula: Agility + Intuition</strong></p>
+      <p>The Defense Pool represents a character’s ability to evade attacks, avoid danger, and react to threats. Whenever a character is attacked, they roll their Defense Pool in an opposed test against the attacker’s roll (typically an attack skill + attribute pool).</p>
+      <ul>
+        <li>Each hit on the defender’s roll cancels one hit from the attacker.</li>
+        <li>Remaining net hits determine the degree of success or damage inflicted.</li>
+        <li>Defense Pool is used in nearly all defensive situations. If the player is unaware of an attacker (flanked) or when defending against an AoE attack the Pool is halved.</li>
+      </ul>
+      <h3>Speed</h3>
+      <p><strong>Formula: (Agility + Reaction) / 2 (round up)</strong></p>
+      <p>Speed determines how far a character can move per Action during combat. The result is measured in meters, representing the distance a character can cover in a single movement or tactical maneuver.</p>
+      <ul>
+        <li>A character may use one Action to move a number of meters equal to their Speed.</li>
+        <li>Speed may be modified by cyberware, gear, or situational conditions (terrain, injuries, etc.).</li>
+      </ul>
+      <h3>Initiative</h3>
+      <p><strong>Formula: Reaction + Intuition</strong></p>
+      <p>Initiative determines the order of actions in combat and other time-sensitive situations. At the start of an encounter, each participant rolls a number of dice equal to their Initiative score and counts total hits. Characters act in descending order of total hits.</p>
+      <ul>
+        <li>Ties are resolved by comparing raw Initiative scores (higher acts first).</li>
+        <li>Cybernetic reflex enhancers or neural boosters may provide bonus dice to Initiative rolls.</li>
+      </ul>
+    </div>
+
+
+    <div id="content-skills-rules" class="content-block">
+      <h2>Skills</h2>
+      <p>Skills represent learned abilities, training, and practical knowledge. They define what a character knows how to do — from handling firearms to negotiating contracts or performing cybernetic surgery. Each skill is rated from 1 to 5, with higher values reflecting deeper proficiency and greater reliability in challenging conditions.</p>
+      <h3>Using Skills</h3>
+      <p>To perform an action involving a skill, build a dice pool using the following formula:</p>
+      <p><strong>Dice Pool = (Base Attributes / 2, rounded up) + Skill Rating + Modifiers</strong></p>
+      <p>Each skill is linked to two base attributes that define its physical, mental, or social foundation. The average of these attributes is used to calculate the base for the roll.</p>
+      <h3>Specializations</h3>
+      <p>Each skill may have one Specialization, representing a focused area of expertise within that skill. A specialization grants a +2 dice bonus to any roll that directly applies to its field. Examples:</p>
+      <ul>
+        <li>Firearms (Pistols)</li>
+        <li>Hacking (Corporate Systems)</li>
+        <li>Medicine (Trauma Surgery)</li>
+        <li>Persuasion (Corporate Negotiation)</li>
+        <li>Driving (Motorcycles)</li>
+      </ul>
+      <p>Specializations must be defined at character creation or gained through advancement and must be narrow enough to apply only in specific contexts.</p>
+      <h3>Skill Ratings</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rating</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 – Basic</td>
+            <td>Rudimentary understanding; minimal training or casual experience.</td>
+          </tr>
+          <tr>
+            <td>2 – Competent</td>
+            <td>Functional knowledge; capable under normal circumstances.</td>
+          </tr>
+          <tr>
+            <td>3 – Skilled</td>
+            <td>Professionally trained or experienced; reliable performance.</td>
+          </tr>
+          <tr>
+            <td>4 – Expert</td>
+            <td>Exceptional capability; advanced training or years of practice.</td>
+          </tr>
+          <tr>
+            <td>5 – Master</td>
+            <td>Elite or world-class proficiency; rarely fails even under pressure.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Untrained Actions</h3>
+      <p>Characters may attempt actions without the relevant skill if they possess the necessary attributes. An untrained action removes the Skill Rating from the dice pool and may incur an additional –3 dice penalty at the GM’s discretion, depending on task difficulty or familiarity.</p>
+    </div>
+
+     <div id="content-combat-system" class="content-block">
+      <h2>Combat System</h2>
+      <p>Combat represents high-intensity situations such as firefights, brawls, or tactical operations. Time during combat is divided into <strong>Combat Rounds</strong>, each representing approximately five seconds of real time. All participants act in sequence according to their Initiative order, performing actions that cost <strong>Action Points (AP)</strong>.</p>
+      <h3>Combat Round Structure</h3>
+      <p>Each Combat Round follows the same sequence:</p>
+      <ol>
+        <li><strong>Initiative Roll:</strong> At the start of the round, each character may spend any number of their Action Points to enhance their Initiative for that round.
+          <ul>
+            <li>For every Action Point spent, roll 1d6 and add the total to the character’s Initiative score (Reaction + Intuition).</li>
+            <li>This represents reflex acceleration, tactical focus, or preemptive movement before the fight fully develops.</li>
+            <li>The remaining Action Points are available for actions during the round.</li>
+          </ul>
+        </li>
+        <li><strong>Determine Initiative Order:</strong> All participants act in descending order of total Initiative (base + rolled dice). Ties are resolved by comparing base Initiative scores; if still tied, actions occur simultaneously.</li>
+        <li><strong>Take Actions:</strong> During their turn, each character may spend their remaining Action Points on movement, attacks, or other maneuvers until all AP are used or the round ends. A character can hold back Actions for defensive maneuvers.</li>
+        <li><strong>End of Round:</strong> Once all participants have acted, the round concludes. Action Points reset to 4, and a new round begins.</li>
+      </ol>
+      <h3>Action Points</h3>
+      <p>Each character begins a Combat Round with 4 Action Points (AP). Actions cost a number of AP depending on their complexity or time requirement. Players may combine actions freely as long as they have sufficient AP remaining.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>AP Cost</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Attack</td>
+            <td>2</td>
+            <td>Make a standard attack using a weapon or unarmed strike.</td>
+          </tr>
+          <tr>
+            <td>Take Aim</td>
+            <td>1</td>
+            <td>Focus on a target; grants +3 die to the next attack made that round.</td>
+          </tr>
+          <tr>
+            <td>Move / Take Cover</td>
+            <td>1</td>
+            <td>Move a number of meters equal to Speed or dive behind cover.</td>
+          </tr>
+          <tr>
+            <td>Reload / Draw Weapon</td>
+            <td>2</td>
+            <td>Reload a weapon or ready a new one.</td>
+          </tr>
+          <tr>
+            <td>Dodge</td>
+            <td>1</td>
+            <td>Add you Dodge Rating to a defense roll</td>
+          </tr>
+          <tr>
+            <td>Special Action</td>
+            <td>Variable</td>
+            <td>Use a unique ability, cyberware function, or environmental interaction as defined by the GM.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>A player may reserve AP for defensive reactions or delayed actions later in the round. Unused AP are lost at the end of the round.</p>
+      <h3>Initiative and Tempo</h3>
+      <p>Spending Action Points on Initiative introduces a tactical trade-off: acting faster in the round reduces the number of actions available once your turn arrives. Aggressive characters may act first but risk burning their actions and tactical options early, while cautious characters conserve AP for flexible responses later in the round.</p>
+    </div>
+
+
+    <div id="content-weapons-armor" class="content-block">
+      <h2>Weapons and Armor</h2>
+      <p>Weapons and armor determine how effective attacks and defenses are in combat. Each weapon has a defined Damage Rating and Penetration Rating, while armor provides an Armor Rating that mitigates incoming damage. These values interact directly to determine how much damage a target sustains when hit.</p>
+      <h3>Weapons</h3>
+      <p>Weapons represent any tool designed to inflict harm — firearms, melee weapons, or energy systems. Each weapon has two key statistics:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Statistic</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Damage Rating (DMG)</td>
+            <td>The base amount of Physical Damage inflicted by a successful hit. The defender reduces their Physical Attributes by this amount when the attack is resolved.</td>
+          </tr>
+          <tr>
+            <td>Penetration Rating (PEN)</td>
+            <td>Indicates how effectively the weapon bypasses armor. The attack ignores Armor Rating up to the weapon’s Penetration value.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Example:</strong> A rifle with DMG 4 and PEN 2 hits a target wearing Armor 3. The armor’s effective protection is reduced to 1 (3 − 2). The defender’s armor then converts 1 point of Physical Damage into Stun Damage. The remaining 3 points apply as Physical Damage.</p>
+      <h3>Armor</h3>
+      <p>Armor provides protection against Physical Damage by absorbing or dispersing kinetic and thermal energy. Each suit or layer of armor has an Armor Rating (AR) that represents its ability to reduce incoming harm.</p>
+      <p><strong>Armor Rating Effect:</strong></p>
+      <ul>
+        <li>For each point of Armor Rating, 1 point of Physical Damage from a single attack is converted into Stun Damage.</li>
+        <li>This conversion applies after subtracting the attacker’s Penetration value.</li>
+        <li>Any remaining Physical Damage after this conversion is applied normally.</li>
+      </ul>
+      <p><strong>Example:</strong> A target with AR 3 is hit by a pistol (DMG 3, PEN 0). All 3 points of Physical Damage are converted to Stun Damage instead of Physical Damage. If the same target is hit by a rifle (DMG 5, PEN 2), only 1 point of armor remains effective — converting 1 damage to Stun, while 4 Physical Damage is applied directly.</p>
+      <h3>Resolving Damage</h3>
+      <ol>
+        <li>Determine the net hits from the opposed roll (attacker vs. defender).</li>
+        <li>Add net hits to the weapon’s base Damage Rating (optional, if you use degrees of success to amplify damage).</li>
+        <li>Apply the weapon’s Penetration Rating, reducing the target’s effective Armor.</li>
+        <li>The remaining Armor Rating converts 1 Physical Damage per point into Stun Damage.</li>
+        <li>Apply the results as temporary reductions to the target’s Physical or Mental Attributes (as appropriate).</li>
+      </ol>
+      <h3>Damage Types</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Physical Damage</td>
+            <td>Caused by direct trauma, weapons, explosions, or other bodily harm. Reduces Physical Attributes.</td>
+          </tr>
+          <tr>
+            <td>Stun Damage</td>
+            <td>Represents concussive shock, exhaustion, or neurological stress. Reduces Mental Attributes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

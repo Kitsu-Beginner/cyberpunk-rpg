@@ -1,0 +1,227 @@
+<div id="content-combat-rules" class="content-block">
+      <h2>Combat Rules</h2>
+      <p>Combat is resolved in structured combat rounds, each representing approximately five seconds of in-world time. During a round, characters act in descending order of Initiative until all participants have spent their available Action Points (AP).</p>
+      
+      <h3>Action Points</h3>
+      <p>Each character begins the combat round with 4 Action Points (AP). Action Points are spent to perform actions such as attacking, moving, or taking aim. Some actions require multiple points to complete, while others cost only one. Any unspent Action Points can be reserved for defensive reactions or delayed actions later in the same round, but all points must be spent before the end of the round. Unused points do not carry over into the next round.</p>
+      
+      <h3>Initiative</h3>
+      <p>At the start of each combat round, every participant may choose to spend Action Points to roll for Initiative. For each Action Point spent, roll 1d6 and add the total to the character’s Initiative Attribute (Reaction + Intuition). Characters act in descending Initiative order. Initiative is recalculated at the start of every new round. Action Points spent for Initiative reduce the number of points available for actions that round.</p>
+      
+      <h3>Attacks and Defense</h3>
+      <p>An attack is resolved through an opposed roll between the attacker and the defender:</p>
+      <ul>
+        <li><strong>Attacker:</strong> Rolls the appropriate Attack Dice Pool (weapon or skill-based).</li>
+        <li><strong>Defender:</strong> Rolls their Defense Pool = Agility + Intuition, plus any modifiers.</li>
+      </ul>
+      <p>If the defender’s hits ≥ attacker’s hits, the attack fails and no damage is inflicted. If the attacker scores more hits, the attack succeeds — the number of <strong>net hits</strong> (attacker hits minus defender hits) increases the final damage.</p>
+      
+      <h3>Modifiers to Defense</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Flanked / attacked from behind</td>
+            <td>Defense Pool is halved</td>
+          </tr>
+          <tr>
+            <td>Blast or area attack</td>
+            <td>Defense Pool is halved</td>
+          </tr>
+          <tr>
+            <td>Partial Cover</td>
+            <td>+2 dice to Defense Pool</td>
+          </tr>
+          <tr>
+            <td>Good Cover</td>
+            <td>+4 dice to Defense Pool</td>
+          </tr>
+          <tr>
+            <td>Dodge Action</td>
+            <td>+Dodge Skill Rating (costs 1 AP)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Damage Resolution</h3>
+      <p>Successful attacks inflict Damage = Weapon Damage + Net Hits. Before applying damage, reduce its effectiveness according to the defender’s Armor Rating and the weapon’s Penetration Value. Each point of Armor converts one point of Physical Damage into Stun Damage, unless negated by penetration. Afterward, the victim chooses how to distribute the total damage:</p>
+      <ul>
+        <li><strong>Physical Damage</strong> reduces the target’s Physical Attributes (Stamina, Strength, Agility, Reaction) by the total damage received.</li>
+        <li><strong>Stun Damage</strong> reduces the target’s Mental Attributes (Intuition, Logic, Composure) by the total damage received.</li>
+      </ul>
+      <p>If any attribute is reduced to 0, the character becomes incapacitated or unconscious, depending on the type of damage.</p>
+    </div>
+
+
+
+    <div id="content-combat-actions" class="content-block">
+      <h2>Combat Actions</h2>
+      <p>During a combat round, characters may perform actions by spending Action Points (AP). Each character begins the round with 4 AP, minus any spent on the Initiative roll. Actions can be taken in any order during the character’s turn, provided the total Action Point cost does not exceed the remaining AP. Unused Action Points may be reserved for defensive reactions (such as Dodge) or delayed actions later in the round, but must be spent before the round ends.</p>
+
+      <h3>1 Action Point (1 AP) Actions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Take Aim</td>
+            <td>Gain +3 dice to the next ranged attack. Bonus is lost if the attacker moves or performs another action first.</td>
+          </tr>
+          <tr>
+            <td>Quick-Draw (Pistol)</td>
+            <td>Draw or holster a pistol-sized firearm as a free preparation for an attack.</td>
+          </tr>
+          <tr>
+            <td>Move</td>
+            <td>Move up to the character’s Speed (in meters) per Action Point.</td>
+          </tr>
+          <tr>
+            <td>Dodge</td>
+            <td>Adds the character’s Dodge Skill Rating to the next Defense Roll. May be declared as a reaction when attacked.</td>
+          </tr>
+          <tr>
+            <td>Jump to Cover</td>
+            <td>Move to the nearest available cover (up to Speed in meters) and gain the corresponding cover bonus.</td>
+          </tr>
+          <tr>
+            <td>Reload (Smartgun)</td>
+            <td>Instantly reload a weapon equipped with smart-feed or cyber-linked reload systems.</td>
+          </tr>
+          <tr>
+            <td>Activate Device or Cyberware</td>
+            <td>Power on, activate, or toggle a simple device, cybernetic implant, or augment interface.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>2 Action Point (2 AP) Actions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Attack</td>
+            <td>Make an attack roll using the appropriate weapon skill. Compare against the target’s Defense Pool to resolve damage.</td>
+          </tr>
+          <tr>
+            <td>Reload (Standard)</td>
+            <td>Reload a conventional weapon without smart-link systems.</td>
+          </tr>
+          <tr>
+            <td>Ready Weapon</td>
+            <td>Draw, unholster, or ready a weapon for combat use.</td>
+          </tr>
+          <tr>
+            <td>Activate Complex Device</td>
+            <td>Power up or initiate a more advanced system, such as a drone controller, tactical uplink, or field scanner.</td>
+          </tr>
+          <tr>
+            <td>Pick Up Small Object</td>
+            <td>Retrieve or interact with a light or handheld item within reach.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3 Action Point (3 AP) Actions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Climb or Traverse Obstacle</td>
+            <td>Move over a wall, through an open window, or similar barrier. Requires a suitable Athletics or Agility test at GM discretion.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4 Action Point (4 AP) Actions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lift or Move Heavy Object</td>
+            <td>Pick up or drag a heavy object, wounded ally, or similar burden. May require a Strength or Stamina test.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Action Timing and Reactions</h3>
+      <ul>
+        <li><strong>Immediate Actions:</strong> Some actions, such as Dodge, may be declared outside a character’s normal turn if they have AP remaining.</li>
+        <li><strong>Delayed Actions:</strong> A player may hold one or more AP to act later in the round, interrupting another action or reacting to an event.</li>
+        <li><strong>End of Round:</strong> Any unspent AP expire at the end of the combat round.</li>
+      </ul>
+
+      <h3>Full Auto Fire (3 AP)</h3>
+      <p>A character equipped with a weapon capable of Full Auto Fire may unleash a rapid burst of rounds in a single attack. This action expends 10 rounds of ammunition and may only be performed with weapons possessing the Full Auto trait. When firing in Full Auto Mode, add a distance-based Auto Bonus to the attack roll:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Range to Target</th>
+            <th>Auto Bonus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Close (≤ 10 m)</td>
+            <td>+4 dice</td>
+          </tr>
+          <tr>
+            <td>Medium (10–50 m)</td>
+            <td>+2 dice</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>All other modifiers (cover, visibility, movement, etc.) apply normally. Full Auto Fire counts as a single attack for the purpose of resolving hits and damage.</p>
+    </div>
+
+
+    <div id="content-blast-attacks" class="content-block">
+      <h2>Blast Attacks</h2>
+      <p>Attacks caused by explosive weapons such as grenades, rockets, or explosive rounds inflict Blast Damage instead of conventional weapon damage. Blast Damage represents both the destructive power and area of effect of an explosion.</p>
+
+      <h3>Resolving a Blast Attack</h3>
+      <ol>
+        <li><strong>Determine the Center of Impact:</strong> Establish the point of detonation. Any character or object within the Blast Radius (measured in meters) is affected.</li>
+        <li><strong>Defense Roll:</strong> Each affected target rolls a halved Defense Pool (Agility + Intuition) / 2, rounded up. Modifiers such as cover, prone position, or environmental barriers may apply at the GM’s discretion.</li>
+        <li><strong>Damage Resolution:</strong> A Blast weapon’s damage value determines three properties:
+          <ul>
+            <li><strong>Damage:</strong> The number of damage points inflicted.</li>
+            <li><strong>Penetration:</strong> The number of armor points ignored.</li>
+            <li><strong>Radius (m):</strong> The distance in meters from the blast center affected by the explosion.</li>
+          </ul>
+          <p>For example, a grenade with Blast = 4 deals 4 damage, ignores 4 points of armor, and affects all targets within 4 meters of the detonation.</p>
+        </li>
+        <li><strong>Damage Application:</strong> Roll for the explosion as normal. Apply Blast Damage + Net Hits to each affected target after comparing the attacker’s roll to each defender’s halved Defense Pool. Armor converts Physical to Stun Damage as usual, reduced by the attack’s penetration.</li>
+      </ol>
+
+      <h3>Secondary Effects</h3>
+      <p>Explosions may also cause secondary effects such as:</p>
+      <ul>
+        <li>Knockdown or Disorientation: On top of the physical damage, a blast attack then deals an amount of additional Stun damage equal to its blast value</li>
+        <li>Structural Damage: Objects and cover may be destroyed or reduced in effectiveness within the Blast Radius.</li>
+        <li>Chain Reactions: Explosives or fuel sources caught in the radius may detonate.</li>
+      </ul>
+    </div>

@@ -1,0 +1,160 @@
+<nav>
+
+<ul id="main-bar" data-level="1">
+  <li><a href="#" data-shows="content-home">Home</a></li>
+  <li><a href="#" data-toggles="world-bar">World</a></li>
+  <li><a href="#" data-toggles="rules-bar">Rules</a></li>
+  <li><a href="#" data-toggles="lists-bar">Lists</a></li>
+  <li><a href="#" data-toggles="characters-bar">Characters</a></li>
+
+  {% if current_user.is_authenticated %}
+    <li style="margin-left: auto;">
+      <a href="{{ url_for('auth_bp.logout') }}">
+        Logout ({{ current_user.email }})
+      </a>
+    </li>
+  {% else %}
+    <li style="margin-left: auto;">
+      <a href="{{ url_for('auth_bp.login') }}">
+        Login
+      </a>
+    </li>
+  {% endif %}
+</ul>
+
+
+
+
+    
+    <ul id="world-bar" class="sub-bar" data-level="2">
+      <li><a href="#">Timeline</a></li>
+      <li><a href="#">World</a></li>
+      <li><a href="#">Factions</a></li>
+    </ul>
+    
+    <ul id="rules-bar" class="sub-bar" data-level="2">
+      <li><a href="#" data-toggles="general-rules-bar">General Rules</a></li>
+      <li><a href="#" data-toggles="stats-bar">Stats</a></li>
+      <li><a href="#">Damage</a></li>
+      <li><a href="#" data-toggles="combat-bar">Combat</a></li>
+      <li><a href="#">Cyberware</a></li>
+      <li><a href="#" data-toggles="magic-bar">Magic</a></li>
+      <li><a href="#">Hacking</a></li>
+      <li><a href="#">Vehicles</a></li>
+      <li><a href="#">Gear</a></li>
+    </ul>
+
+    <ul id="characters-bar" class="sub-bar" data-level="2">
+      <li><a href="#" data-shows="content-characters-all">View all</a></li>
+
+        {% if current_user.is_authenticated %}
+          <li><a href="#" data-shows="content-characters-mine">My characters</a></li>
+        {% endif %}
+    </ul>
+
+
+    
+    <ul id="general-rules-bar" class="sub-bar" data-level="3">
+      <li><a href="#" data-shows="content-core-resolution">Core Resolution</a></li>
+      <li><a href="#" data-shows="content-attributes-effects">Attributes &amp; Damage</a></li>
+      <li><a href="#" data-shows="content-secondary-attributes">Secondary Attributes</a></li>
+      <li><a href="#" data-shows="content-skills-rules">Skills</a></li>
+      <li><a href="#" data-shows="content-combat-system">Combat System</a></li>
+      <li><a href="#" data-shows="content-weapons-armor">Weapons &amp; Armor</a></li>
+    </ul>
+    
+    <ul id="combat-bar" class="sub-bar" data-level="3">
+      <li><a href="#" data-shows="content-combat-rules">Combat Rules</a></li>
+      <li><a href="#" data-shows="content-combat-actions">Combat Actions</a></li>
+      <li><a href="#" data-shows="content-blast-attacks">Blast Attacks</a></li>
+    </ul>
+    
+    <ul id="stats-bar" class="sub-bar" data-level="3">
+      <li><a href="#" data-toggles="attributes-bar">Attributes</a></li>
+      <li><a href="#" data-toggles="Derived-bar">Secondary Attributes</a></li>
+      <li><a href="#" data-toggles="skills-bar">Skills</a></li>
+    </ul>
+
+    <ul id="Derived-bar" class="sub-bar" data-level="4">
+        <li><a href="#" data-shows="content-Skillbase">Skillbase</a></li>
+        <li><a href="#" data-shows="content-Secondary Attributes">Secondary Attributes</a></li>
+        <li><a href="#" data-shows="content-Other">Other</a></li>
+    </ul>
+
+    <ul id="attributes-bar" class="sub-bar" data-level="4">
+      <li><a href="#" data-shows="content-physical">Physical</a></li>
+      <li><a href="#" data-shows="content-mental">Mental</a></li>
+      <li><a href="#" data-shows="content-social">Social</a></li>
+      <li><a href="#" data-shows="content-special">Special</a></li>
+    </ul>
+    
+    <ul id="skills-bar" class="sub-bar" data-level="4">
+      <li><a href="#" data-shows="content-skills-physical">Physical</a></li>
+      <li><a href="#" data-shows="content-skills-technical">Technical</a></li>
+      <li><a href="#" data-shows="content-skills-social">Social</a></li>
+      <li><a href="#" data-shows="content-skills-magic">Magic</a></li>
+    </ul>
+
+    <ul id="skills-bar" class="sub-bar" data-level="4">
+      <li><a href="#" data-shows="content-skills-physical">Physical</a></li>
+      <li><a href="#" data-shows="content-skills-technical">Technical</a></li>
+      <li><a href="#" data-shows="content-skills-social">Social</a></li>
+      <li><a href="#" data-shows="content-skills-magic">Magic</a></li>
+    </ul>
+
+    <ul id="magic-bar" class="sub-bar" data-level="3">
+      <li><a href="#" data-shows="content-magic-rules">Magic Rules</a></li>
+      <li><a href="#" data-shows="content-magic-spells">Spell List</a></li>
+    </ul>
+
+
+    <ul id="lists-bar" class="sub-bar" data-level="2">
+      <li><a href="#" data-toggles="lists-items-bar">Items</a></li>
+      <li><a href="#" data-shows="content-list-spells">Spells</a></li>
+      <li><a href="#" data-shows="content-list-skills">Skills</a></li>
+      <li><a href="#" data-shows="content-list-vehicles">Vehicles</a></li>
+      <li><a href="#" data-shows="content-list-attributes">Attributes</a></li>
+      <li><a href="#" data-shows="content-list-tables">Tables</a></li>
+      <li><a href="#" data-shows="content-list-features">Features</a></li>
+    </ul>
+
+    <ul id="lists-items-bar" class="sub-bar" data-level="3">
+      <li><a href="#" data-toggles="lists-weapons-bar">Weapons</a></li>
+      <li><a href="#" data-toggles="lists-ammunition-bar">Ammunition</a></li>
+      <li><a href="#" data-toggles="lists-armor-headware-bar">Armor &amp; Headware</a></li>
+      <li><a href="#" data-toggles="lists-cyberware-bar">Cyberware</a></li>
+    </ul>
+
+    <ul id="lists-weapons-bar" class="sub-bar" data-level="4">
+     <li><a href="#" data-shows="content-list-weapons-pistols">Pistols</a></li>
+     <li><a href="#" data-shows="content-list-weapons-smg">SMG</a></li>
+     <li><a href="#" data-shows="content-list-weapons-ar">Automatic Rifles</a></li>
+     <li><a href="#" data-shows="content-list-weapons-sniper">Sniper Rifles</a></li>
+     <li><a href="#" data-shows="content-list-weapons-mg">Machine Guns</a></li>
+     <li><a href="#" data-shows="content-list-weapons-launcher">Launcher</a></li>
+    </ul>
+
+    <ul id="lists-ammunition-bar" class="sub-bar" data-level="4">
+     <li><a href="#" data-shows="content-list-ammunition-rounds">Rounds</a></li>
+     <li><a href="#" data-shows="content-list-ammunition-grenades">Grenades</a></li>
+     <li><a href="#" data-shows="content-list-ammunition-rockets">Rockets</a></li>
+    </ul>
+
+
+    <ul id="lists-armor-headware-bar" class="sub-bar" data-level="4">
+      <li><a href="#" data-shows="content-list-armor-armor">Armor</a></li>
+      <li><a href="#" data-shows="content-list-armor-headware">Headware</a></li>
+    </ul>
+
+
+    <ul id="lists-cyberware-bar" class="sub-bar" data-level="4">
+     <li><a href="#" data-shows="content-list-cyberware-head">Head</a></li>
+     <li><a href="#" data-shows="content-list-cyberware-torso">Torso</a></li>
+     <li><a href="#" data-shows="content-list-cyberware-arms">Arms</a></li>
+     <li><a href="#" data-shows="content-list-cyberware-legs">Legs</a></li>
+    </ul>
+
+
+    
+    </nav>
+

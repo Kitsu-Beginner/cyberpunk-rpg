@@ -1,0 +1,341 @@
+<title>Tactical Cyberpunk RPG - Rules</title>
+  <style>
+    /* --- Cyberpunk Theme Styles --- */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    :root {
+        --neon-cyan: #00f3ff;
+        --neon-magenta: #ff00ff;
+        --neon-yellow: #ffff00;
+        --dark-bg: #0a0a0f;
+        --card-bg: #1a1a2e;
+        --text-primary: #e0e0e0;
+        --text-secondary: #a0a0a0;
+    }
+    
+    body {
+        font-family: 'Rajdhani', sans-serif;
+        background: var(--dark-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+    
+    /* Animated Background */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            linear-gradient(90deg, transparent 0%, rgba(0, 243, 255, 0.03) 50%, transparent 100%),
+            repeating-linear-gradient(0deg, rgba(255, 0, 255, 0.03) 0px, transparent 2px, transparent 4px, rgba(255, 0, 255, 0.03) 6px);
+        animation: scanlines 8s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    @keyframes scanlines {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(20px); }
+    }
+
+    /* --- Page Title --- */
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        font-size: 2.5rem;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    /* --- STYLING FOR OUR DRILL-DOWN MENUS --- */
+    
+    nav {
+        border-bottom: 2px solid var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        margin-bottom: 10px;
+    }
+    
+    /* Style for all menu bars */
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      background-color: var(--card-bg);
+      display: flex; /* Makes items horizontal */
+      width: 100%;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+    }
+    
+    /* Style for sub-bars */
+    nav ul.sub-bar {
+      background-color: rgba(26, 26, 46, 0.8); /* Slightly different bg for sub-bars */
+      border-top: 1px solid rgba(255, 0, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+    }
+
+    /* Style for menu links */
+    nav ul li a {
+      display: block;
+      color: var(--text-primary);
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(0, 243, 255, 0.2);
+      transition: all 0.3s;
+    }
+
+    /* Main bar links */
+    #main-bar li a {
+        color: var(--neon-cyan);
+    }
+
+    /* Sub-bar links */
+    nav ul.sub-bar li a {
+        color: var(--text-secondary);
+    }
+
+
+    /* Highlight for active menu items (tabs) */
+nav li.active > a {
+    color: var(--neon-yellow);
+    text-shadow: 0 0 8px var(--neon-yellow);
+    font-weight: 700;
+    background: rgba(255, 255, 0, 0.08);
+    border-bottom: 2px solid var(--neon-yellow);
+}
+
+
+
+
+
+    /* Hover effect for all links */
+    nav ul li a:hover {
+      color: var(--neon-magenta);
+      text-shadow: 0 0 5px var(--neon-magenta);
+      background: rgba(255, 0, 255, 0.1);
+    }
+    
+    /* --- HIDE/SHOW LOGIC (Unchanged) --- */
+    nav ul.sub-bar {
+      display: none;
+    }
+    nav ul.sub-bar.visible {
+      display: flex;
+    }
+    
+    /* --- STYLING FOR OUR CONTENT AREA --- */
+    
+    #content-display {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    
+    .content-block {
+      display: none; /* Hide all content blocks by default */
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 0, 255, 0.2);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 25px rgba(26, 26, 46, 0.8);
+    }
+    
+    .content-block.visible {
+      display: block; /* Show the active one */
+    }
+    
+    /* Content text styling */
+    #content-display h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+      font-size: 2rem; 
+      border-bottom: 1px solid var(--neon-cyan); 
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    #content-display p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+    }
+    #content-display h3 {
+       font-family: 'Orbitron', sans-serif;
+       font-size: 1.5rem; 
+       color: var(--neon-magenta); 
+       text-shadow: 0 0 10px rgba(255, 0, 255, 0.5); 
+       margin-top: 25px;
+       margin-bottom: 15px;
+    }
+    #content-display ul, #content-display ol {
+      line-height: 1.6;
+      margin-left: 20px;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+    }
+    #content-display li {
+        margin-bottom: 8px;
+    }
+    
+    /* Table Styling */
+    #content-display table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    #content-display table th, #content-display table td {
+        border: 1px solid var(--neon-magenta);
+        padding: 12px 15px;
+        text-align: left;
+    }
+    #content-display table th {
+        background: rgba(255, 0, 255, 0.1);
+        color: var(--neon-magenta);
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
+    }
+    #content-display table tr:nth-child(even) {
+        background: rgba(26, 26, 46, 0.5);
+    }
+
+
+    .subtab-bar {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.subtab-button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--neon-cyan);
+  background: transparent;
+  color: var(--neon-cyan);
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.subtab-button:hover {
+  background: rgba(0, 243, 255, 0.1);
+}
+
+.subtab-button.active {
+  background: rgba(0, 243, 255, 0.2);
+  color: var(--neon-yellow);
+  border-color: var(--neon-yellow);
+}
+
+
+
+
+
+
+
+
+    /* Das Modal das sich bei Items und Ähnlichem öffnet mit Bild und Beschreibung         */
+
+
+
+.modal.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  background: #1a1a2e;
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+  padding: 1rem 1.5rem;
+  max-width: 1200px;
+  width: 90%;
+  color: var(--text-primary);
+  z-index: 2100;
+  border-radius: 8px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  background: transparent;
+  border: none;
+  color: var(--neon-cyan);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.modal-image-wrapper img {
+  max-width: 600px;
+  max-height: 600px;
+  object-fit: contain;
+  border: 1px solid var(--neon-cyan);
+}
+
+.modal-text-wrapper {
+  flex: 1;
+}
+
+/* Generic helper: hide any element with this class */
+.hidden {
+  display: none;
+}
+
+
+
+
+
+
+/* General text inside content sections (rules, lists, etc.) */
+.content-block p,
+.content-block li {
+  font-size: 1.1rem;  /* try 1.1rem if you want even bigger */
+  line-height: 1.5;
+}
+
+
+
+  </style>
+
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/character_modal.css') }}">

@@ -1,0 +1,449 @@
+/* ================================
+   Character Sheet Modal Layout
+   ================================ */
+
+/* Make this modal a bit bigger than the item modal */
+.character-sheet-modal {
+  max-width: 1100px;
+  width: 95%;
+}
+
+/* ===== HEADER ===== */
+
+.character-sheet-header {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--neon-cyan);
+  padding-bottom: 0.5rem;
+}
+
+.character-sheet-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.6rem;
+  color: var(--neon-cyan);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.char-class-display {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.character-header-grid {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.char-header-item {
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(10, 10, 20, 0.8);
+}
+
+.char-header-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.char-header-value {
+  display: block;
+  font-size: 1rem;
+  color: var(--neon-yellow);
+}
+
+/* ===== INTERNAL TABS ===== */
+
+/* We reuse your existing .subtab-bar / .subtab-button styles.
+   This just tightens spacing inside the modal if needed. */
+.character-sheet-modal .character-tabs {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Panels container */
+.character-tab-panels {
+  margin-top: 0.5rem;
+}
+
+/* Panels themselves: only one visible at a time */
+.character-tab-panel {
+  display: none;
+}
+
+.character-tab-panel.active {
+  display: block;
+}
+
+/* ===== ATTRIBUTES LAYOUT ===== */
+
+.attributes-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* three equal columns */
+  gap: 1rem;
+}
+
+
+.attributes-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.attribute-group {
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.9);
+}
+
+.attribute-group h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: var(--neon-magenta);
+  margin-bottom: 0.4rem;
+}
+
+.attribute-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.attribute-label {
+  flex: 0 0 130px; /* ← fixed width, adjust as needed */
+  font-size: 0.95rem;
+}
+
+
+
+.attribute-box {
+  width: 1.5rem;
+  height: 1.6rem;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: var(--neon-yellow);
+}
+
+/* ===== DERIVED ATTRIBUTES (right column) ===== */
+
+.attributes-derived {
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(10, 10, 30, 0.9);
+}
+
+.attributes-derived h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.4rem;
+}
+
+.derived-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.derived-label {
+  font-size: 0.95rem;
+}
+
+.derived-box {
+  width: 2rem;
+  height: 1.6rem;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: var(--neon-yellow);
+}
+
+/* EVENT LOG COLUMN (3rd column) */
+.attributes-log {
+  border: 1px solid rgba(255, 255, 0, 0.4);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(20, 20, 10, 0.9);
+}
+
+.attributes-log h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: var(--neon-yellow);
+  margin-bottom: 0.4rem;
+}
+
+.event-log-placeholder {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+
+/* ===== SKILLS TAB ===== */
+
+.skills-list {
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.9);
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.skill-name {
+  flex: 1;
+}
+
+.skill-box {
+  width: 2rem;
+  height: 1.6rem;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  color: var(--neon-yellow);
+}
+
+/* ===== TABLES (Cyberware / Magic / Inventory / Stash) ===== */
+
+.character-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.character-table th,
+.character-table td {
+  border: 1px solid var(--neon-magenta);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+.character-table th {
+  background: rgba(255, 0, 255, 0.15);
+  color: var(--neon-magenta);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.character-table tr:nth-child(even) {
+  background: rgba(26, 26, 46, 0.7);
+}
+
+
+/* ===== SKILLS TAB, 3-column layout ===== */
+
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 1/3 – 1/3 – 1/3 */
+  gap: 1rem;
+}
+
+.skills-column {
+  min-height: 3rem;
+}
+
+.skills-column-left .skills-list {
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.9);
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.skills-event-log {
+  border: 1px dashed rgba(0, 243, 255, 0.6);
+  padding: 0.5rem;
+  border-radius: 4px;
+  min-height: 5rem;
+}
+
+/* we reuse your existing skill-row / skill-name / skill-box styling */
+.skills-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left 2/3, right 1/3 */
+  gap: 1rem;
+}
+
+.skills-event-log {
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(10, 10, 30, 0.9);
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-event-log h4 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.0rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.4rem;
+}
+
+.event-log-box {
+  flex: 1;
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  background: rgba(5, 5, 15, 0.9);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  overflow-y: auto;
+}
+
+
+/* ===== SKILLS TAB LAYOUT (2/3 + 1/3) ===== */
+
+/* =================================================================
+   ===== SKILLS TAB LAYOUT (2/3 + 1/3) - MIT BOXEN-AUSRICHTUNG =====
+   ================================================================= */
+
+.skills-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left 2/3, right 1/3 */
+  gap: 1rem;
+}
+
+.skills-main {
+  /* Enthält alle Skill-Gruppen */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-group {
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.9);
+}
+
+.skill-group h4 { /* Geändert von h3 in Ihrem HTML */
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.0rem;
+  color: var(--neon-magenta);
+  margin-bottom: 0.4rem;
+}
+
+/* Eine vollständige Zeile, bestehend aus ZWEI Skill-Slots */
+.skill-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem; /* Abstand zwischen den beiden nebeneinander liegenden Skill-Slots */
+  margin-bottom: 8px;
+}
+
+/* Ein Skill-Slot (Name + 3 Boxen) */
+.skill-slot {
+  /* WICHTIG: Stellt sicher, dass beide Slots in der Reihe gleich breit sind */
+  flex: 1; 
+  
+  /* Flexbox für die interne Ausrichtung des Namens und der Boxen */
+  display: flex;
+  align-items: center;
+  gap: 6px; 
+}
+
+/* Der Skill-Name muss den gesamten verfügbaren Raum ausfüllen, 
+   um die Boxen an den rechten Rand des Slots zu drücken */
+.skill-name {
+  flex-grow: 1; /* Lässt den Namen wachsen und die Boxen nach rechts schieben */
+  min-width: 80px; 
+  font-size: 0.9rem;
+  text-align: left; 
+}
+
+/* Die Boxen-Größe beibehalten */
+.skill-box {
+  width: 2rem;
+  height: 1.6rem;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  color: var(--neon-yellow);
+  flex-shrink: 0; /* Wichtig: Verhindert, dass die Boxen schrumpfen */
+}
+
+/* Für den leeren Slot in der "Dodge (Blast)"-Reihe */
+.skill-slot-empty {
+  visibility: hidden; /* Behält den Platz, ist aber unsichtbar */
+  flex: 1; /* Stellt sicher, dass der Platzhalter dieselbe Breite hat */
+}
+
+/* Rechte Spalte: Event Log */
+.skills-log {
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(10, 10, 30, 0.9);
+}
+
+.skills-log h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.4rem;
+}
+
+.skills-log-body {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 900px) {
+  .skills-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+/* ===== RESPONSIVE: small screens ===== */
+
+@media (max-width: 900px) {
+  .attributes-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .character-header-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

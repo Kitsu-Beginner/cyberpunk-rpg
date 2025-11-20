@@ -1,0 +1,450 @@
+<div id="character-modal" class="modal hidden">
+
+
+  <div class="modal-backdrop"></div>
+
+  <div class="modal-content character-sheet-modal">
+    <!-- Close button (we'll wire it later) -->
+    <button id="character-modal-close" class="modal-close">&times;</button>
+
+    <!-- HEADER: always visible -->
+    <header class="character-sheet-header">
+      <h2 class="character-sheet-title">
+        <span id="char-name-display">Name</span>
+        <span class="char-class-display">[<span id="char-class-display">Class</span>]</span>
+      </h2>
+
+      <div class="character-header-grid">
+        <div class="char-header-item">
+          <span class="char-header-label">Player</span>
+          <span class="char-header-value" id="char-player-display">Player</span>
+        </div>
+        <div class="char-header-item">
+          <span class="char-header-label">XP</span>
+          <span class="char-header-value" id="char-xp-display">000</span>
+        </div>
+        <div class="char-header-item">
+          <span class="char-header-label">Money</span>
+          <span class="char-header-value" id="char-money-display">0000</span>
+        </div>
+        <div class="char-header-item">
+          <span class="char-header-label">Humanity</span>
+          <span class="char-header-value" id="char-humanity-display">5.0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SUBTABS ROW -->
+    <div class="character-tabs subtab-bar">
+      <button class="subtab-button active" data-char-tab="attributes">Attributes</button>
+      <button class="subtab-button" data-char-tab="skills">Skills</button>
+      <button class="subtab-button" data-char-tab="cyberware">Cyberware</button>
+      <button class="subtab-button" data-char-tab="magic">Magic</button>
+      <button class="subtab-button" data-char-tab="inventory">Inventory</button>
+      <button class="subtab-button" data-char-tab="stash">Stash</button>
+    </div>
+
+    <!-- TAB CONTENT AREA -->
+    <div class="character-tab-panels">
+      <!-- ATTRIBUTES TAB -->
+      <section id="char-tab-attributes" class="character-tab-panel active">
+  <div class="attributes-layout">
+    <!-- 1/3: Base attributes -->
+    <div class="attributes-main">
+      <!-- Physical -->
+      <div class="attribute-group">
+        <h3>Physical</h3>
+        <div class="attribute-row">
+          <span class="attribute-label">Stamina</span>
+          <span class="attribute-box" id="attr-stamina-1"></span>
+          <span class="attribute-box" id="attr-stamina-2"></span>
+          <span class="attribute-box" id="attr-stamina-3"></span>
+        </div>
+        <div class="attribute-row">
+          <span class="attribute-label">Strength</span>
+          <span class="attribute-box" id="attr-strength-1"></span>
+          <span class="attribute-box" id="attr-strength-2"></span>
+          <span class="attribute-box" id="attr-strength-3"></span>
+        </div>
+        <div class="attribute-row">
+          <span class="attribute-label">Agility</span>
+          <span class="attribute-box" id="attr-agility-1"></span>
+          <span class="attribute-box" id="attr-agility-2"></span>
+          <span class="attribute-box" id="attr-agility-3"></span>
+        </div>
+        <div class="attribute-row">
+          <span class="attribute-label">Reaction</span>
+          <span class="attribute-box" id="attr-reaction-1"></span>
+          <span class="attribute-box" id="attr-reaction-2"></span>
+          <span class="attribute-box" id="attr-reaction-3"></span>
+        </div>
+      </div>
+
+      <!-- Mental -->
+      <div class="attribute-group">
+        <h3>Mental</h3>
+        <div class="attribute-row">
+          <span class="attribute-label">Intuition</span>
+          <span class="attribute-box" id="attr-intuition-1"></span>
+          <span class="attribute-box" id="attr-intuition-2"></span>
+          <span class="attribute-box" id="attr-intuition-3"></span>
+        </div>
+        <div class="attribute-row">
+          <span class="attribute-label">Logic</span>
+          <span class="attribute-box" id="attr-logic-1"></span>
+          <span class="attribute-box" id="attr-logic-2"></span>
+          <span class="attribute-box" id="attr-logic-3"></span>
+        </div>
+        <div class="attribute-row">
+          <span class="attribute-label">Composure</span>
+          <span class="attribute-box" id="attr-composure-1"></span>
+          <span class="attribute-box" id="attr-composure-2"></span>
+          <span class="attribute-box" id="attr-composure-3"></span>
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div class="attribute-group">
+        <h3>Social</h3>
+        <div class="attribute-row">
+          <span class="attribute-label">Charisma</span>
+          <span class="attribute-box" id="attr-charisma-1"></span>
+          <span class="attribute-box" id="attr-charisma-2"></span>
+          <span class="attribute-box" id="attr-charisma-3"></span>
+        </div>
+        <div class="attribute-row">
+          <span class="attribute-label">Humanity</span>
+          <span class="attribute-box" id="attr-humanity-1"></span>
+          <span class="attribute-box" id="attr-humanity-2"></span>
+          <span class="attribute-box" id="attr-humanity-3"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1/3: Derived Attributes -->
+    <aside class="attributes-derived">
+      <h3>Derived Attributes</h3>
+      <div class="derived-row">
+        <span class="derived-label">Defense Pool</span>
+        <span class="derived-box" id="derived-defense-pool"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">Defense Pool halved</span>
+        <span class="derived-box" id="derived-defense-pool-halved"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">Initiative</span>
+        <span class="derived-box" id="derived-initiative"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">Speed</span>
+        <span class="derived-box" id="derived-speed"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">Carry Weight</span>
+        <span class="derived-box" id="derived-carry-weight"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">Armor</span>
+        <span class="derived-box" id="derived-armor"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">ShockArmor</span>
+        <span class="derived-box" id="derived-shock-armor"></span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">Action Points</span>
+        <span class="derived-box" id="derived-action-points"></span>
+      </div>
+    </aside>
+
+    <!-- 1/3: Event Log (empty for now) -->
+    <section class="attributes-log">
+      <h3>Event Log</h3>
+      <div class="event-log-placeholder">
+        <p>Important combat/story events will be shown here.</p>
+      </div>
+    </section>
+  </div>
+</section>
+
+
+<!-- SKILLS TAB -->
+<section id="char-tab-skills" class="character-tab-panel">
+  <div class="skills-layout">
+    <!-- LEFT 2/3: grouped skills -->
+    <div class="skills-main">
+      <h3>Skills</h3>
+
+      <!-- COMBAT GROUP -->
+      <div class="skill-group">
+        <h4>Combat</h4>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Firearms</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Heavy Weapons</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Close Combat</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Dodge</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Dodge (Blast)</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <!-- empty second slot for alignment -->
+          <div class="skill-slot skill-slot-empty"></div>
+        </div>
+      </div>
+
+      <!-- PHYSICAL GROUP -->
+      <div class="skill-group">
+        <h4>Physical</h4>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Athletics</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Stealth</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Survival</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot skill-slot-empty"></div>
+        </div>
+      </div>
+
+      <!-- MENTAL GROUP -->
+      <div class="skill-group">
+        <h4>Mental</h4>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Piloting</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Electronics</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Engineering</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Hacking</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Medicine</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot skill-slot-empty"></div>
+        </div>
+      </div>
+
+      <!-- SOCIAL GROUP -->
+      <div class="skill-group">
+        <h4>Social</h4>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Investigation</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Subterfuge</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Persuasion</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Intimidation</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-slot">
+            <span class="skill-name">Streetwise</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+
+          <div class="skill-slot">
+            <span class="skill-name">Insight</span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+            <span class="skill-box"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT 1/3: Event Log placeholder -->
+    <aside class="skills-log">
+      <h3>Event Log</h3>
+      <div class="skills-log-body">
+        <p>Events will be shown here later.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+
+
+
+
+
+
+      <section id="char-tab-cyberware" class="character-tab-panel">
+        <h3>Cyberware</h3>
+          <table class="character-table" id="char-cyberware-table">
+            <thead>
+              <tr>
+                <th style="width: 10%;">Slot</th>
+                <th style="width: 25%;">Name</th>
+                <th style="width: 8%; text-align: center;" title="Humanity Loss">HL</th>
+                <th style="width: 27%;">Stats</th>
+                <th style="width: 30%;">Features</th>
+              </tr>
+            </thead>
+         <tbody>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- MAGIC TAB -->
+      <section id="char-tab-magic" class="character-tab-panel">
+        <h3>Magic</h3>
+        <table class="character-table" id="char-magic-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Name</th>
+              <th>Effect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows to be filled later -->
+          </tbody>
+        </table>
+      </section>
+
+
+
+
+      <section id="char-tab-inventory" class="character-tab-panel">
+  <h3>Inventory</h3>
+  <table class="character-table" id="char-inventory-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Name</th>
+        <th style="width: 15%;">Weight (Total)</th>
+        <th style="width: 45%;">Features</th>
+        <th style="width: 15%; text-align: center;">Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      </tbody>
+  </table>
+</section>
+
+<section id="char-tab-stash" class="character-tab-panel">
+  <h3>Stash</h3>
+  <table class="character-table" id="char-stash-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Name</th>
+        <th style="width: 15%;">Weight (Total)</th>
+        <th style="width: 45%;">Features</th>
+        <th style="width: 15%; text-align: center;">Qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      </tbody>
+  </table>
+</section>
+
+
+    </div>
+  </div>
+</div>
