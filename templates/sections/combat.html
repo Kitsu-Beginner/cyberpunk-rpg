@@ -92,10 +92,7 @@
             <td>Jump to Cover</td>
             <td>Move to the nearest available cover (up to Speed in meters) and gain the corresponding cover bonus.</td>
           </tr>
-          <tr>
-            <td>Reload (Smartgun)</td>
-            <td>Instantly reload a weapon equipped with smart-feed or cyber-linked reload systems.</td>
-          </tr>
+          
           <tr>
             <td>Activate Device or Cyberware</td>
             <td>Power on, activate, or toggle a simple device, cybernetic implant, or augment interface.</td>
@@ -117,9 +114,10 @@
             <td>Make an attack roll using the appropriate weapon skill. Compare against the target’s Defense Pool to resolve damage.</td>
           </tr>
           <tr>
-            <td>Reload (Standard)</td>
-            <td>Reload a conventional weapon without smart-link systems.</td>
+            <td>Reload (AR or Smartgun)</td>
+            <td>Reload a weapon that is connected to an AR_Interface or via smartlink.</td>
           </tr>
+          
           <tr>
             <td>Ready Weapon</td>
             <td>Draw, unholster, or ready a weapon for combat use.</td>
@@ -148,6 +146,11 @@
             <td>Climb or Traverse Obstacle</td>
             <td>Move over a wall, through an open window, or similar barrier. Requires a suitable Athletics or Agility test at GM discretion.</td>
           </tr>
+          <tr>
+            <td>Full Auto Attack</td>
+            <td>You fire a total of 10 bullets in one or more salvos. You can attack up to 3 targets at once by distributing your successes onto the targets.</td>
+          </tr>
+          
         </tbody>
       </table>
 
@@ -164,6 +167,14 @@
             <td>Lift or Move Heavy Object</td>
             <td>Pick up or drag a heavy object, wounded ally, or similar burden. May require a Strength or Stamina test.</td>
           </tr>
+          <tr>
+            <td>Reload (Standard)</td>
+            <td>Reload a conventional weapon without smart-link systems.</td>
+          </tr>
+          <tr>
+            <td>Full Sprint</td>
+            <td>Use all(!) your actions to cover (speed + athletics) x 4 metres on flat terrain. You can sprint for (stamina) consecutive rounds.</td>
+          </tr>
         </tbody>
       </table>
 
@@ -174,27 +185,7 @@
         <li><strong>End of Round:</strong> Any unspent AP expire at the end of the combat round.</li>
       </ul>
 
-      <h3>Full Auto Fire (3 AP)</h3>
-      <p>A character equipped with a weapon capable of Full Auto Fire may unleash a rapid burst of rounds in a single attack. This action expends 10 rounds of ammunition and may only be performed with weapons possessing the Full Auto trait. When firing in Full Auto Mode, add a distance-based Auto Bonus to the attack roll:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Range to Target</th>
-            <th>Auto Bonus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Close (≤ 10 m)</td>
-            <td>+4 dice</td>
-          </tr>
-          <tr>
-            <td>Medium (10–50 m)</td>
-            <td>+2 dice</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>All other modifiers (cover, visibility, movement, etc.) apply normally. Full Auto Fire counts as a single attack for the purpose of resolving hits and damage.</p>
+      
     </div>
 
 
@@ -224,4 +215,17 @@
         <li>Structural Damage: Objects and cover may be destroyed or reduced in effectiveness within the Blast Radius.</li>
         <li>Chain Reactions: Explosives or fuel sources caught in the radius may detonate.</li>
       </ul>
+    </div>
+
+    <div id="content-full-auto" class="content-block">
+      <h2>Full Auto Attacks</h2>
+      <ol>
+        <li>Every weapon with the full_auto feature can fire 10 bullets in one or more salvoes using 3 action points. The Attacker adds the auto_bonus of his weapon and his character to the dice pool. He can attack up to three different targets if reasonably close together by splitting his successes on the attack roll between them. An Attack on multiple targets must be declared before the attack roll.</li>
+        <li>The weapon must have at least 6 bullets left for an auto attack.</li>
+        <li>The total maximum of added dice is 6.</li>
+        
+      </ol>
+    
+
+      
     </div>

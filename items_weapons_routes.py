@@ -27,12 +27,6 @@ def api_weapons():
 
 
 
-
-
-
-
-
-
 @items_weapons_bp.route("/weapons_with_items")
 def api_weapons_with_items():
     conn = get_conn()
@@ -185,13 +179,6 @@ def api_ammunition_with_items(category):
 
 
 
-
-
-
-
-
-
-
 @items_weapons_bp.route("/armor_with_items")
 def api_armor_with_items():
     """
@@ -225,16 +212,6 @@ def api_armor_with_items():
     cur.close()
     conn.close()
     return jsonify(rows)
-
-
-
-
-
-
-
-
-
-
 
 
 

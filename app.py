@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify
 from db import get_conn
 from items_weapons_routes import items_weapons_bp
 from items_cyberware_routes import cyberware_bp
+from items_commlinks_routes import items_commlinks_bp
 from auth import auth_bp, login_manager
 from characters_routes import characters_bp
 
@@ -23,7 +24,7 @@ def create_app():
     app.register_blueprint(cyberware_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(characters_bp)
-
+    app.register_blueprint(items_commlinks_bp)
     # Flask-Login setup
     login_manager.init_app(app)
 
