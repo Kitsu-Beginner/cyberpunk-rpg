@@ -428,16 +428,14 @@ async function loadCharacterStash(characterId) {
 }
 
 /**
- * Generische Funktion zum Laden von Item-Listen
- * @param {number} charId - ID des Charakters
- * @param {string} endpointType - "inventory" oder "stash" (Teil der URL)
- * @param {string} tableId - ID der HTML Tabelle
+ * Generische Funktion zum Laden von Item-Listen (Inventory & Stash)
  */
 async function loadItemTable(charId, endpointType, tableId) {
   const tableBody = document.querySelector(`#${tableId} tbody`);
   if (!tableBody) return;
 
-  tableBody.innerHTML = `<tr><td colspan="4">Loading ${endpointType}...</td></tr>`;
+  // colspan auf 5 erhöht wegen der neuen Spalte
+  tableBody.innerHTML = `<tr><td colspan="5">Loading ${endpointType}...</td></tr>`;
 
   try {
     const response = await fetch(`/api/character/${encodeURIComponent(charId)}/${endpointType}`);
@@ -447,43 +445,92 @@ async function loadItemTable(charId, endpointType, tableId) {
     tableBody.innerHTML = "";
 
     if (!Array.isArray(data) || data.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">${endpointType} is empty.</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888;">${endpointType} is empty.</td></tr>`;
       return;
     }
 
     data.forEach(item => {
       const row = document.createElement("tr");
 
-      // 1. NAME
+      // --- 1. VIEW BUTTON (NEU) ---
+      const tdView = document.createElement("td");
+      const btnView = document.createElement("button");
+      btnView.textContent = "View";
+      // Styling direkt hier, damit der Button gut aussieht
+      btnView.style.fontSize = "0.8rem";
+      btnView.style.padding = "2px 8px";
+      btnView.style.cursor = "pointer";
+      btnView.style.background = "rgba(0, 243, 255, 0.1)";
+      btnView.style.border = "1px solid #00f3ff";
+      btnView.style.color = "#00f3ff";
+      btnView.style.borderRadius = "4px";
+
+      btnView.addEventListener("click", () => {
+        // Pfad für das Bild bauen
+        let imagePath = "/static/img/placeholder.png";
+        if (item.image_url) {
+          imagePath = "/static/img/" + item.image_url;
+        }
+
+        // Das Item-Modal über das globale window-Objekt öffnen
+        if (window.openItemModal) {
+            window.openItemModal({
+              name: item.name,
+              description: item.description,
+              image: imagePath
+            });
+        } else {
+            console.error("openItemModal function not found!");
+        }
+      });
+
+      tdView.appendChild(btnView);
+      row.appendChild(tdView);
+
+
+      // --- 2. NAME ---
       const tdName = document.createElement("td");
       tdName.textContent = item.name || "Unknown";
       tdName.style.fontWeight = "bold";
       row.appendChild(tdName);
 
-      // 2. WEIGHT (Total = Item Weight * Quantity)
+      // --- 3. WEIGHT ---
       const tdWeight = document.createElement("td");
       const singleWeight = parseFloat(item.weight) || 0;
       const totalWeight = (singleWeight * item.quantity).toFixed(1);
-      // Zeigt: "5.0 kg" (Optional: man könnte auch "5.0 (1.0 ea)" anzeigen)
       tdWeight.textContent = totalWeight > 0 ? `${totalWeight} kg` : "-";
       row.appendChild(tdWeight);
 
-      // 3. FEATURES
+      // --- 4. FEATURES ---
       const tdFeatures = document.createElement("td");
-      let featuresList = [];
-      // Datenbank liefert Array oder String (je nach Treiber/DB Setup)
+      let featuresText = "";
+
       if (Array.isArray(item.features)) {
-        featuresList = item.features;
+        // Fall 1: Es ist ein sauberes Array -> Einfach verbinden
+        featuresText = item.features.join(", ");
+      
       } else if (typeof item.features === 'string' && item.features.length > 0) {
-        featuresList.push(item.features.replace(/[{"}]/g, ''));
+        // Fall 2: Es ist ein String (z.B. "{nightvision,smartlink}" aus Postgres)
+        
+        // Schritt A: Entferne {, }, [, ] und "
+        let clean = item.features.replace(/[{"}\[\]]/g, '');
+        
+        // Schritt B: Ersetze jedes Komma durch "Komma + Leerzeichen"
+        featuresText = clean.replace(/,/g, ', ');
       }
-      tdFeatures.textContent = featuresList.join(", ");
+
+      tdFeatures.textContent = featuresText;
+      
+      // Styling für bessere Lesbarkeit
       tdFeatures.style.fontSize = "0.9em";
       tdFeatures.style.fontStyle = "italic";
       tdFeatures.style.color = "#bbb";
+      // Optional: Macht den ersten Buchstaben groß (sieht oft besser aus)
+      tdFeatures.style.textTransform = "capitalize"; 
+
       row.appendChild(tdFeatures);
 
-      // 4. QUANTITY
+      // --- 5. QUANTITY ---
       const tdQty = document.createElement("td");
       tdQty.textContent = item.quantity;
       tdQty.style.textAlign = "center";
@@ -494,7 +541,7 @@ async function loadItemTable(charId, endpointType, tableId) {
 
   } catch (err) {
     console.error(`Error loading ${endpointType}:`, err);
-    tableBody.innerHTML = '<tr><td colspan="4" style="color:red;">Error loading data.</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="5" style="color:red;">Error loading data.</td></tr>';
   }
 }
 

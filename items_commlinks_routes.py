@@ -22,8 +22,9 @@ def api_commlinks():
             i.legality,
             i.image_url,
             COALESCE(array_to_json(i.features), '[]'::json) AS features,    
-            c.encryption,
+            c.firewall,
             c.signal,
+            c.mask,
             c.compute
             
         FROM commlinks c
@@ -53,8 +54,9 @@ def api_drones():
             i.legality,
             i.image_url,
             COALESCE(array_to_json(i.features), '[]'::json) AS features,    
-            d.encryption,
+            d.firewall,
             d.signal,
+            d.mask,
             d.speed,
             d.slots,
             d.hull,

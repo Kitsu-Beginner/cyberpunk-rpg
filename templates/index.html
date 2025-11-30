@@ -11,6 +11,7 @@
   {% include "partials/nav.html" %}
   {% include "partials/item_modal.html" %}
   {% include "partials/character_modal.html" %}
+  {% include "partials/level_modal.html" %}
 
   <main id="content-display">
 
@@ -27,6 +28,7 @@
     {% include "sections/characters_all.html" %}
     {% include "sections/characters_user.html" %}
     {% include "sections/Timeline.html" %}
+   
 
 
   </main>
@@ -140,6 +142,8 @@
   <script src="{{ url_for('static', filename='js/characters.js') }}"></script>
 
   <script src="{{ url_for('static', filename='js/character_modal.js') }}"></script>
+
+  
 
 
 </body>

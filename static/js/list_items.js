@@ -18,7 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const cyberArmsLink  = document.querySelector('nav a[data-shows="content-list-cyberware-arms"]');
   const cyberLegsLink  = document.querySelector('nav a[data-shows="content-list-cyberware-legs"]');
 
+  const commlinksLink = document.querySelector('nav a[data-shows="content-list-commlinks-general"]');
+if (commlinksLink) {
+  commlinksLink.addEventListener("click", () => {
+    loadCommlinksTable("commlinks-general-table-container");
+  });
+}
 
+  const dronesLink = document.querySelector('nav a[data-shows="content-list-Mini-Drones"]');
+if (dronesLink) {
+  dronesLink.addEventListener("click", () => {
+    loaddronesTable("Mini-Drones-table-container");
+  });
+}
 
 
 
@@ -739,6 +751,222 @@ if (cyberLegsLink) {
   console.log("cyberLegsLink NOT found");
 }
 
+// Commlinks. Alle Commlinks erstmal in commlinks -> commlinks general laden. Später dann auch andere unter specialized
+
+
+function loadCommlinksTable(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.textContent = "Loading commlinks...";
+
+  fetch("/api/commlinks")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        container.textContent = "No commlinks found.";
+        return;
+      }
+
+      container.textContent = "";
+
+      const columns = [
+        { key: "name",       label: "Name" },
+        { key: "compute",    label: "Compute" },
+        { key: "firewall",   label: "Firewall" },
+        { key: "signal",     label: "Range (km)" },
+        { key: "mask",       label: "Mask" },
+        { key: "price",      label: "Price" },
+        { key: "weight",     label: "Weight" },
+        { key: "legality",   label: "Legality" },
+        { key: "features",   label: "Features" }
+      ];
+
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const tbody = document.createElement("tbody");
+
+      // Header
+      const headerRow = document.createElement("tr");
+
+      // --- NEU: View Header ---
+      const viewTh = document.createElement("th");
+      viewTh.textContent = "View";
+      headerRow.appendChild(viewTh);
+      // ------------------------
+
+      columns.forEach(col => {
+        const th = document.createElement("th");
+        th.textContent = col.label;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+
+      // Rows
+      data.forEach(row => {
+        const tr = document.createElement("tr");
+
+        // --- NEU: View Button Logic ---
+        const viewTd = document.createElement("td");
+        const viewBtn = document.createElement("button");
+        viewBtn.textContent = "View";
+
+        viewBtn.addEventListener("click", () => {
+          let imagePath = "/static/img/placeholder.png";
+          if (row.image_url) {
+            imagePath = "/static/img/" + row.image_url;
+          }
+          // Zugriff auf openItemModal (global verfügbar)
+          openItemModal({
+            name: row.name,
+            description: row.description,
+            image: imagePath
+          });
+        });
+
+        viewTd.appendChild(viewBtn);
+        tr.appendChild(viewTd);
+        // -----------------------------
+
+        columns.forEach(col => {
+          const td = document.createElement("td");
+          let value = row[col.key];
+
+          if (Array.isArray(value)) {
+            value = value.join(", ");
+          }
+
+          td.textContent = value != null ? value : "";
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      container.appendChild(table);
+
+    })
+    .catch(err => {
+      console.error("Error loading commlinks:", err);
+      container.textContent = "Error loading commlinks.";
+    });
+}
+
+
+
+// Table für Drones und Mini Drones
+
+
+function loaddronesTable(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.textContent = "Loading drones...";
+
+  fetch("/api/drones")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        container.textContent = "No drones found.";
+        return;
+      }
+
+      container.textContent = "";
+
+      const columns = [
+        { key: "name",       label: "Name" },
+        { key: "firewall",   label: "Firewall" },
+        { key: "signal",     label: "Range (km)" },
+        { key: "mask",       label: "Mask" },
+        { key: "speed",      label: "Speed" },
+        { key: "price",      label: "Price" },
+        { key: "weight",     label: "Weight" },
+        { key: "legality",   label: "Legality" },
+        { key: "features",   label: "Features" }
+      ];
+
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const tbody = document.createElement("tbody");
+
+      // Header
+      const headerRow = document.createElement("tr");
+
+      // --- NEU: View Header ---
+      const viewTh = document.createElement("th");
+      viewTh.textContent = "View";
+      headerRow.appendChild(viewTh);
+      // ------------------------
+
+      columns.forEach(col => {
+        const th = document.createElement("th");
+        th.textContent = col.label;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+
+      // Rows
+      data.forEach(row => {
+        const tr = document.createElement("tr");
+
+        // --- NEU: View Button Logic ---
+        const viewTd = document.createElement("td");
+        const viewBtn = document.createElement("button");
+        viewBtn.textContent = "View";
+
+        viewBtn.addEventListener("click", () => {
+          let imagePath = "/static/img/placeholder.png";
+          if (row.image_url) {
+            imagePath = "/static/img/" + row.image_url;
+          }
+          openItemModal({
+            name: row.name,
+            description: row.description,
+            image: imagePath
+          });
+        });
+
+        viewTd.appendChild(viewBtn);
+        tr.appendChild(viewTd);
+        // -----------------------------
+
+        columns.forEach(col => {
+          const td = document.createElement("td");
+          let value = row[col.key];
+
+          if (Array.isArray(value)) {
+            value = value.join(", ");
+          }
+
+          td.textContent = value != null ? value : "";
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      container.appendChild(table);
+
+    })
+    .catch(err => {
+      console.error("Error loading drones:", err); // Hier habe ich auch den Log-Text von 'commlinks' auf 'drones' korrigiert
+      container.textContent = "Error loading drones.";
+    });
+}
 
 
 });

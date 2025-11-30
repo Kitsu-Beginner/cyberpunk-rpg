@@ -332,7 +332,25 @@ nav li.active > a {
 }
 
 
+/* --- SPEZIFISCHE STAPELUNG DER FENSTER --- */
+    
+    #character-modal {
+        z-index: 2000; 
+    }
 
+    /* NEU: Das Level-Modal ist auch ein Hauptfenster, also gleiche Ebene */
+    #level-modal {
+        z-index: 2000;
+    }
+
+    #item-modal {
+        z-index: 3000; 
+    }
+    
+    #item-modal .modal-backdrop {
+        z-index: 2999;
+        background: rgba(0, 0, 0, 0.2); 
+    }
 
 
 

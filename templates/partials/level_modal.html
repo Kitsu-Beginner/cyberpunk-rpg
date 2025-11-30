@@ -1,0 +1,259 @@
+<div id="level-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+
+  <div class="modal-content character-sheet-modal" id="level-modal-content">
+    <button id="level-modal-close" class="modal-close">&times;</button>
+
+    <header class="character-sheet-header">
+      <h2 class="character-sheet-title">
+        MANAGE: <span id="level-char-name">Name</span>
+        <span class="char-class-display">[<span id="level-char-class">Class</span>]</span>
+      </h2>
+
+      <div class="character-header-grid">
+        <div class="char-header-item">
+          <span class="char-header-label">Player</span>
+          <span class="char-header-value" id="level-char-player">Player</span>
+        </div>
+        <div class="char-header-item" style="border-color: #00ff00;">
+          <span class="char-header-label">Available XP</span>
+          <span class="char-header-value" id="level-xp-display" style="color: #00ff00;">000</span>
+        </div>
+        <div class="char-header-item" style="border-color: #ffff00;">
+          <span class="char-header-label">Money</span>
+          <span class="char-header-value" id="level-money-display" style="color: #ffff00;">0000</span>
+        </div>
+        <div class="char-header-item">
+          <span class="char-header-label">Humanity</span>
+          <span class="char-header-value" id="level-humanity-display">5.0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="character-tabs subtab-bar">
+      <button class="subtab-button active" data-level-tab="attributes">Attributes</button>
+      <button class="subtab-button" data-level-tab="skills">Skills</button>
+      <button class="subtab-button" data-level-tab="cyberware">Cyberware</button>
+      <button class="subtab-button" data-level-tab="magic">Magic</button>
+      <button class="subtab-button" data-level-tab="inventory">Inventory</button>
+      <button class="subtab-button" data-level-tab="stash">Stash</button>
+    </div>
+
+    <div class="character-tab-panels">
+      
+      <style>
+        .lvl-btn {
+            width: 1.2rem;
+            height: 1.6rem;
+            border: 1px solid #555;
+            background: #222;
+            color: #aaa;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: monospace;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .lvl-btn:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.1);
+        }
+        .lvl-btn-plus:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+        .lvl-btn-minus:hover {
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+        /* Container um die bearbeitbare Box */
+        .edit-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+      </style>
+
+      <section id="level-tab-attributes" class="character-tab-panel active">
+        <div class="attributes-layout">
+          
+          <div class="attributes-main">
+            
+            <div class="attribute-group">
+              <h3>Physical</h3>
+              <div class="attribute-row">
+                <span class="attribute-label">Stamina</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('stamina', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-stamina-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('stamina', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-stamina-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-stamina-total"></span>
+              </div>
+
+              <div class="attribute-row">
+                <span class="attribute-label">Strength</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('strength', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-strength-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('strength', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-strength-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-strength-total"></span>
+              </div>
+
+              <div class="attribute-row">
+                <span class="attribute-label">Agility</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('agility', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-agility-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('agility', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-agility-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-agility-total"></span>
+              </div>
+
+              <div class="attribute-row">
+                <span class="attribute-label">Reaction</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('reaction', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-reaction-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('reaction', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-reaction-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-reaction-total"></span>
+              </div>
+            </div>
+
+            <div class="attribute-group">
+              <h3>Mental</h3>
+              <div class="attribute-row">
+                <span class="attribute-label">Intuition</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('intuition', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-intuition-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('intuition', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-intuition-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-intuition-total"></span>
+              </div>
+
+              <div class="attribute-row">
+                <span class="attribute-label">Logic</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('logic', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-logic-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('logic', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-logic-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-logic-total"></span>
+              </div>
+
+              <div class="attribute-row">
+                <span class="attribute-label">Composure</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('composure', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-composure-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('composure', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-composure-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-composure-total"></span>
+              </div>
+            </div>
+
+            <div class="attribute-group">
+              <h3>Social</h3>
+              <div class="attribute-row">
+                <span class="attribute-label">Charisma</span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('charisma', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-charisma-base"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('charisma', 1)">+</button>
+                </div>
+                <span class="attribute-box" id="level-attr-charisma-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <span class="attribute-box" id="level-attr-charisma-total"></span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="attributes-derived">
+            <h3>Derived (Preview)</h3>
+            <div class="derived-row">
+              <span class="derived-label">Defense Pool</span>
+              <span class="derived-box" id="level-derived-defense-pool"></span>
+            </div>
+            <div class="derived-row">
+              <span class="derived-label">Initiative</span>
+              <span class="derived-box" id="level-derived-initiative"></span>
+            </div>
+            <div class="derived-row">
+              <span class="derived-label">Speed</span>
+              <span class="derived-box" id="level-derived-speed"></span>
+            </div>
+            <div class="derived-row">
+              <span class="derived-label">Carry Weight</span>
+              <span class="derived-box" id="level-derived-carry-weight"></span>
+            </div>
+             <div class="derived-row">
+              <span class="derived-label">Action Points</span>
+              <span class="derived-box" id="level-derived-action-points"></span>
+            </div>
+          </aside>
+
+          <section class="attributes-log">
+            <h3>Level Log</h3>
+            <div class="event-log-placeholder" id="level-log-container">
+              <p>Changes will appear here.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+
+      <section id="level-tab-skills" class="character-tab-panel">
+        <div class="skills-layout">
+          <div class="skills-main">
+            <h3>Skills</h3>
+            
+            <div id="level-skills-container">
+                <p>Loading Skills for Editing...</p>
+            </div>
+          </div>
+
+          <aside class="skills-log">
+            <h3>Skill Costs</h3>
+            <div class="skills-log-body">
+              <p>New Skill: 5 XP</p>
+              <p>Increase: New Level x 2 XP</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="level-tab-shop" class="character-tab-panel">
+        <h3>Shop (Coming Soon)</h3>
+      </section>
+      
+      <section id="level-tab-cyberware" class="character-tab-panel">
+         <h3>Cyberware (Coming Soon)</h3>
+      </section>
+
+      <section id="level-tab-magic" class="character-tab-panel">
+         <h3>Magic (Coming Soon)</h3>
+      </section>
+      
+      <section id="level-tab-inventory" class="character-tab-panel">
+         <h3>Inventory (Coming Soon)</h3>
+      </section>
+
+       <section id="level-tab-stash" class="character-tab-panel">
+         <h3>Stash (Coming Soon)</h3>
+      </section>
+
+    </div>
+  </div>
+</div>
