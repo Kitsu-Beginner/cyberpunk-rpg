@@ -35,7 +35,7 @@ def create_user():
                     """,
                     (email, password_hash, role),
                 )
-                user_id = cur.fetchone()[0]
+                user_id = cur.fetchone()['id']
         print(f"User created with id={user_id}, email={email}, role={role}")
     except Exception as e:
         print("Error creating user:", e)

@@ -7,6 +7,8 @@ from items_cyberware_routes import cyberware_bp
 from items_commlinks_routes import items_commlinks_bp
 from auth import auth_bp, login_manager
 from characters_routes import characters_bp
+from level_skills_routes import level_skills_bp
+from level_shop_routes import level_shop_bp
 
 
 def create_app():
@@ -25,6 +27,8 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(characters_bp)
     app.register_blueprint(items_commlinks_bp)
+    app.register_blueprint(level_skills_bp)
+    app.register_blueprint(level_shop_bp)
     # Flask-Login setup
     login_manager.init_app(app)
 

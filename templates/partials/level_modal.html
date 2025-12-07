@@ -19,10 +19,25 @@
           <span class="char-header-label">Available XP</span>
           <span class="char-header-value" id="level-xp-display" style="color: #00ff00;">000</span>
         </div>
+
         <div class="char-header-item" style="border-color: #ffff00;">
           <span class="char-header-label">Money</span>
-          <span class="char-header-value" id="level-money-display" style="color: #ffff00;">0000</span>
+          
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <button class="lvl-btn lvl-btn-minus" 
+                      style="width: 1.2rem; height: 1.2rem; font-size: 0.8rem;" 
+                      onclick="exchangeMoney('sell')" 
+                      title="-5000¥ / +1 XP">-</button>
+              
+              <span class="char-header-value" id="level-money-display" style="color: #ffff00;">0000</span>
+              
+              <button class="lvl-btn lvl-btn-plus" 
+                      style="width: 1.2rem; height: 1.2rem; font-size: 0.8rem;" 
+                      onclick="exchangeMoney('buy')" 
+                      title="+5000¥ / -1 XP">+</button>
+          </div>
         </div>
+
         <div class="char-header-item">
           <span class="char-header-label">Humanity</span>
           <span class="char-header-value" id="level-humanity-display">5.0</span>
@@ -31,12 +46,13 @@
     </header>
 
     <div class="character-tabs subtab-bar">
-      <button class="subtab-button active" data-level-tab="attributes">Attributes</button>
-      <button class="subtab-button" data-level-tab="skills">Skills</button>
+      <button class="subtab-button" data-level-tab="attributes">Attributes</button>
+      <button class="subtab-button active" data-level-tab="skills">Skills</button>
       <button class="subtab-button" data-level-tab="cyberware">Cyberware</button>
       <button class="subtab-button" data-level-tab="magic">Magic</button>
       <button class="subtab-button" data-level-tab="inventory">Inventory</button>
       <button class="subtab-button" data-level-tab="stash">Stash</button>
+      <button class="subtab-button" data-level-tab="shop" style="color: #ffff00; border-color: #ffff00;">Shop</button>
     </div>
 
     <div class="character-tab-panels">
@@ -75,57 +91,143 @@
             align-items: center;
             gap: 2px;
         }
+
+        /* --- Shop Navigation Styles --- */
+        .shop-nav-level-1 {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .shop-nav-btn {
+            background: #222;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        
+        .shop-nav-btn:hover {
+            background: rgba(0, 243, 255, 0.2);
+        }
+
+        .shop-sub-bar {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .shop-sub-btn {
+            background: #111;
+            color: #aaa;
+            border: 1px solid #555;
+            padding: 3px 10px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+        .shop-sub-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        /* --- Scrollbarer Tabellen-Bereich --- */
+        #shop-table-wrapper {
+            max-height: 400px; /* Hier begrenzst du die Höhe! */
+            overflow-y: auto;  /* Scrollbalken wenn nötig */
+            border: 1px solid #333;
+            background: rgba(0,0,0,0.2);
+            padding: 5px;
+        }
+        
+        /* Helper Class */
+        .hidden { display: none !important; }
+
+
+
+
+
       </style>
 
-      <section id="level-tab-attributes" class="character-tab-panel active">
+      <section id="level-tab-attributes" class="character-tab-panel">
         <div class="attributes-layout">
           
           <div class="attributes-main">
             
+            <style>
+                .attr-spacer { margin-right: 5px; margin-left: 5px; }
+            </style>
+
             <div class="attribute-group">
               <h3>Physical</h3>
+              
               <div class="attribute-row">
                 <span class="attribute-label">Stamina</span>
+                
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('stamina', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('stamina', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-stamina-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('stamina', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('stamina', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-stamina-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-stamina-total"></span>
+                
+                <span class="attribute-box attr-spacer" id="level-attr-stamina-mod" style="border-style: dotted; opacity: 0.7;"></span>
+
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('stamina', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-stamina-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('stamina', 'total', 1)">+</button>
+                </div>
               </div>
 
               <div class="attribute-row">
                 <span class="attribute-label">Strength</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('strength', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('strength', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-strength-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('strength', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('strength', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-strength-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-strength-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-strength-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('strength', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-strength-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('strength', 'total', 1)">+</button>
+                </div>
               </div>
 
               <div class="attribute-row">
                 <span class="attribute-label">Agility</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('agility', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('agility', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-agility-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('agility', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('agility', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-agility-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-agility-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-agility-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('agility', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-agility-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('agility', 'total', 1)">+</button>
+                </div>
               </div>
 
               <div class="attribute-row">
                 <span class="attribute-label">Reaction</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('reaction', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('reaction', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-reaction-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('reaction', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('reaction', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-reaction-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-reaction-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-reaction-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('reaction', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-reaction-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('reaction', 'total', 1)">+</button>
+                </div>
               </div>
             </div>
 
@@ -134,34 +236,46 @@
               <div class="attribute-row">
                 <span class="attribute-label">Intuition</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('intuition', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('intuition', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-intuition-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('intuition', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('intuition', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-intuition-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-intuition-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-intuition-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('intuition', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-intuition-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('intuition', 'total', 1)">+</button>
+                </div>
               </div>
 
               <div class="attribute-row">
                 <span class="attribute-label">Logic</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('logic', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('logic', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-logic-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('logic', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('logic', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-logic-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-logic-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-logic-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('logic', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-logic-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('logic', 'total', 1)">+</button>
+                </div>
               </div>
 
               <div class="attribute-row">
                 <span class="attribute-label">Composure</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('composure', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('composure', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-composure-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('composure', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('composure', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-composure-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-composure-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-composure-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('composure', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-composure-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('composure', 'total', 1)">+</button>
+                </div>
               </div>
             </div>
 
@@ -170,12 +284,16 @@
               <div class="attribute-row">
                 <span class="attribute-label">Charisma</span>
                 <div class="edit-wrapper">
-                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('charisma', -1)">-</button>
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('charisma', 'base', -1)">-</button>
                     <span class="attribute-box" id="level-attr-charisma-base"></span>
-                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('charisma', 1)">+</button>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('charisma', 'base', 1)">+</button>
                 </div>
-                <span class="attribute-box" id="level-attr-charisma-mod" style="border-style: dotted; opacity: 0.7;"></span>
-                <span class="attribute-box" id="level-attr-charisma-total"></span>
+                <span class="attribute-box attr-spacer" id="level-attr-charisma-mod" style="border-style: dotted; opacity: 0.7;"></span>
+                <div class="edit-wrapper">
+                    <button class="lvl-btn lvl-btn-minus" onclick="changeStat('charisma', 'total', -1)">-</button>
+                    <span class="attribute-box" id="level-attr-charisma-total"></span>
+                    <button class="lvl-btn lvl-btn-plus" onclick="changeStat('charisma', 'total', 1)">+</button>
+                </div>
               </div>
             </div>
           </div>
@@ -216,26 +334,321 @@
 
       <section id="level-tab-skills" class="character-tab-panel">
         <div class="skills-layout">
+          
           <div class="skills-main">
-            <h3>Skills</h3>
-            
-            <div id="level-skills-container">
-                <p>Loading Skills for Editing...</p>
+            <h3>Skills Management</h3>
+
+            <div class="skill-group">
+              <h4>Combat</h4>
+              
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Firearms</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Firearms', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-firearms-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Firearms" onclick="changeSkill('Firearms', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-firearms-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-firearms-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Heavy Weapons</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Heavy Weapons', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-heavy-weapons-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Heavy Weapons" onclick="changeSkill('Heavy Weapons', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-heavy-weapons-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-heavy-weapons-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Close Combat</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Close Combat', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-close-combat-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Close Combat" onclick="changeSkill('Close Combat', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-close-combat-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-close-combat-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Dodge</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Dodge', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-dodge-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Dodge" onclick="changeSkill('Dodge', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-dodge-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-dodge-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+              
+               <div class="skill-row">
+                 <div class="skill-slot">
+                  <span class="skill-name">Dodge (Blast)</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Dodge (Blast)', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-dodge-blast-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Dodge (Blast)" onclick="changeSkill('Dodge (Blast)', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-dodge-blast-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-dodge-blast-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+                 <div class="skill-slot skill-slot-empty"></div>
+               </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Physical</h4>
+              
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Athletics</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Athletics', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-athletics-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Athletics" onclick="changeSkill('Athletics', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-athletics-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-athletics-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Stealth</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Stealth', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-stealth-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Stealth" onclick="changeSkill('Stealth', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-stealth-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-stealth-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Survival</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Survival', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-survival-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Survival" onclick="changeSkill('Survival', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-survival-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-survival-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+                <div class="skill-slot skill-slot-empty"></div>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Mental</h4>
+              
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Piloting</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Piloting', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-piloting-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Piloting" onclick="changeSkill('Piloting', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-piloting-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-piloting-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Electronics</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Electronics', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-electronics-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Electronics" onclick="changeSkill('Electronics', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-electronics-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-electronics-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Engineering</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Engineering', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-engineering-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Engineering" onclick="changeSkill('Engineering', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-engineering-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-engineering-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Hacking</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Hacking', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-hacking-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Hacking" onclick="changeSkill('Hacking', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-hacking-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-hacking-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+              
+               <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Medicine</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Medicine', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-medicine-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Medicine" onclick="changeSkill('Medicine', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-medicine-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-medicine-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+                <div class="skill-slot skill-slot-empty"></div>
+               </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Social</h4>
+              
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Investigation</span>
+                  <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Investigation', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-investigation-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Investigation" onclick="changeSkill('Investigation', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-investigation-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-investigation-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Subterfuge</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Subterfuge', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-subterfuge-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Subterfuge" onclick="changeSkill('Subterfuge', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-subterfuge-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-subterfuge-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Persuasion</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Persuasion', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-persuasion-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Persuasion" onclick="changeSkill('Persuasion', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-persuasion-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-persuasion-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Intimidation</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Intimidation', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-intimidation-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Intimidation" onclick="changeSkill('Intimidation', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-intimidation-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-intimidation-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-slot">
+                  <span class="skill-name">Streetwise</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Streetwise', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-streetwise-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Streetwise" onclick="changeSkill('Streetwise', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-streetwise-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-streetwise-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+
+                <div class="skill-slot">
+                  <span class="skill-name">Insight</span>
+                   <div class="edit-wrapper">
+                      <button class="lvl-btn lvl-btn-minus" onclick="changeSkill('Insight', -1, this)">-</button>
+                      <span class="skill-box" id="level-skill-insight-val">0</span>
+                      <button class="lvl-btn lvl-btn-plus" data-skill="Insight" onclick="changeSkill('Insight', 1, this)">+</button>
+                  </div>
+                  <span class="skill-box" id="level-skill-insight-att" title="Attribute Bonus" style="border-style: dotted; opacity: 0.7;">-</span>
+                  <span class="skill-box" id="level-skill-insight-total" title="Total Pool" style="color: #fff; font-weight: bold;">-</span>
+                </div>
+              </div>
             </div>
           </div>
 
           <aside class="skills-log">
-            <h3>Skill Costs</h3>
-            <div class="skills-log-body">
+            <h3>Skill Log</h3>
+            <div class="skills-log-body" id="level-skill-log">
+              <p>Cost: New Level x 1 XP</p>
               <p>New Skill: 5 XP</p>
-              <p>Increase: New Level x 2 XP</p>
+              <hr style="border-color: #444; margin: 10px 0;">
             </div>
           </aside>
         </div>
       </section>
 
       <section id="level-tab-shop" class="character-tab-panel">
-        <h3>Shop (Coming Soon)</h3>
+        
+        <div class="shop-nav-level-1">
+            <button class="shop-nav-btn" onclick="showShopSub('weapons')">Weapons</button>
+            <button class="shop-nav-btn" onclick="showShopSub('ammo')">Ammo</button>
+            <button class="shop-nav-btn" onclick="showShopSub('armor')">Armor</button>
+            <button class="shop-nav-btn" onclick="showShopSub('cyberware')">Cyberware</button>
+            <button class="shop-nav-btn" onclick="showShopSub('tech')">Tech/Drones</button>
+        </div>
+
+        <div id="shop-sub-weapons" class="shop-sub-bar hidden">
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'Pistol')">Pistols</button>
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'SMG')">SMG</button>
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'Automatic Rifle')">Assault Rifles</button>
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'Sniper Rifle')">Sniper</button>
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'Shotgun')">Shotguns</button>
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'Melee')">Melee</button>
+            <button class="shop-sub-btn" onclick="loadShopData('weapons', 'Launcher')">Launcher</button>
+        </div>
+
+        <div id="shop-sub-ammo" class="shop-sub-bar hidden">
+            <button class="shop-sub-btn" onclick="loadShopData('ammo', 'rounds')">Bullets</button>
+            <button class="shop-sub-btn" onclick="loadShopData('ammo', 'grenades')">Grenades</button>
+            <button class="shop-sub-btn" onclick="loadShopData('ammo', 'rockets')">Rockets/Missiles</button>
+        </div>
+
+        <div id="shop-sub-armor" class="shop-sub-bar hidden">
+            <button class="shop-sub-btn" onclick="loadShopData('armor', 'armor')">Body Armor</button>
+            <button class="shop-sub-btn" onclick="loadShopData('armor', 'head')">Helmets / Headware</button>
+        </div>
+
+        <div id="shop-sub-cyberware" class="shop-sub-bar hidden">
+            <button class="shop-sub-btn" onclick="loadShopData('cyberware', 'head')">Head</button>
+            <button class="shop-sub-btn" onclick="loadShopData('cyberware', 'torso')">Torso</button>
+            <button class="shop-sub-btn" onclick="loadShopData('cyberware', 'arms')">Arms</button>
+            <button class="shop-sub-btn" onclick="loadShopData('cyberware', 'legs')">Legs</button>
+            <button class="shop-sub-btn" onclick="loadShopData('cyberware', 'skin')">Skin</button>
+        </div>
+
+        <div id="shop-sub-tech" class="shop-sub-bar hidden">
+            <button class="shop-sub-btn" onclick="loadShopData('tech', 'commlinks')">Commlinks</button>
+            <button class="shop-sub-btn" onclick="loadShopData('tech', 'drones')">Drones</button>
+        </div>
+
+        <div id="shop-table-wrapper">
+            <div id="shop-table-container">
+                <p style="color: #666; font-style: italic; margin-top: 20px;">Select a category above.</p>
+            </div>
+        </div>
       </section>
       
       <section id="level-tab-cyberware" class="character-tab-panel">
