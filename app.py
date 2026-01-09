@@ -9,6 +9,12 @@ from auth import auth_bp, login_manager
 from characters_routes import characters_bp
 from level_skills_routes import level_skills_bp
 from level_shop_routes import level_shop_bp
+from level_stash_routes import level_stash_bp
+from level_cyberware_routes import level_cyberware_bp
+from features_routes import features_bp
+from magic_routes import magic_bp
+from skill_routes import skill_bp
+
 
 
 def create_app():
@@ -29,6 +35,14 @@ def create_app():
     app.register_blueprint(items_commlinks_bp)
     app.register_blueprint(level_skills_bp)
     app.register_blueprint(level_shop_bp)
+    app.register_blueprint(level_stash_bp)
+    app.register_blueprint(level_cyberware_bp)
+    app.register_blueprint(features_bp)
+    app.register_blueprint(magic_bp)
+    app.register_blueprint(skill_bp)
+
+
+
     # Flask-Login setup
     login_manager.init_app(app)
 

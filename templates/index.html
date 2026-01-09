@@ -24,11 +24,12 @@
     {% include "sections/combat.html" %}
     {% include "sections/stats.html" %}
     {% include "sections/magic.html" %}
+    {% include "sections/hacking.html" %}
     {% include "sections/lists.html" %}
     {% include "sections/characters_all.html" %}
     {% include "sections/characters_user.html" %}
     {% include "sections/Timeline.html" %}
-   
+    {% include "sections/damage.html" %}
 
 
   </main>
@@ -149,7 +150,18 @@
 
   <script src="{{ url_for('static', filename='js/level_shop.js') }}"></script>
 
-  
+  <script src="{{ url_for('static', filename='js/level_stash.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/level_cyberware.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/features.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/magic.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/skills.js') }}"></script>
+
+
+
 
 
 </body>

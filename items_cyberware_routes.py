@@ -36,7 +36,18 @@ def api_cyberware_with_items(category):
             COALESCE(array_to_json(i.features), '[]'::json) AS features,
             
             c.humanity_cost,
-            c.cyberware_type
+            c.cyberware_type,
+            c.stamina_bonus,
+                        c.strength_bonus,
+                        c.agility_bonus,
+                        c.reaction_bonus,
+                        c.intuition_bonus,
+                        c.logic_bonus,
+                        c.composure_bonus,
+                        c.charisma_bonus,
+                        c.armor_bonus,
+                        c.shock_absorption,
+                        c.action_bonus
             
         FROM cyberware c
         JOIN items i ON i.id = c.item_id

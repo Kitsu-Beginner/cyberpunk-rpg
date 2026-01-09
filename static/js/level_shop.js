@@ -1,54 +1,50 @@
 // static/js/level_shop.js
 
-// 1. Navigation Logik (Sub-Menus anzeigen)
+// 1. Navigation Logik (Unverändert)
 window.showShopSub = function(category) {
-    // Erstmal alle Sub-Bars verstecken
     const allSubs = document.querySelectorAll('.shop-sub-bar');
     allSubs.forEach(el => el.classList.add('hidden'));
 
-    // Dann die gewählte anzeigen
     const target = document.getElementById(`shop-sub-${category}`);
     if (target) {
         target.classList.remove('hidden');
     }
     
-    // Optional: Container leeren oder Hinweis anzeigen
     const container = document.getElementById("shop-table-container");
     container.innerHTML = '<p style="color: #888;">Select a sub-category...</p>';
 };
 
-// 2. Daten laden (basierend auf Drill-Down Auswahl)
+// 2. Daten laden (ERWEITERT um Cyberdecks)
 window.loadShopData = async function(mainType, subType) {
     const container = document.getElementById("shop-table-container");
     container.innerHTML = '<p style="color: cyan;">Loading Market Data...</p>';
 
     let apiUrl = "";
-    let dbCategory = "stash"; // 'stash' oder 'cyberware' (für die Kauf-Logik im Backend)
+    let dbCategory = "stash"; 
 
-    // URL Bauen basierend auf den Parametern
     if (mainType === 'weapons') {
-        // subType ist z.B. 'Pistol', 'SMG' -> Wir nutzen die gefilterte Route
         apiUrl = `/api/weapons_with_items/${encodeURIComponent(subType)}`;
         dbCategory = "stash";
     } 
     else if (mainType === 'ammo') {
-        // subType ist 'rounds', 'grenades'
         apiUrl = `/api/ammunition_with_items/${subType}`;
         dbCategory = "stash";
     }
     else if (mainType === 'armor') {
         if (subType === 'armor') apiUrl = "/api/armor_with_items";
-        if (subType === 'head') apiUrl = "/api/headware_with_items"; // Falls du diese Route hast
+        if (subType === 'head') apiUrl = "/api/headware_with_items";
         dbCategory = "stash";
     }
     else if (mainType === 'cyberware') {
-        // subType ist 'head', 'torso', etc.
         apiUrl = `/api/cyberware_with_items/${subType}`;
         dbCategory = "cyberware";
     }
     else if (mainType === 'tech') {
         if (subType === 'commlinks') apiUrl = "/api/commlinks";
         if (subType === 'drones') apiUrl = "/api/drones";
+        if (subType === 'combat_drones') apiUrl = "/api/combat_drones";
+        // NEU: Cyberdecks nutzen jetzt die gleiche Logik wie Commlinks
+        if (subType === 'cyberdecks') apiUrl = "/api/cyberdecks"; 
         dbCategory = "stash";
     }
 
@@ -65,7 +61,7 @@ window.loadShopData = async function(mainType, subType) {
     }
 };
 
-// 3. Tabelle Rendern
+// 3. Tabelle Rendern (SMART-UPDATE für Tech-Stats)
 function renderShopTable(items, dbCategory) {
     const container = document.getElementById("shop-table-container");
     
@@ -86,20 +82,31 @@ function renderShopTable(items, dbCategory) {
         <tbody>`;
 
     items.forEach(item => {
-        // ID Mapping Sicherheit
         const realItemId = item.item_id || item.id;
         const price = item.price || 0;
         
-        // Features hübsch machen (optional)
+        // Features aufbereiten
         let featuresStr = "";
         if (Array.isArray(item.features)) featuresStr = item.features.join(", ");
+
+        // NEU: Spezial-Zeile für Commlinks/Cyberdecks generieren
+        let techStats = "";
+        if (item.compute !== undefined || item.firewall !== undefined) {
+            // Wir prüfen range_m (Decks) oder signal (Commlinks)
+            const range = item.range_m || item.signal || 0;
+            techStats = `<div style="font-size: 0.85em; color: #00f3ff; margin-top: 2px;">
+                Compute: ${item.compute || 0} | Firewall: ${item.firewall || 0} | Range: ${range}
+            </div>`;
+        }
 
         html += `
         <tr>
             <td>
                 <div style="font-weight: bold; color: #fff;">${item.name}</div>
-                <div style="font-size: 0.8em; color: #aaa;">${item.legality || ''} | Weight: ${item.weight || 0}</div>
-                <div style="font-size: 0.75em; color: #888; font-style: italic;">${featuresStr}</div>
+                <div style="font-size: 0.8em; color: #aaa;">
+                    ${item.legality || 'Legal'} | Weight: ${item.weight || 0}kg
+                </div>
+                ${techStats} <div style="font-size: 0.75em; color: #888; font-style: italic;">${featuresStr}</div>
             </td>
             <td style="color: #ffff00; font-family: monospace; font-size: 1.1em;">
                 ${price} ¥
@@ -124,7 +131,7 @@ function renderShopTable(items, dbCategory) {
     container.innerHTML = html;
 }
 
-// 4. Kaufen (Sendet an Backend)
+// 4. Kaufen (Unverändert)
 window.buyItem = async function(itemId, qty, category, itemName) {
     if (!window.currentLevelCharId) return;
 
@@ -150,12 +157,9 @@ window.buyItem = async function(itemId, qty, category, itemName) {
             return;
         }
 
-        // Erfolg: Geld im Header updaten
         if (window.setText) {
             window.setText("level-money-display", data.new_money);
         }
-        
-        // Kleines visuelles Feedback (optional: Toast Notification wäre besser)
         console.log(data.message);
 
     } catch (err) {

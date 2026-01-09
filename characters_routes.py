@@ -357,7 +357,67 @@ def api_exchange_money(char_id: int):
         abort(500, description="Database error")
 
 
+# DICEROLL Tab....komische Variante mit verbindung zur Datenbank
 
+
+# In deiner routes-Datei (z.B. character_routes.py)
+
+@characters_bp.route('/api/character/<int:char_id>/level_log', methods=['GET'])
+def get_character_level_log(char_id):
+    try:
+        with get_conn() as conn:
+            with conn.cursor() as cur:
+                # Wir holen die Daten. Wichtig: 'as time_str' definiert den Namen für das dritte Feld
+                cur.execute("""
+                    SELECT change_value, reason, to_char(timestamp, 'DD.MM.YYYY HH24:MI') as time_str
+                    FROM level_log 
+                    WHERE character_id = %s 
+                    ORDER BY timestamp DESC
+                """, (char_id,))
+                
+                rows = cur.fetchall()
+                
+                log_entries = []
+                for row in rows:
+                    # KORREKTUR: Wir greifen über die Namen zu, nicht über Zahlen!
+                    log_entries.append({
+                        "change": row['change_value'],
+                        "reason": row['reason'],
+                        "date": row['time_str']
+                    })
+                    
+        return jsonify(log_entries)
+
+    except Exception as e:
+        print(f"Error fetching log: {e}")
+        # Zeige den Fehler auch im Frontend an, falls einer passiert
+        return jsonify({"error": str(e)}), 500
+
+
+@characters_bp.route('/api/add_level_entry', methods=['POST'])
+def add_level_entry():
+    data = request.get_json()
+    char_id = data.get('character_id')
+    change_value = data.get('change_value', 0)
+    reason = data.get('reason', '')
+
+    if not char_id:
+        return jsonify({"error": "Missing character_id"}), 400
+
+    try:
+        with get_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO level_log (character_id, change_value, reason, timestamp)
+                    VALUES (%s, %s, %s, NOW())
+                """, (char_id, change_value, reason))
+                conn.commit()
+        
+        return jsonify({"success": True})
+    
+    except Exception as e:
+        print(f"Error adding level entry: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 

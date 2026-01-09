@@ -1,0 +1,267 @@
+$env:DB_NAME = "Cyberpunk_rpg"
+$env:DB_USER = "postgres"
+$env:DB_PASSWORD = "CA-520sql"
+$env:DB_HOST = "localhost"
+$env:DB_PORT = "5432"
+
+python app.py
+
+
+CYBERDECKS
+
+WITH new_item AS (
+    INSERT INTO public.items (
+        name, 
+        description, 
+        price, 
+        weight, 
+        legality, 
+        image_url, 
+        features
+    )
+    VALUES (
+        'Renraku "Erika" Stealth Deck', 
+        'A high-end stealth deck optimized for silent running and firewall integrity. Features a specialized cooling system for prolonged hacking sessions.', 
+        95000, 
+        1.5, 
+        'restricted', 
+        'items/erika.png', 
+        ARRAY['wireless', 'cable', 'hacking_OS', 'signal']::features[]
+    )
+    RETURNING id
+)
+INSERT INTO public.cyberdecks (
+    item_id, 
+    compute, 
+    firewall, 
+    signal
+)
+SELECT 
+    id, 
+    8,      -- Compute (used for Active Drone slots)
+    6,      -- Firewall
+    7       -- Signal
+FROM new_item;
+
+
+
+DROHNEN
+
+WITH new_item AS (
+    INSERT INTO public.items (
+        name, 
+        description, 
+        price, 
+        weight, 
+        legality, 
+        image_url, 
+        features
+    )
+    VALUES (
+        'Renraku "Stormcloud"', 
+        'A medium-sized surveillance drone capable of hovering at high altitudes for extended periods. Provides a stable platform for long-range sensors.', 
+        15000, 
+        8.0, 
+        'legal', 
+        'items/stormcloud.png', 
+        ARRAY['camera', 'wireless', 'signal', 'relay']::features[]
+    )
+    RETURNING id
+)
+INSERT INTO public.drones (
+    item_id, 
+    firewall, 
+    signal, 
+    speed, 
+    ordnance, 
+    hull, 
+    autopilot
+)
+SELECT 
+    id, 
+    4,      -- firewall [cite: 183]
+    12,     -- signal [cite: 184]
+    10,     -- speed [cite: 185]
+    1,      -- ordnance [cite: 184]
+    3,      -- hull [cite: 183]
+    4       -- autopilot [cite: 185]
+FROM new_item;
+
+
+CYBERWARE 
+
+WITH new_item AS (
+    INSERT INTO public.items (
+        name, 
+        description, 
+        price, 
+        weight, 
+        legality, 
+        image_url, 
+        features
+    )
+    VALUES (
+        'Name', 
+        'Beschreibung.', 
+        10000, -- Platzhalter-Preis, bitte ggf. anpassen
+        0.0, 
+        'legal', 
+        NULL, 
+        ARRAY['feature1', 'feature2']::features[]
+    )
+    RETURNING id
+)
+INSERT INTO public.cyberware (
+    item_id, 
+    stamina_bonus, 
+    strength_bonus, 
+    agility_bonus, 
+    reaction_bonus, 
+    intuition_bonus, 
+    logic_bonus, 
+    composure_bonus, 
+    charisma_bonus, 
+    cyberware_type, 
+    humanity_cost, 
+    action_bonus, 
+    armor_bonus, 
+    shock_absorption
+)
+SELECT 
+    id, 
+    1,      -- stamina_bonus: +1 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    0, 
+    'torso',-- Einbauort (Blut/Intern) 
+    0.2,    -- humanity_cost: 0.2 
+    0, 
+    0, 
+    0
+FROM new_item;
+
+
+
+
+WAFFEN 
+
+
+WITH new_item AS (
+    INSERT INTO public.items (
+        name, 
+        description, 
+        price, 
+        weight, 
+        legality, 
+        image_url, 
+        features
+    )
+    VALUES (
+        'HK MP5',                -- Name
+        'This classic submachingun is a readily sold on the black market', -- Beschreibung
+        2500,                              -- Preis
+        2.5,                              -- Gewicht (kg)
+        'illegal',                     -- Legality: 'legal', 'restricted', 'military', 'illegal'
+        'items/predator.png',             -- Bildpfad (oder NULL)
+        ARRAY['max_auto_5']::features[] -- Features
+    )
+    RETURNING id
+)
+INSERT INTO public.weapons (
+    item_id, 
+    type, 
+    calibr,
+    damage, 
+    penetration, 
+    max_range,
+    ammo,
+    auto_bonus,
+    damage_type
+
+)
+SELECT 
+    id, 
+    'SMG',      -- WICHTIG: Muss exakt passen (Pistol, SMG, Automatic Rifle, Sniper Rifle, Machine Gun, Launcher)
+    '9mm',       -- calibr
+    2,            -- damage
+    1,            --penetration
+    '150m',      -- max_range
+    30,            -- ammo
+    3,           -- auto_bonus
+    'physical'   -- Ammo Type / Caliber
+    
+FROM new_item;
+
+
+Fahrzeige
+
+
+WITH new_item AS (
+    INSERT INTO public.items (
+        name, 
+        description, 
+        price, 
+        weight, 
+        legality, 
+        image_url, 
+        features
+    )
+    VALUES (
+        'Ya-Ungo "Kusangi" CTX',           -- Name
+        'A high-performance street bike favored by courier services and gangers alike. Fast, but offers little protection.', 
+        12000,                             -- Preis
+        280.0,                             -- Gewicht
+        'legal',                           -- Legality
+        'items/kusanagi.png',              -- Image
+        ARRAY['turbo', 'gyroscopic']::features[] -- Features
+    )
+    RETURNING id
+)
+INSERT INTO public.vehicles (
+    item_id, 
+    vehicle_type, 
+    structure, 
+    handling, 
+    speed, 
+    armor, 
+    control, 
+    space
+)
+SELECT 
+    id, 
+    'Bike',    -- vehicle_type (für Filterung)
+    8,         -- structure: Wenig HP (es ist nur ein Bike)
+    2,         -- handling: Sehr wendig (+2 auf Piloting)
+    180,       -- speed: Sehr schnell
+    2,         -- armor: Kaum Panzerung
+    3,         -- control: Guter Bordcomputer
+    1          -- space: 1 Sitzplatz
+FROM new_item;
+
+
+action_bonus
+
+INSERT INTO public.actions (name, action_cost, action_type, description)
+VALUES 
+    (
+        'Quick Shot', 
+        1, 
+        'Simple', 
+        'A fast, snap-fire attack with a ranged weapon. Does not allow for aiming bonuses.'
+    ),
+    (
+        'Full Defense', 
+        5, 
+        'Reaction', 
+        'The character focuses entirely on dodging incoming attacks. Adds Willpower to the defense pool for the rest of the round.'
+    ),
+    (
+        'Reload (Smart)', 
+        0, 
+        'Free', 
+        'Ejecting a clip via smartlink command. Requires a mental command only.'
+    );

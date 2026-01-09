@@ -1,0 +1,185 @@
+<div id="content-hacking-rules" class="content-block">
+    <h2 style="color: var(--neon-magenta); border-bottom: 2px solid var(--neon-magenta); padding-bottom: 10px; margin-bottom: 20px;">
+        Neural Network & Hacking Protocols
+    </h2>
+
+    <p style="color: var(--text-primary); margin-bottom: 30px;">
+        In the year 2050, the battlefield is digital as often as it is physical. Attacks occur on two vectors: 
+        <strong>Wireless Injection</strong> (remote takeover) and <strong>Direct Link</strong> (physical port access, no rules as of yet). 
+        To hack a target wirelessly, the target and the attacker must be in each others range.
+    </p>
+
+    <div style="background: rgba(0, 20, 40, 0.6); border: 1px solid var(--neon-cyan); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="color: var(--neon-cyan); margin-top: 0;">Signal & Range Logic</h3>
+        
+        <ul style="color: var(--text-secondary); line-height: 1.6;">
+            <li><strong>Handshake Protocol:</strong> A connection can only be established within the <em>lowest</em> range of the two devices. (e.g., If Device A has 5km range and Device B has 10km, connection is only possible within 5km).</li>
+            <li><strong>Urban Interference:</strong> In dense city environments, all signal ranges are effective <strong>halved</strong> due to structural interference.</li>
+            <li><strong>Visibility:</strong> Devices within range are not immediately visible; they must be identified via a <strong>Scan</strong> program.</li>
+            <li><strong>Micro-Devices:</strong> Purely wireless devices often have ranges of only a few meters. These are usually hacked via their host (e.g., the owner's Commlink).</li>
+        </ul>
+    </div>
+
+    <h3 style="color: var(--neon-green); margin-bottom: 15px;">Base Stats</h3>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+        
+        <div style="flex: 1; min-width: 300px; background: rgba(20, 20, 20, 0.8); padding: 15px; border-left: 4px solid var(--neon-yellow);">
+            <h4 style="color: var(--neon-yellow); margin-top: 0;">Compute (CPU)</h4>
+            <p style="font-size: 0.9em; color: #ccc;">
+                Determines the processing power available for offensive and utility programs.
+            </p>
+            <ul style="font-size: 0.9em; color: #aaa;">
+                <li>Each active program consumes <strong>1 Compute</strong> per level.</li>
+                <li>The Program Level is added to your dice pool for attacks.</li>
+                <li><strong>Cyberdecks</strong> (Mobile Quantum Computers) offer significantly higher Compute than standard Commlinks.</li>
+            </ul>
+        </div>
+
+        <div style="flex: 1; min-width: 300px; background: rgba(20, 20, 20, 0.8); padding: 15px; border-left: 4px solid var(--neon-red);">
+            <h4 style="color: var(--neon-red); margin-top: 0;">Firewall (FWL)</h4>
+            <p style="font-size: 0.9em; color: #ccc;">
+                The primary defense rating against intrusion. It acts as the Threshold (Difficulty) for hacking attempts.
+            </p>
+            <div style="background: rgba(255, 0, 85, 0.1); border: 1px solid var(--neon-red); padding: 10px; margin-top: 10px; border-radius: 4px;">
+                <strong style="color: var(--neon-red);">Dynamic Defense Rule:</strong><br>
+                Any <strong>unused Compute</strong> capacity is automatically rerouted to the Firewall. <br>
+                <em>Example: A Commlink with Compute 2 and Firewall 2 running no programs has an Effective Firewall of 4.</em>
+            </div>
+        </div>
+    </div>
+
+    <h3 style="color: var(--neon-magenta); margin-bottom: 15px;">Attack Vectors</h3>
+    <p style="margin-bottom: 15px;">Hacking requires a dedicated <strong>Cyberdeck</strong> with a Hacking OS. Commlinks can run defense and utility, but cannot launch intrusion attacks.
+                                    The Hacker rolls an attack roll  and usually needs to meet (firewall) successes to 
+                                    succeed. The effect is defined by the program that was used in the attack.</p>
+    
+    <table class="item-table" style="margin-bottom: 40px;">
+        <thead>
+            <tr>
+                <th style="width: 20%;">Mode</th>
+                <th style="width: 20%;">Time Cost</th>
+                <th style="width: 60%;">Resolution Mechanics</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color: var(--neon-cyan); font-weight: bold;">AI Assisted Attack<br><span style="font-size:0.8em; color:#888;">(Slow / AI)</span></td>
+                <td>1 Minute <br>per Compute utilized</td>
+                <td>
+                    The hacker compiles a code package and lets an AI execute the breach. This is how the 99% do it.
+                    <ol style="padding-left: 20px; margin: 5px 0;">
+                        <li>Declare intended <strong>Compute</strong> allocation.</li>
+                        <li>Roll <strong>Hacking Skill</strong>. Note the successes.</li>
+                        <li><strong>Final Attack Pool</strong> = (Allocated Compute) + (Successes from Hacking Roll).</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td style="color: var(--neon-magenta); font-weight: bold;">Neural Interface<br><span style="font-size:0.8em; color:#888;">(Fast / VR)</span></td>
+                <td>1 Combat Round <br>per Compute utilized</td>
+                <td>
+                    
+                    The hacker uses a neural interface (via a neural translator library) to attack in real-time.
+                    <ol style="padding-left: 20px; margin: 5px 0;">
+                        <li>Declare intended <strong>Compute</strong> allocation.</li>
+                        <li>Spend Actions to build the stack (1 round of 4 Actions each per Compute point).</li>
+                        <li><strong>Final Attack Pool</strong> = (Hacking Skill) + (Allocated Compute).</li>
+                    </ol>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 style="color: var(--neon-cyan); border-bottom: 2px solid var(--neon-cyan); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">
+        Program Library
+    </h3>
+
+    <div id="programs-list">
+        
+        <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+            <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: var(--neon-cyan); font-size: 1.1rem;">1. Network Scan</span>
+                <span style="font-size: 0.9em; color: #aaa;">REQ: Cyberdeck (Hacking_OS)</span>
+            </div>
+            <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+                Scans the environment for wireless signatures. The hacker perceives (used Compute) devices with a <strong>Firewall rating ≤ Successes rolled</strong>. If more devices 
+                are present, than the used compute, the hacker has to either perform multiple scans or limit the search to only 
+                match vertain criteria.
+                <br><br>
+                <span style="color: var(--neon-yellow);">Effect:</span> Reveals Device Type, Stats, and approximate distance (±1km).
+            </div>
+        </div>
+
+        <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+            <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: var(--neon-cyan); font-size: 1.1rem;">2. Gain Access (Root)</span>
+                <span style="font-size: 0.9em; color: #aaa;">REQ: Cyberdeck (Hacking OS) | <span style="color: var(--neon-red);">Target: Scan Lock</span></span>
+            </div>
+            <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+                Attempts to establish a backdoor for passive monitoring.
+                <br><strong>Threshold:</strong> Target Firewall.
+                <br><br>
+                <span style="color: var(--neon-green);">Success:</span> Access to GPS data, chat logs, media files, and contact lists.
+                <br>
+                <span style="color: var(--neon-red);">Failure:</span> Target receives a security log notification (often delayed/unnoticed until later analysis).
+            </div>
+        </div>
+
+        <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+            <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: var(--neon-magenta); font-size: 1.1rem;">3. Gain Access (Admin)</span>
+                <span style="font-size: 0.9em; color: #aaa;">REQ: Cyberdeck (Hacking OS) | <span style="color: var(--neon-yellow);">Target: Root Access</span></span>
+            </div>
+            <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+                Escalates privileges to seize full control of the device.
+                <br><strong>Threshold:</strong> Target Firewall.
+                <br><br>
+                <span style="color: var(--neon-green);">Success:</span> Complete device takeover (Shutdown, Reboot, Format, Control).
+                <br>
+                <span style="color: var(--neon-red);">Failure:</span> <strong>Active Lockout.</strong> The hacker is dumped from the system. No further attempts can be made on this device until the security resets.
+            </div>
+        </div>
+
+        <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+            <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: var(--neon-cyan); font-size: 1.1rem;">4. System Overload (Slow Down)</span>
+                <span style="font-size: 0.9em; color: #aaa;">REQ: Cyberdeck (Hacking OS) | Target: Scan Lock</span>
+            </div>
+            <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+                Floods the target with garbage requests to freeze their processing power. Does not require Access privileges.
+                <br><br>
+                <span style="color: var(--neon-yellow);">Effect:</span> Attacker makes an opposed roll against the targets firewall.<strong> The target device looses 1 compute for each net hit on the opposed roll as long as the programm is active.</strong>.
+                <br>
+                <span style="font-style: italic; color: #888;">Note: The attacker's Compute used for this attack remains "occupied" as long as the jammer is active.</span>
+            </div>
+        </div>
+
+        <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+            <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: var(--neon-green); font-size: 1.1rem;">5. Tactical Network (TacNet)</span>
+                <span style="font-size: 0.9em; color: #aaa;">REQ: Any device | Cost: 1 Compute</span>
+            </div>
+            
+            <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+                Links team commlinks to share real-time telemetry: GPS, Ammo counts, Biomonitor status, and Enemy sightlines. An AI predicts enemy movement based on shared vision. Drones can also be connected to the network.
+                <br><br>
+                <span style="color: var(--neon-green);">Bonus:</span> <strong>Flank Immunity.</strong> Team members cannot be flanked (which usually halves defense pools) as long
+                                                        as at least one linked member has Line of Sight to the attacker. If an attacker breaches on of the linked devices in such 
+                                                        a network, he can readout all transmitted data of all members in the network.
+            </div>
+        </div>
+
+        <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+            <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; color: var(--neon-green); font-size: 1.1rem;">6. Drone Command</span>
+                <span style="font-size: 0.9em; color: #aaa;">REQ: Any Device | Cost: Variable</span>
+            </div>
+            <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+                Allows the user to issue commands to linked drones or assume direct control.
+                <br><br>
+                <span style="color: var(--neon-yellow);">Cost:</span> Occupies <strong>1 Compute</strong> slot per active drone in the network.
+            </div>
+        </div>
+
+    </div>
+</div>

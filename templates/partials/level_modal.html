@@ -149,9 +149,39 @@
         /* Helper Class */
         .hidden { display: none !important; }
 
+        /* --- Stash Scroll-Bereich --- */
+        #stash-table-wrapper {
+            max-height: 400px; /* Maximale Höhe, danach wird gescrollt */
+            overflow-y: auto;  /* Automatischen Scrollbalken anzeigen */
+            border: 1px solid #333; /* Optional: Ein feiner Rahmen */
+            background: rgba(0,0,0,0.2); /* Optional: Leichter Hintergrund */
+            padding: 5px;
+        }
 
 
+        /* --- Cyberware Scroll-Bereich --- */
+        #cyberware-table-wrapper {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            background: rgba(0,0,0,0.2);
+            padding: 5px;
+        }
 
+        #dice-modal {
+             background-color: rgba(0, 0, 0, 0.85); /* Dunklerer Hintergrund */
+        }
+
+
+        /* LEVEL LOG SCROLLBAR */
+      #level-log-container {
+          max-height: 250px;           /* Maximum height before scrolling starts */
+           overflow-y: auto;            /* vertical scrollbar if needed */
+          border: 1px solid #333;      /* nice border frame */
+          background: rgba(0, 0, 0, 0.2); /* slightly darker background */
+          padding: 5px;
+          margin-top: 10px;
+      }
 
       </style>
 
@@ -324,6 +354,11 @@
 
           <section class="attributes-log">
             <h3>Level Log</h3>
+
+            <button id="open-dice-btn" class="btn-small" style="background-color: var(--neon-magenta); margin-right: 10px;">
+                  🎲 Roll Dice
+            </button>
+
             <div class="event-log-placeholder" id="level-log-container">
               <p>Changes will appear here.</p>
             </div>
@@ -642,6 +677,7 @@
         <div id="shop-sub-tech" class="shop-sub-bar hidden">
             <button class="shop-sub-btn" onclick="loadShopData('tech', 'commlinks')">Commlinks</button>
             <button class="shop-sub-btn" onclick="loadShopData('tech', 'drones')">Drones</button>
+            <button class="shop-sub-btn" onclick="loadShopData('tech', 'cyberdecks')">Cyberdecks</button>
         </div>
 
         <div id="shop-table-wrapper">
@@ -652,7 +688,18 @@
       </section>
       
       <section id="level-tab-cyberware" class="character-tab-panel">
-         <h3>Cyberware (Coming Soon)</h3>
+         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+             <h3>Installed Cyberware</h3>
+             <button class="lvl-btn" style="width: auto; padding: 5px 10px;" onclick="loadCyberwareData()">
+                 &#x21bb; Refresh
+             </button>
+         </div>
+
+         <div id="cyberware-table-wrapper">
+             <div id="cyberware-table-container">
+                 <p style="color: #666;">Loading implants...</p>
+             </div>
+         </div>
       </section>
 
       <section id="level-tab-magic" class="character-tab-panel">
@@ -664,9 +711,45 @@
       </section>
 
        <section id="level-tab-stash" class="character-tab-panel">
-         <h3>Stash (Coming Soon)</h3>
+         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+             <h3>Your Inventory</h3>
+             <button class="lvl-btn" style="width: auto; padding: 5px 10px;" onclick="loadStashData()">
+                 &#x21bb; Refresh
+             </button>
+         </div>
+
+         <div id="stash-table-wrapper">
+             <div id="stash-table-container">
+                 <p style="color: #666;">Loading items...</p>
+             </div>
+         </div>
       </section>
 
+    </div>
+  </div>
+</div>
+
+
+<div id="dice-modal" class="modal" style="display: none; z-index: 2000; background-color: rgba(0, 0, 0, 0.85);">
+  <div class="modal-content" style="max-width: 600px; width: 90%; border: 1px solid var(--neon-magenta); padding: 30px;">
+    
+    <span class="close-btn" onclick="closeDiceModal()" style="font-size: 2rem;">&times;</span>
+    
+    <h3 style="color: var(--neon-magenta); margin-top: 0;">Dice Roll (p=0.33)</h3>
+    
+    <div class="form-group" style="margin-bottom: 20px;">
+        <label style="font-size: 1.1em;">Dice Pool:</label>
+        <input type="number" id="dice-pool-input" value="6" min="1" style="width: 100%; padding: 10px; font-size: 1.1em; background: #111; color: #fff; border: 1px solid #555;">
+    </div>
+
+    <div class="form-group" style="margin-bottom: 30px;">
+        <label style="font-size: 1.1em;">Note / Action:</label>
+        <input type="text" id="dice-note-input" placeholder="e.g. Hacking Attempt" style="width: 100%; padding: 10px; font-size: 1.1em; background: #111; color: #fff; border: 1px solid #555;">
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 15px;">
+        <button class="btn-small" onclick="closeDiceModal()" style="background: #333; padding: 10px 20px;">Cancel</button>
+        <button class="btn-small" onclick="performDiceRoll()" style="background: var(--neon-green); padding: 10px 20px; font-weight: bold;">Roll & Log</button>
     </div>
   </div>
 </div>

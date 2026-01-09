@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("level-modal");
   const closeBtn = document.getElementById("level-modal-close");
 
-  // 1. Schließen-Logik
+  // 1. Schließen-Logik (Level Modal)
   if (closeBtn) {
     closeBtn.addEventListener("click", closeLevelModal);
   }
@@ -27,17 +27,49 @@ document.addEventListener("DOMContentLoaded", () => {
   
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+      // A. UI Reset (alte Tabs deaktivieren)
       tabButtons.forEach(b => b.classList.remove("active"));
       document.querySelectorAll("#level-modal .character-tab-panel").forEach(p => p.classList.remove("active"));
 
+      // B. UI Set (neuen Tab aktivieren)
       btn.classList.add("active");
       const tabName = btn.getAttribute("data-level-tab");
       const targetPanel = document.getElementById(`level-tab-${tabName}`);
+      
       if (targetPanel) {
         targetPanel.classList.add("active");
       }
+
+      // C. DATEN LADEN (Spezifische Logik für Tabs)
+      
+      // Stash Tab: Inventar neu laden
+      if (tabName === "stash" && window.loadStashData) {
+          window.loadStashData();
+      }
+
+      // Cyberware Tab: Implantate neu laden
+      if (tabName === "cyberware" && window.loadCyberwareData) {
+          window.loadCyberwareData();
+      }
+      
     });
   });
+
+  // 3. Würfel-Modal Öffnen (Button Listener)
+  const diceBtn = document.getElementById('open-dice-btn');
+  if (diceBtn) {
+      diceBtn.addEventListener('click', () => {
+          const diceModal = document.getElementById('dice-modal');
+          if (diceModal) {
+            diceModal.style.display = 'block';
+            // Fokus auf das Eingabefeld setzen (kleine Verzögerung für Rendering)
+            setTimeout(() => {
+                const noteInput = document.getElementById('dice-note-input');
+                if (noteInput) noteInput.focus();
+            }, 100);
+          }
+      });
+  }
 });
 
 // ==========================================
@@ -58,6 +90,11 @@ window.openLevelModal = function(row) {
 
   // Daten laden
   fetchCharacterLevelDetails(row.id);
+  
+  // Log laden (NEU: Damit alte Würfe sichtbar sind)
+  if (typeof window.loadLevelLog === "function") {
+      window.loadLevelLog(row.id);
+  }
 };
 
 function closeLevelModal() {
@@ -67,7 +104,7 @@ function closeLevelModal() {
 }
 
 // ==========================================
-// DATEN LADEN & ANZEIGEN
+// DATEN LADEN & ANZEIGEN (Details)
 // ==========================================
 async function fetchCharacterLevelDetails(charId) {
   try {
@@ -84,8 +121,7 @@ async function fetchCharacterLevelDetails(charId) {
     // Attribute füllen
     fillLevelAttributes(data);
 
-    // HIER IST DIE VERBINDUNG ZU LEVEL_SKILLS.JS:
-    // Wir prüfen, ob die Funktion existiert (weil sie in der anderen Datei liegt) und rufen sie auf.
+    // Skills laden (falls externe Funktion vorhanden)
     if (window.loadLevelSkills) {
         window.loadLevelSkills(charId, data);
     }
@@ -171,7 +207,7 @@ window.changeStat = async function(attrName, type, change) {
       return;
     }
 
-    // ERFOLG! 
+    // Erfolg! 
     
     // 1. Header Update
     setText("level-xp-display", data.xp);
@@ -180,10 +216,14 @@ window.changeStat = async function(attrName, type, change) {
     // 2. Attribute Update
     fillLevelAttributes(data);
 
-    // 3. HIER IST DIE VERBINDUNG ZU LEVEL_SKILLS.JS:
-    // Wenn sich Attribute ändern (z.B. Agility), müssen sich die Skill-Summen (Box 3) auch ändern.
+    // 3. Skills aktualisieren (da Attribute Einfluss haben)
     if (window.refreshSkillValuesOnly) {
         window.refreshSkillValuesOnly(data);
+    }
+    
+    // 4. Log neu laden (da XP Änderung im Log stehen sollte)
+    if (typeof window.loadLevelLog === "function") {
+        window.loadLevelLog(window.currentLevelCharId);
     }
 
   } catch (err) {
@@ -222,8 +262,173 @@ window.exchangeMoney = async function(direction) {
     // Erfolg: UI Update
     setText("level-xp-display", data.xp);
     setText("level-money-display", data.money);
+    
+    // Log Update
+    if (typeof window.loadLevelLog === "function") {
+        window.loadLevelLog(window.currentLevelCharId);
+    }
 
   } catch (err) {
     console.error("Error executing exchangeMoney:", err);
   }
+};
+
+
+// ==========================================
+// DICE MODAL LOGIK (Global)
+// ==========================================
+
+window.closeDiceModal = function() {
+    const diceModal = document.getElementById('dice-modal');
+    if (diceModal) diceModal.style.display = 'none';
+};
+
+window.performDiceRoll = async function() {
+    const poolInput = document.getElementById('dice-pool-input');
+    const noteInput = document.getElementById('dice-note-input');
+    
+    const pool = parseInt(poolInput.value) || 1;
+    const note = noteInput.value || "Check";
+    
+    // 1. Würfeln (Shadowrun Style: 5 und 6 sind Erfolge => p=0.33)
+    let hits = 0;
+    let ones = 0;
+
+    for (let i = 0; i < pool; i++) {
+        const result = Math.floor(Math.random() * 6) + 1;
+        if (result >= 5) hits++;
+        if (result === 1) ones++;
+    }
+
+    // Optional: Glitch Erkennung (mehr als die Hälfte sind 1en)
+    let glitchText = "";
+    if (ones > pool / 2) {
+        glitchText = (hits === 0) ? " [CRITICAL GLITCH!]" : " [Glitch]";
+    }
+
+    // 2. String für das Log bauen
+    const logText = `🎲 ${hits} Hits (Pool: ${pool})${glitchText} — ${note}`;
+
+    // 3. An die Datenbank senden
+    const charId = window.currentLevelCharId; 
+
+    if (!charId) {
+        alert("Fehler: Kein Charakter geladen.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/add_level_entry`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                character_id: charId,
+                change_value: 0,       // Keine Änderung am Karma
+                reason: logText        // Unser Ergebnis als Text
+            })
+        });
+
+        if (response.ok) {
+            // Modal schließen
+            window.closeDiceModal();
+            
+            // Log sofort neu laden
+            if (typeof window.loadLevelLog === "function") {
+                window.loadLevelLog(charId);
+            } else {
+                alert(`Wurf gespeichert: ${hits} Erfolge\n(Bitte Seite neu laden)`);
+            }
+            
+        } else {
+            const errData = await response.json();
+            alert("Error saving dice roll: " + (errData.error || "Unknown error"));
+        }
+    } catch (err) {
+        console.error(err);
+        alert("System error communicating with server.");
+    }
+};
+
+// ==========================================
+// LOG LADEN & ANZEIGEN (NEU!)
+// ==========================================
+window.loadLevelLog = async function(charId) {
+    const container = document.getElementById("level-log-container");
+    if (!container) return;
+
+    // Lade-Animation
+    container.innerHTML = '<p style="color:#666; font-style:italic; padding: 5px;">Loading history...</p>';
+
+    try {
+        const response = await fetch(`/api/character/${charId}/level_log`);
+        if (!response.ok) throw new Error("Failed to load log");
+
+        const logs = await response.json();
+
+        // Container leeren
+        container.innerHTML = "";
+
+        if (logs.length === 0) {
+            container.innerHTML = '<p style="padding: 5px; color:#888;">No entries yet.</p>';
+            return;
+        }
+
+        // Liste aufbauen
+        logs.forEach(entry => {
+            const row = document.createElement("div");
+            row.style.borderBottom = "1px solid #333";
+            row.style.padding = "6px 4px";
+            row.style.fontSize = "0.9em";
+            row.style.display = "flex";
+            row.style.justifyContent = "space-between";
+            row.style.alignItems = "center";
+
+            // Linke Seite: Grund + Datum
+            const leftCol = document.createElement("div");
+            
+            // Datum stylen
+            const dateSpan = document.createElement("span");
+            dateSpan.textContent = `[${entry.date}] `;
+            dateSpan.style.color = "#666";
+            dateSpan.style.fontSize = "0.8em";
+            dateSpan.style.marginRight = "6px";
+            dateSpan.style.fontFamily = "monospace";
+
+            // Grund (Reason) stylen
+            const reasonSpan = document.createElement("span");
+            reasonSpan.textContent = entry.reason;
+            reasonSpan.style.color = "#ccc";
+            
+            // Highlight für Würfelwürfe
+            if (entry.reason.includes("🎲")) {
+                reasonSpan.style.color = "var(--neon-magenta)";
+                reasonSpan.style.fontWeight = "bold";
+            }
+
+            leftCol.appendChild(dateSpan);
+            leftCol.appendChild(reasonSpan);
+
+            // Rechte Seite: XP/Karma Änderung
+            const rightCol = document.createElement("div");
+            if (entry.change !== 0) {
+                const sign = entry.change > 0 ? "+" : "";
+                const color = entry.change > 0 ? "var(--neon-green)" : "var(--neon-red)";
+                rightCol.innerHTML = `<span style="color:${color}; font-weight:bold; font-family: monospace;">${sign}${entry.change} XP</span>`;
+            } else {
+                 // Platzhalter bei 0 XP Änderung
+                 rightCol.innerHTML = `<span style="color:#333;">-</span>`;
+            }
+
+            row.appendChild(leftCol);
+            row.appendChild(rightCol);
+
+            container.appendChild(row);
+        });
+
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = '<p style="color:var(--neon-red);">Error loading log.</p>';
+    }
 };

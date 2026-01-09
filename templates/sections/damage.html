@@ -1,0 +1,194 @@
+<div id="content-damage-physical" class="content-block">
+
+
+    <h2 style="color: var(--neon-red); border-bottom: 2px solid var(--neon-red); padding-bottom: 10px; margin-bottom: 20px;">
+        Damage & Trauma
+    </h2>
+
+    <p style="color: var(--text-primary); margin-bottom: 20px;">
+        Physical damage is visceral and immediate. Damage is subtracted directly from the character’s 
+        <strong>Physical Attributes</strong> (Stamina, Strength, Agility, Reaction). 
+        This reduction immediately lowers any derived statistics (e.g., lower Agility reduces Defense Pool; lower Reaction reduces Initiative).
+    </p>
+
+    <h3 style="color: var(--neon-red); margin-top: 30px;">Critical System Failure (0 Value)</h3>
+    <p style="font-size: 0.9em; color: #aaa;">
+        If an attribute is reduced to <strong>0</strong>, the character suffers a catastrophic failure of that body system.
+    </p>
+
+    <table class="item-table" style="margin-bottom: 30px;">
+        <thead>
+            <tr>
+                <th style="width: 20%;">Attribute</th>
+                <th style="width: 25%;">Status</th>
+                <th style="width: 55%;">Effect</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color: var(--neon-red); font-weight: bold;">Stamina</td>
+                <td>CLINICAL DEATH</td>
+                <td>Trauma to vital organs/arteries. Character dies permanently within minutes without emergency resuscitation.</td>
+            </tr>
+            <tr>
+                <td style="color: var(--neon-yellow); font-weight: bold;">Strength</td>
+                <td>LIMB FAILURE</td>
+                <td>Muscular/Structural collapse. Arms are useless. Character <strong>cannot perform physical attacks</strong>.</td>
+            </tr>
+            <tr>
+                <td style="color: var(--neon-cyan); font-weight: bold;">Agility</td>
+                <td>CRIPPLED</td>
+                <td>Legs/Tendons destroyed. <strong>Max Speed = 1</strong> (Crawling). Character is always considered <strong>Flanked</strong> (Defense Pool halved).</td>
+            </tr>
+            <tr>
+                <td style="color: var(--neon-magenta); font-weight: bold;">Reaction</td>
+                <td>INCAPACITATED</td>
+                <td>Neural/Spinal trauma. Character is unconscious or paralyzed and cannot take actions.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+        
+        <div style="flex: 1; min-width: 300px; background: rgba(20, 0, 0, 0.6); padding: 15px; border-left: 4px solid var(--neon-red);">
+            <h4 style="color: var(--neon-red); margin-top: 0;">Rule 1: System Shock</h4>
+            <p style="font-size: 0.9em; color: #ccc;">
+                Whenever an attribute hits <strong>0</strong>, the traumatic shock causes the character to immediately suffer 
+                <strong>1 additional point of Stamina damage</strong>. This usually causes bleeding as described below.
+            </p>
+        </div>
+
+        <div style="flex: 1; min-width: 300px; background: rgba(255, 0, 0, 0.1); padding: 15px; border: 1px solid var(--neon-red);">
+            <h4 style="color: var(--neon-red); margin-top: 0;">Rule 2: Hemorrhage (Bleeding)</h4>
+            <p style="font-size: 0.9em; color: #ccc;">
+                Any kinetic attack (bullets, blades) that deals Stamina damage as well as cascade damage causes <strong>Bleeding</strong>.
+            </p>
+            <ul style="font-size: 0.9em; color: #aaa;">
+                <li><strong>Stage 1:</strong> Suffer <strong>1 Stamina Dmg</strong> every <strong>12 Rounds</strong>.</li>
+                <li><strong>Stage 2:</strong> If hit again while bleeding, the rate worsens to <strong>1 Stamina Dmg</strong> every <strong>6 Rounds</strong>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 style="color: var(--neon-green); border-bottom: 2px solid var(--neon-green); padding-bottom: 10px; margin-bottom: 20px;">
+        Medical Intervention
+    </h2>
+
+    <div class="spell-block" style="border: 1px solid rgba(0, 255, 0, 0.2); background: rgba(0, 20, 10, 0.4); margin-bottom: 20px;">
+        <div style="background: rgba(0, 255, 0, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold; color: var(--neon-green); font-size: 1.1rem;">First Aid (Skill)</span>
+            <span style="font-size: 0.9em; color: #aaa;">REQ: First Aid Kit</span>
+        </div>
+        <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+            <p>A character treats wounds using the <strong>Medicine</strong> skill. <br>
+            <em>(Self-Administered: Dice pool is halved)</em>.</p>
+            
+            <div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px;">
+                    <strong style="color: var(--neon-green);">Heal Attribute</strong><br>
+                    <span style="font-size: 0.85em; color: #ccc;">Time: 12 Rounds (1 Min)</span><br>
+                    <span style="font-size: 0.85em; color: #ccc;">Threshold: <strong>Total Dmg Taken</strong></span><br>
+                    <span style="font-size: 0.85em; color: #aaa;">Effect: Heals 1 Point. Cannot heal attributes at 0.</span>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px;">
+                    <strong style="color: var(--neon-red);">Stop Bleeding</strong><br>
+                    <span style="font-size: 0.85em; color: #ccc;">Time: 2 Rounds</span><br>
+                    <span style="font-size: 0.85em; color: #ccc;">Threshold: <strong>1 Hit</strong> (Stage 1) / <strong>2 Hits</strong> (Stage 2)</span><br>
+                    <span style="font-size: 0.85em; color: #aaa;">Effect: Removes Bleeding status.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spell-block" style="border: 1px solid rgba(0, 243, 255, 0.2); background: rgba(0, 10, 20, 0.4); margin-bottom: 20px;">
+        <div style="background: rgba(0, 243, 255, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold; color: var(--neon-cyan); font-size: 1.1rem;">Nano-Repair Bots</span>
+            <span style="font-size: 0.9em; color: #aaa;">Single Use Injection</span>
+        </div>
+        <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+            Expensive, programmable nanites that repair tissue.
+            <ul style="margin-top: 5px; color: #ccc;">
+                <li><strong>Heal:</strong> Restores <strong>1 Point</strong> to any non-zero attribute (Takes 1 Minute).</li>
+                <li><strong>Stanch:</strong> Immediately stops Bleeding (Takes 1 Round).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="opacity: 0.5; border: 1px dashed #555; padding: 10px; text-align: center;">
+        <strong style="color: var(--neon-magenta);">Magical Healing</strong> — <em>Research pending...</em>
+    </div>
+
+</div>
+
+<div id="content-damage-stun" class="content-block">
+    <h2 style="color: var(--neon-magenta); border-bottom: 2px solid var(--neon-magenta); padding-bottom: 10px; margin-bottom: 20px;">
+        Stun & Mental Stress
+    </h2>
+
+    <p style="color: var(--text-primary); margin-bottom: 20px;">
+        Just like physical damage, Stun damage is subtracted directly from the character’s 
+        <strong>Mental Attributes</strong> (Intuition, Logic, Composure). 
+        For every point of damage received, the player must lower one Mental Attribute by <strong>1</strong>.
+    </p>
+
+    <h3 style="color: var(--neon-magenta); margin-top: 30px;">Mental Breakdown (0 Value)</h3>
+    <p style="font-size: 0.9em; color: #aaa; margin-bottom: 15px;">
+        If <strong>any</strong> mental attribute is reduced to <strong>0</strong>, the character suffers a mental breakdown.
+    </p>
+
+    <div style="background: rgba(20, 0, 20, 0.6); border: 1px solid var(--neon-magenta); padding: 15px; margin-bottom: 30px; border-radius: 4px;">
+        <ul style="color: #ccc; margin: 0; padding-left: 20px;">
+            <li style="margin-bottom: 10px;">
+                <strong>Immediate Effect:</strong> The character loses <strong>all remaining actions</strong> for the current combat round.
+            </li>
+            <li>
+                <strong>Duration:</strong> The character cannot act again until <strong>ALL</strong> mental attributes have been restored to a value of at least <strong>1</strong>.
+            </li>
+        </ul>
+    </div>
+
+    <h4 style="color: var(--neon-cyan); margin-bottom: 10px;">Specific Trauma Effects</h4>
+    <table class="item-table" style="margin-bottom: 30px;">
+        <thead>
+            <tr>
+                <th style="width: 20%;">Attribute</th>
+                <th style="width: 25%;">Status</th>
+                <th style="width: 55%;">Effect</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color: var(--neon-cyan); font-weight: bold;">Intuition</td>
+                <td>DISORIENTED</td>
+                <td>The character is blinded or suffers a sensory blackout. They lose spatial awareness.</td>
+            </tr>
+            <tr>
+                <td style="color: #0088ff; font-weight: bold;">Logic</td>
+                <td>CONFUSED</td>
+                <td>Cognitive collapse. The character is bewildered and unable to process information or formulate plans.</td>
+            </tr>
+            <tr>
+                <td style="color: var(--neon-magenta); font-weight: bold;">Composure</td>
+                <td>SHOCK</td>
+                <td>Psychological paralysis. The character freezes in a state of shock or panic and cannot move.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 style="color: var(--neon-green); border-bottom: 2px solid var(--neon-green); padding-bottom: 10px; margin-bottom: 20px;">
+        Recovery
+    </h2>
+
+    <div class="spell-block" style="border: 1px solid rgba(0, 255, 0, 0.2); background: rgba(0, 20, 10, 0.4); margin-bottom: 20px;">
+        <div style="background: rgba(0, 255, 0, 0.1); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold; color: var(--neon-green); font-size: 1.1rem;">Regeneration</span>
+            <span style="font-size: 0.9em; color: #aaa;">Passive Effect</span>
+        </div>
+        <div style="padding: 15px; color: var(--text-primary); line-height: 1.5;">
+            <p>
+                At the <strong>start of every Combat Round</strong>, the character automatically regenerates 
+                <strong>1 point</strong> to a mental attribute of their choice.
+            </p>
+        </div>
+    </div>
+</div>

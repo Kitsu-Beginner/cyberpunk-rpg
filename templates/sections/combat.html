@@ -3,15 +3,15 @@
       <p>Combat is resolved in structured combat rounds, each representing approximately five seconds of in-world time. During a round, characters act in descending order of Initiative until all participants have spent their available Action Points (AP).</p>
       
       <h3>Action Points</h3>
-      <p>Each character begins the combat round with 4 Action Points (AP). Action Points are spent to perform actions such as attacking, moving, or taking aim. Some actions require multiple points to complete, while others cost only one. Any unspent Action Points can be reserved for defensive reactions or delayed actions later in the same round, but all points must be spent before the end of the round. Unused points do not carry over into the next round.</p>
+      <p>Each character begins the combat round with 4 Action Points (AP). This might be raised trough cyberware or other effects. Action Points are spent to perform actions such as attacking, moving, or taking aim. Some actions require multiple points to complete, while others cost only one. If an action cost 4 AP it always uses the entire round, no matter how many AP the character actually has. Any unspent Action Points can be reserved for defensive reactions. Unused points do not carry over into the next round.</p>
       
       <h3>Initiative</h3>
-      <p>At the start of each combat round, every participant may choose to spend Action Points to roll for Initiative. For each Action Point spent, roll 1d6 and add the total to the character’s Initiative Attribute (Reaction + Intuition). Characters act in descending Initiative order. Initiative is recalculated at the start of every new round. Action Points spent for Initiative reduce the number of points available for actions that round.</p>
+      <p>At the start of each combat round, every participant may choose to spend Action Points to roll for Initiative. For each Action Point spent, roll 1d6 and add the total to the character’s Initiative Attribute (Reaction + Intuition). Characters act in descending Initiative order.  Action Points spent for Initiative reduce the number of points available for actions that round.</p>
       
       <h3>Attacks and Defense</h3>
       <p>An attack is resolved through an opposed roll between the attacker and the defender:</p>
       <ul>
-        <li><strong>Attacker:</strong> Rolls the appropriate Attack Dice Pool (weapon or skill-based).</li>
+        <li><strong>Attacker:</strong> Rolls the appropriate Attack Dice Pool plus any modifiers.</li>
         <li><strong>Defender:</strong> Rolls their Defense Pool = Agility + Intuition, plus any modifiers.</li>
       </ul>
       <p>If the defender’s hits ≥ attacker’s hits, the attack fails and no damage is inflicted. If the attacker scores more hits, the attack succeeds — the number of <strong>net hits</strong> (attacker hits minus defender hits) increases the final damage.</p>
@@ -74,11 +74,11 @@
         <tbody>
           <tr>
             <td>Take Aim</td>
-            <td>Gain +3 dice to the next ranged attack. Bonus is lost if the attacker moves or performs another action first.</td>
+            <td>Gain + 2 dice to the next ranged attack. Bonus is lost if the attacker moves or performs another action first.</td>
           </tr>
           <tr>
             <td>Quick-Draw (Pistol)</td>
-            <td>Draw or holster a pistol-sized firearm as a free preparation for an attack.</td>
+            <td>Draw or holster a pistol-sized firearm as a quick preparation for an attack.</td>
           </tr>
           <tr>
             <td>Move</td>
@@ -92,11 +92,11 @@
             <td>Jump to Cover</td>
             <td>Move to the nearest available cover (up to Speed in meters) and gain the corresponding cover bonus.</td>
           </tr>
-          
           <tr>
-            <td>Activate Device or Cyberware</td>
-            <td>Power on, activate, or toggle a simple device, cybernetic implant, or augment interface.</td>
+            <td>Pick Up Small Object</td>
+            <td>Retrieve or interact with a light or handheld item within reach.</td>
           </tr>
+         
         </tbody>
       </table>
 
@@ -114,8 +114,8 @@
             <td>Make an attack roll using the appropriate weapon skill. Compare against the target’s Defense Pool to resolve damage.</td>
           </tr>
           <tr>
-            <td>Reload (AR or Smartgun)</td>
-            <td>Reload a weapon that is connected to an AR_Interface or via smartlink.</td>
+            <td>Activate Device or Cyberware</td>
+            <td>Power on, activate, or toggle a simple device, cybernetic implant, or augment interface.</td>
           </tr>
           
           <tr>
@@ -126,10 +126,7 @@
             <td>Activate Complex Device</td>
             <td>Power up or initiate a more advanced system, such as a drone controller, tactical uplink, or field scanner.</td>
           </tr>
-          <tr>
-            <td>Pick Up Small Object</td>
-            <td>Retrieve or interact with a light or handheld item within reach.</td>
-          </tr>
+          
         </tbody>
       </table>
 
@@ -150,6 +147,10 @@
             <td>Full Auto Attack</td>
             <td>You fire a total of 10 bullets in one or more salvos. You can attack up to 3 targets at once by distributing your successes onto the targets.</td>
           </tr>
+          <tr>
+            <td>Reload</td>
+            <td>Reload a firearm</td>
+          </tr>
           
         </tbody>
       </table>
@@ -168,8 +169,8 @@
             <td>Pick up or drag a heavy object, wounded ally, or similar burden. May require a Strength or Stamina test.</td>
           </tr>
           <tr>
-            <td>Reload (Standard)</td>
-            <td>Reload a conventional weapon without smart-link systems.</td>
+            <td>Activate Complex Device</td>
+            <td>Power up or initiate a more advanced system, such as a drone controller, tactical uplink, or field scanner.</td>
           </tr>
           <tr>
             <td>Full Sprint</td>
@@ -181,7 +182,7 @@
       <h3>Action Timing and Reactions</h3>
       <ul>
         <li><strong>Immediate Actions:</strong> Some actions, such as Dodge, may be declared outside a character’s normal turn if they have AP remaining.</li>
-        <li><strong>Delayed Actions:</strong> A player may hold one or more AP to act later in the round, interrupting another action or reacting to an event.</li>
+        <li><strong>Delayed Actions:(???)</strong> A player may hold one or more AP to act later in the round reacting to an event.</li>
         <li><strong>End of Round:</strong> Any unspent AP expire at the end of the combat round.</li>
       </ul>
 
@@ -196,6 +197,7 @@
       <h3>Resolving a Blast Attack</h3>
       <ol>
         <li><strong>Determine the Center of Impact:</strong> Establish the point of detonation. Any character or object within the Blast Radius (measured in meters) is affected.</li>
+        <li><strong>Attack Roll</strong>The Attacker rolls a normal heavy wepaons attack roll with the usual modifiers. </li>
         <li><strong>Defense Roll:</strong> Each affected target rolls a halved Defense Pool (Agility + Intuition) / 2, rounded up. Modifiers such as cover, prone position, or environmental barriers may apply at the GM’s discretion.</li>
         <li><strong>Damage Resolution:</strong> A Blast weapon’s damage value determines three properties:
           <ul>
@@ -220,12 +222,90 @@
     <div id="content-full-auto" class="content-block">
       <h2>Full Auto Attacks</h2>
       <ol>
-        <li>Every weapon with the full_auto feature can fire 10 bullets in one or more salvoes using 3 action points. The Attacker adds the auto_bonus of his weapon and his character to the dice pool. He can attack up to three different targets if reasonably close together by splitting his successes on the attack roll between them. An Attack on multiple targets must be declared before the attack roll.</li>
-        <li>The weapon must have at least 6 bullets left for an auto attack.</li>
-        <li>The total maximum of added dice is 6.</li>
-        
+        <li>Every weapon with the max_auto feature can fire a number bullets equal to twice the 
+          max_auto value in one or more salvoes using 3 action points. The Attacker adds the 
+          auto_bonus of his weapon and his character to the dice pool. He can attack two different
+          targets if reasonably close together by splitting his successes on the attack roll between them.
+          An Attack on multiple targets must be declared before the attack roll. You cannot use any zoom bonus when firing full_auto</li>
+        <li>The maximum bonus is is given by the weapon as max_auto_value. The number of bullets fired is twice that number</li>
+        <li>If not enough bullets are left the maximum bonus is halve the fired bullets.</li>
+
       </ol>
     
+
+      </div> <div id="content-melee-rules" class="content-block">
+
+    <h2>Melee Combat Rules</h2>
+
+    <h3>Range Mechanics</h3>
+    <ul>
+        <li><strong>Range Categories:</strong>
+            <ul>
+                <li><strong>Range 0:</strong> Unarmed combat.</li>
+                <li><strong>Range 1:</strong> Small weapons (Knives, Hatchets) OR Long weapons in cramped spaces.</li>
+                <li><strong>Range 2:</strong> Long weapons (Swords, Axes) with sufficient space.</li>
+            </ul>
+        </li>
+        <li><strong>The Advantage:</strong>
+            <ul>
+                <li>When two characters fight, compare their Range.</li>
+                <li>The character with the <strong>lower Range</strong> subtracts the difference from their total successes on <strong>every roll</strong> (Attack or Defense).</li>
+                <li><em>Example:</em> Range 2 vs. Range 0 results in a penalty of -2 successes for the Unarmed fighter.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Unarmed Combat</h3>
+    <ul>
+        <li><strong>Attacker Actions:</strong>
+            <ul>
+                <li><strong>Strike (2 AP):</strong> Roll Attack Pool. Deals standard damage.</li>
+                <li><strong>Takedown (3 AP):</strong> Roll Attack Pool. Deals only net hits as damage and applies status <strong>Prone</strong>.</li>
+                <li><strong>Clinch (4 AP):</strong> Roll Attack Pool. on a win both Attacker and Defender become <strong>Immobilized</strong> (cannot move).</li>
+            </ul>
+        </li>
+        <li><strong>Defender Options:</strong>
+            <ul>
+                <li><strong>Option A (0 AP):</strong> Roll <strong>½ Defense Pool</strong>.</li>
+                <li><strong>Option B (1 AP - Dodge/Cover):</strong>
+                    <ul>
+                        <li>In Open Space: Roll <strong>Full Defense Pool + Dodge</strong>.</li>
+                        <li>In Cramped Space: Roll <strong>½ Defense Pool + Dodge</strong>.</li>
+                    </ul>
+                </li>
+                <li><strong>Option C (2 AP - Standard Brawl):</strong>
+                    <ul>
+                        <li>Roll an <strong>Opposed Close Combat</strong> check.</li>
+                        <li>The winner (Attacker or Defender) deals standard damage based on Net Hits.</li>
+                        <li><em>Note:</em> Range penalties apply to this roll.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Weapon Combat</h3>
+    <ul>
+        <li><strong>Attacker Actions:</strong>
+            <ul>
+                <li><strong>Strike (2 AP):</strong> Roll Attack Pool.</li>
+            </ul>
+        </li>
+        <li><strong>Defender Options:</strong>
+            <ul>
+                <li><strong>Option A (0 AP):</strong> Roll <strong>½ Defense Pool</strong>.</li>
+                <li><strong>Option B (1 AP - Dodge):</strong> Roll <strong>Full Defense Pool + Dodge</strong> (Space rules apply as above).</li>
+                <li><strong>Option C (2 AP - Counter-Strike):</strong> Roll an <strong>Opposed Close Combat</strong> check. The winner deals damage based on Net Hits.</li>
+            </ul>
+        </li>
+        <li><strong>Environmental Constraint:</strong>
+            <ul>
+                <li>In cramped environments, weapons with <strong>Range 2</strong> are treated as <strong>Range 1</strong> (The only penalty is the loss of the range advantage).</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
 
       
     </div>

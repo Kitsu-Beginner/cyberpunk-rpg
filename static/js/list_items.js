@@ -32,6 +32,25 @@ if (dronesLink) {
   });
 }
 
+const combatDronesLink = document.querySelector('nav a[data-shows="content-list-combat-drones"]');
+if (combatDronesLink) {
+    combatDronesLink.addEventListener("click", () => {
+        loadCombatDronesTable("combat-drones-table-container");
+    });
+}
+
+
+
+
+const cyberdecksLink = document.querySelector('nav a[data-shows="content-list-cyberdecks"]');
+  if (cyberdecksLink) {
+    cyberdecksLink.addEventListener("click", () => {
+      loadCyberdecksTable("cyberdecks-table-container");
+    });
+  }
+
+
+
 
 
 
@@ -488,143 +507,231 @@ if (dronesLink) {
   // ===============================
   // Cyberware table loader
   // ===============================
-  async function loadCyberwareTable(category, containerId) {
 
-    console.log("loadCyberwareTable called with", category, containerId);
 
-    // category expected: "head" | "torso" | "arms" | "legs"
+
+// Helper: Formatiert Attributs-Boni wie im Character Modal
+function formatAttributeBonuses(item) {
+    const attrMap = {
+        stamina_bonus: "STA",
+        strength_bonus: "STR",
+        agility_bonus: "AGI",
+        reaction_bonus: "REA",
+        intuition_bonus: "INT",
+        logic_bonus: "LOG",
+        composure_bonus: "COM",
+        charisma_bonus: "CHA"
+    };
+
+    let badges = [];
+
+    for (const [key, label] of Object.entries(attrMap)) {
+        const val = item[key];
+        if (val && val !== 0) {
+            const sign = val > 0 ? "+" : "";
+            const color = val > 0 ? "var(--neon-green)" : "var(--neon-red)";
+            // Erstellt ein Badge im Stil: [STR +1]
+            badges.push(
+                `<span style="color: ${color}; font-weight: bold; margin-right: 8px; white-space: nowrap;">
+                    ${label} ${sign}${val}
+                </span>`
+            );
+        }
+    }
+
+    return badges.length > 0 ? badges.join("") : '<span style="color: #555;">-</span>';
+}
+
+
+
+
+
+
+
+  // ===============================
+// Cyberware table loader (FIXED)
+// ===============================
+// ===============================
+// Cyberware table loader (UPDATED with Legality)
+// ===============================
+async function loadCyberwareTable(category, containerId) {
     const container = document.getElementById(containerId);
-
-    console.log("container exists?", !!container);
-
     if (!container) return;
 
-    container.textContent = "Loading " + category + " cyberware...";
+    container.innerHTML = `<p style="color:var(--neon-cyan);">Accessing ${category} cyberware database...</p>`;
 
     try {
-      // *** KORREKTUR HIER ***
-      // 1. Definiere die URL in einer Variable
-      const url = "/api/cyberware_with_items/" + encodeURIComponent(category);
-      
-      // 2. Verwende die Variable im Log
-      console.log("fetching", url);
-      
-      // 3. Verwende die Variable im Fetch
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-         throw new Error("HTTP error " + response.status);
-        }
+        const url = "/api/cyberware_with_items/" + encodeURIComponent(category);
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+        }
+
+        const data = await response.json();
+        container.innerHTML = "";
+
+        if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML = `<p class="placeholder">No cyberware found for '${category}'.</p>`;
+            return;
+        }
+
+        const table = document.createElement("table");
+        table.className = "item-table"; 
+
+        // --- THEAD ---
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+
+        // HIER WURDE "Legality" EINGEFÜGT
+        const headers = ["View", "Name", "Stats", "Humanity", "Price", "Legality", "Features"];
+        
+        headers.forEach(text => {
+            const th = document.createElement("th");
+            th.textContent = text;
+            
+            // Breiten anpassen
+            if (text === "Stats") th.style.width = "12%";
+            else if (text === "Humanity") th.style.width = "8%";
+            else if (text === "Name") th.style.width = "20%";
+            else if (text === "Legality") th.style.width = "10%"; // Neue Spalte
+            else if (text === "Features") th.style.width = "30%"; // Etwas reduziert für Platz
+            
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // --- TBODY ---
+        const tbody = document.createElement("tbody");
+
+        data.forEach(item => {
+            const row = document.createElement("tr");
+
+            // 1. View Button
+            const tdView = document.createElement("td");
+            const viewBtn = document.createElement("button");
+            viewBtn.textContent = "View";
+            viewBtn.className = "btn-small";
+            viewBtn.onclick = () => {
+                let imagePath = "/static/img/placeholder.png";
+                if (item.image_url) imagePath = "/static/img/" + item.image_url;
+                if (typeof openItemModal === "function") {
+                    openItemModal({
+                        name: item.name,
+                        description: item.description,
+                        image: imagePath
+                    });
+                }
+            };
+            tdView.appendChild(viewBtn);
+            row.appendChild(tdView);
+
+            // 2. Name
+            const tdName = document.createElement("td");
+            tdName.textContent = item.name;
+            tdName.style.fontWeight = "bold";
+            tdName.style.color = "var(--neon-cyan)";
+            row.appendChild(tdName);
+
+            // 3. Stats (Kompakt)
+            const tdStats = document.createElement("td");
+            const statsList = [];
+            const bonusMap = {
+                "STR": item.strength_bonus, "AGI": item.agility_bonus, "REA": item.reaction_bonus,
+                "STA": item.stamina_bonus, "INT": item.intuition_bonus, "LOG": item.logic_bonus,
+                "COM": item.composure_bonus, "CHA": item.charisma_bonus, "Armor": item.armor_bonus,
+                "Shock": item.shock_absorption, "AP": item.action_bonus
+            };
+
+            for (const [label, val] of Object.entries(bonusMap)) {
+                if (val && val !== 0) {
+                    const sign = val > 0 ? "+" : "";
+                    const color = val > 0 ? "var(--neon-green)" : "var(--neon-red)";
+                    statsList.push(`<span style="color:${color}; margin-right:4px; white-space:nowrap;">${label}${sign}${val}</span>`);
+                }
+            }
+            tdStats.innerHTML = statsList.length > 0 ? statsList.join(" ") : '<span style="color:#555;">-</span>';
+            tdStats.style.fontSize = "0.85em";
+            row.appendChild(tdStats);
+
+            // 4. Humanity
+            const tdHL = document.createElement("td");
+            tdHL.textContent = item.humanity_cost || "0";
+            tdHL.style.textAlign = "center";
+            tdHL.style.color = "var(--neon-red)";
+            row.appendChild(tdHL);
+
+            // 5. Price
+            const tdPrice = document.createElement("td");
+            tdPrice.textContent = item.price ? item.price + " ¥" : "-";
+            tdPrice.style.whiteSpace = "nowrap";
+            row.appendChild(tdPrice);
+
+            // 6. Legality (NEU EINGEFÜGT)
+            const tdLegality = document.createElement("td");
+            tdLegality.textContent = item.legality || "-";
+            tdLegality.style.textTransform = "capitalize"; // "restricted" -> "Restricted"
+            
+            // Optional: Einfärbung je nach Status
+            // if (item.legality === 'restricted') tdLegality.style.color = "var(--neon-yellow)";
+            // if (item.legality === 'illegal' || item.legality === 'military') tdLegality.style.color = "var(--neon-red)";
+            
+            row.appendChild(tdLegality);
 
 
+            // 7. Features (Badges)
+            const tdFeatures = document.createElement("td");
+            let featuresArray = [];
+            
+            if (Array.isArray(item.features)) {
+                featuresArray = item.features;
+            } else if (typeof item.features === 'string') {
+                featuresArray = item.features.replace(/[{}"']/g, '').split(',');
+            }
 
-// ... (der Rest deines try-Blocks bleibt gleich)
+            if (featuresArray.length > 0 && featuresArray[0] !== "") {
+                const badgeContainer = document.createElement("div");
+                badgeContainer.style.display = "flex";
+                badgeContainer.style.flexWrap = "wrap";
+                badgeContainer.style.gap = "4px";
 
-      const data = await response.json();
+                featuresArray.forEach(feature => {
+                    const cleanFeature = feature.trim();
+                    if (cleanFeature) {
+                        const badge = document.createElement("span");
+                        badge.textContent = cleanFeature;
+                        
+                        badge.style.display = "inline-block";
+                        badge.style.padding = "4px 8px";
+                        badge.style.fontSize = "0.9em";
+                        badge.style.border = "1px solid rgba(0, 243, 255, 0.3)";
+                        badge.style.borderRadius = "4px";
+                        badge.style.backgroundColor = "rgba(0, 20, 40, 0.6)";
+                        badge.style.color = "#ccc";
+                        badge.style.whiteSpace = "nowrap";
+                        
+                        badgeContainer.appendChild(badge);
+                    }
+                });
+                tdFeatures.appendChild(badgeContainer);
+            } else {
+                 tdFeatures.textContent = "-";
+                 tdFeatures.style.color = "#555";
+            }
+            row.appendChild(tdFeatures);
 
-      console.log("Data received:", data); // <-- DIE NEUE ZEILE
-
-      if (!Array.isArray(data) || data.length === 0) {
-        container.textContent = "No cyberware found for '" + category + "'.";
-        return;
-      }
-
-      container.textContent = "";
-
-      // Adjust column keys to match your actual JSON fields from the API
-      // (we'll fine-tune after we see a sample row)
-      const columns = [
-
-        { key: "name",          label: "Name" },
-               
-        { key: "humanity_cost",  label: "Humanity" },         // adjust if your key differs
-        { key: "price",         label: "Price" },
-        { key: "legality",      label: "Legality" },
-        { key: "features",      label: "Features" }
-
-      ];
-
-      const table = document.createElement("table");
-      const thead = document.createElement("thead");
-      const tbody = document.createElement("tbody");
-
-      // Header row
-      const headerRow = document.createElement("tr");
-
-      // "View" column like your other tables
-      const viewTh = document.createElement("th");
-      viewTh.textContent = "View";
-      headerRow.appendChild(viewTh);
-
-      columns.forEach(col => {
-        const th = document.createElement("th");
-        th.textContent = col.label;
-        headerRow.appendChild(th);
-      });
-      thead.appendChild(headerRow);
-
-      // Body rows
-      data.forEach(row => {
-        const tr = document.createElement("tr");
-
-        // View button cell
-        const viewTd = document.createElement("td");
-        const viewBtn = document.createElement("button");
-        viewBtn.textContent = "View";
-
-        viewBtn.addEventListener("click", () => {
-          let imagePath = "/static/img/placeholder.png";
-          if (row.image_url) {
-            imagePath = "/static/img/" + row.image_url;
-          }
-
-          openItemModal({
-            name: row.name,
-            description: row.description,
-            image: imagePath
-          });
+            tbody.appendChild(row);
         });
 
-        viewTd.appendChild(viewBtn);
-        tr.appendChild(viewTd);
-
-        // Data cells
-        columns.forEach(col => {
-          const td = document.createElement("td");
-          let value = row[col.key];
-
-          // --- Verbesserte Feature-Behandlung ---
-          if (col.key === 'features') {
-            if (Array.isArray(value)) {
-              // Fall 1: Echtes Array (nach dem SQL-Fix)
-              value = value.join(", ");
-            } else if (typeof value === 'string' && value.startsWith('{')) {
-              // Fall 2: Hässlicher String (vor dem SQL-Fix)
-              value = value.replace(/[{}]/g, ''); // Entfernt { und }
-            }
-          }
-          // --- Ende der Feature-Behandlung ---
-
-          td.textContent = value != null ? value : "";
-
-          tr.appendChild(td);
-        });
-
-        tbody.appendChild(tr);
-      });
-
-      table.appendChild(thead);
-      table.appendChild(tbody);
-      container.appendChild(table);
+        table.appendChild(tbody);
+        container.appendChild(table);
 
     } catch (err) {
-      console.error(err);
-      container.textContent = "Error loading cyberware data.";
+        console.error("Error loading cyberware:", err);
+        container.innerHTML = `<p style="color:var(--neon-red);">Error loading data: ${err.message}</p>`;
     }
-  }
-
-
-
+}
 
 
   // Hook all weapon subtabs to the loader
@@ -780,7 +887,7 @@ function loadCommlinksTable(containerId) {
         { key: "compute",    label: "Compute" },
         { key: "firewall",   label: "Firewall" },
         { key: "signal",     label: "Range (km)" },
-        { key: "mask",       label: "Mask" },
+      //  { key: "mask",       label: "Mask" },
         { key: "price",      label: "Price" },
         { key: "weight",     label: "Weight" },
         { key: "legality",   label: "Legality" },
@@ -859,6 +966,125 @@ function loadCommlinksTable(containerId) {
     });
 }
 
+// Tabelle für cyberdecks
+
+
+
+// ===============================
+  // Cyberdecks Loader
+  // ===============================
+  function loadCyberdecksTable(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.textContent = "Loading cyberdecks...";
+
+    fetch("/api/cyberdecks")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+          container.textContent = "No cyberdecks found.";
+          return;
+        }
+
+        container.textContent = "";
+
+        // Spalten-Definition passend zu deiner SQL-Abfrage
+        const columns = [
+          { key: "name",       label: "Name" },
+          { key: "compute",    label: "Compute" },
+          { key: "firewall",   label: "Firewall" },
+          { key: "signal",    label: "Range (m)" },
+          { key: "price",      label: "Price" },
+          { key: "weight",     label: "Weight" },
+          { key: "legality",   label: "Legality" },
+          { key: "features",   label: "Features" }
+          // Features/Legality optional, falls in SQL View vorhanden
+        ];
+
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
+
+        // --- Header ---
+        const headerRow = document.createElement("tr");
+
+        // View Header
+        const viewTh = document.createElement("th");
+        viewTh.textContent = "View";
+        headerRow.appendChild(viewTh);
+
+        columns.forEach(col => {
+          const th = document.createElement("th");
+          th.textContent = col.label;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // --- Rows ---
+        data.forEach(row => {
+          const tr = document.createElement("tr");
+
+          // View Button
+          const viewTd = document.createElement("td");
+          const viewBtn = document.createElement("button");
+          viewBtn.textContent = "View";
+
+          viewBtn.addEventListener("click", () => {
+            let imagePath = "/static/img/placeholder.png";
+            if (row.image_url) {
+              imagePath = "/static/img/" + row.image_url;
+            }
+            openItemModal({
+              name: row.name,
+              description: row.description,
+              image: imagePath
+            });
+          });
+
+          viewTd.appendChild(viewBtn);
+          tr.appendChild(viewTd);
+
+          // Data Columns
+          columns.forEach(col => {
+            const td = document.createElement("td");
+            let value = row[col.key];
+
+            if (Array.isArray(value)) {
+              value = value.join(", ");
+            }
+
+            td.textContent = value != null ? value : "";
+            
+            // Optional: Einfärbung für wichtige Hacking-Werte
+            if (col.key === "compute") td.style.color = "#ffff00"; // Gelb
+            if (col.key === "firewall") td.style.color = "#ff4444"; // Rot
+
+            tr.appendChild(td);
+          });
+
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        container.appendChild(table);
+
+      })
+      .catch(err => {
+        console.error("Error loading cyberdecks:", err);
+        container.textContent = "Error loading cyberdecks.";
+      });
+  }
+
+
+
+
 
 
 // Table für Drones und Mini Drones
@@ -887,10 +1113,13 @@ function loaddronesTable(containerId) {
 
       const columns = [
         { key: "name",       label: "Name" },
+        { key: "hull",       label: "Hull" },
         { key: "firewall",   label: "Firewall" },
-        { key: "signal",     label: "Range (km)" },
-        { key: "mask",       label: "Mask" },
+        { key: "signal",     label: "Range" },
+        { key: "autopilot",  label: "Auto" },
         { key: "speed",      label: "Speed" },
+      //  { key: "mask",       label: "Mask"nance },
+        { key: "ordnance",   label: "Ordnance" },
         { key: "price",      label: "Price" },
         { key: "weight",     label: "Weight" },
         { key: "legality",   label: "Legality" },
@@ -966,6 +1195,82 @@ function loaddronesTable(containerId) {
       console.error("Error loading drones:", err); // Hier habe ich auch den Log-Text von 'commlinks' auf 'drones' korrigiert
       container.textContent = "Error loading drones.";
     });
+}
+
+// Kampfdrohenn
+
+function loadCombatDronesTable(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.textContent = "Loading combat drones...";
+
+    fetch("/api/combat_drones")
+        .then(response => response.json())
+        .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                container.textContent = "No combat drones found.";
+                return;
+            }
+            container.textContent = "";
+
+            const columns = [
+                { key: "name", label: "Name" },
+                { key: "firewall", label: "Fwl" },
+                { key: "signal", label: "Range" },
+                { key: "speed", label: "Spd" },
+                { key: "ordnance", label: "Ord" },
+                { key: "hp", label: "HP" },
+                { key: "stun_hp", label: "Stun" },
+                { key: "armor", label: "Arm" },
+                { key: "price", label: "Price" }
+            ];
+
+            const table = document.createElement("table");
+            table.className = "character-table";
+            const thead = document.createElement("thead");
+            const tbody = document.createElement("tbody");
+
+            const headerRow = document.createElement("tr");
+            const viewTh = document.createElement("th");
+            viewTh.textContent = "View";
+            headerRow.appendChild(viewTh);
+
+            columns.forEach(col => {
+                const th = document.createElement("th");
+                th.textContent = col.label;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+
+            data.forEach(row => {
+                const tr = document.createElement("tr");
+                const viewTd = document.createElement("td");
+                const viewBtn = document.createElement("button");
+                viewBtn.textContent = "View";
+                viewBtn.onclick = () => openItemModal({
+                    name: row.name,
+                    description: row.description,
+                    image: row.image_url ? `/static/img/${row.image_url}` : "/static/img/placeholder.png"
+                });
+                viewTd.appendChild(viewBtn);
+                tr.appendChild(viewTd);
+
+                columns.forEach(col => {
+                    const td = document.createElement("td");
+                    td.textContent = row[col.key] ?? "";
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            container.appendChild(table);
+        })
+        .catch(err => {
+            console.error(err);
+            container.textContent = "Error loading combat drones.";
+        });
 }
 
 

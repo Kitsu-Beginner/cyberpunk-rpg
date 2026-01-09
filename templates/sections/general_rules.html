@@ -96,7 +96,7 @@
           </tr>
           <tr>
             <td>Agility</td>
-            <td>Bodily coordination, precision, and control of fine and gross motor skills.</td>
+            <td>Bodily coordination, precision, speed and control of fine and gross motor skills.</td>
           </tr>
           <tr>
             <td>Reaction</td>
@@ -152,14 +152,14 @@
       <p>When a character suffers Physical Damage, they must reduce their Physical Attributes (Stamina, Strength, Agility, or Reaction) by a total equal to the damage received.</p>
       <ul>
         <li>The player (or defender) chooses which attributes to lower, reflecting how the injury manifests. (Example: a gunshot might lower Strength and Agility, while electric shock could reduce Reaction.)</li>
-        <li>Attribute reductions apply immediately and affect all derived rolls that use those attributes.</li>
+        <li>Attribute reductions apply immediately and affect all derived rolls that use those attributes. Damage is dealt to the modified attribute values, so enhanced attribute (cyberware, druges or spells) raise the totla amount of damage a character can take.</li>
         <li>Attributes cannot be reduced below 0. If an attribute would be reduced below 0, the character is incapacitated or killed, depending on the source of damage and GM discretion.</li>
       </ul>
       <h4>Stun Damage</h4>
-      <p>When a character suffers Stun Damage (Brawl, stun weapons, Blasts or Drain), they must reduce their Mental Attributes (Intuition, Logic, or Composure) by a total equal to the damage taken.</p>
+      <p>When a character suffers Stun Damage (Brawl, stun weapons, converted physicla damage throzgh armor, Blasts, Drain), they must reduce their Mental Attributes (Intuition, Logic, or Composure) by a total equal to the damage taken.</p>
       <ul>
         <li>The player chooses which attributes are reduced, representing the mental impact of the effect.</li>
-        <li>If all three mental attributes are reduced to 0, the character loses consciousness or becomes mentally incapacitated.</li>
+        <li>If a mental attribute is lowered to 0 this way, the character looses all remaining actions for that round and has to wait for it to recover next round. In general a character cannot act if any mental attribute is at 0.</li>
       </ul>
       <h4>Recovery</h4>
       <p>Attribute losses from damage are temporary and can be restored through rest, medical care, or mental recovery. You heal 1 point of one physical attribute per night's rest. You recover 1 point of one mental attribute per combat round</p>
@@ -182,16 +182,27 @@
       <h3>Speed</h3>
       <p><strong>Formula: (Agility + Reaction) / 2 (round up)</strong></p>
       <p>Speed determines how far a character can move per Action during combat. The result is measured in meters, representing the distance a character can cover in a single movement or tactical maneuver.</p>
+
       <ul>
         <li>A character may use one Action to move a number of meters equal to their Speed.</li>
+        <li>A character can spend his whole turn to sprint (speed+athletics) x 5 metres. He can do this for (athletics) consecutive rounds.</li>
         <li>Speed may be modified by cyberware, gear, or situational conditions (terrain, injuries, etc.).</li>
       </ul>
+
+
       <h3>Initiative</h3>
       <p><strong>Formula: Reaction + Intuition</strong></p>
-      <p>Initiative determines the order of actions in combat and other time-sensitive situations. At the start of an encounter, each participant rolls a number of dice equal to their Initiative score and counts total hits. Characters act in descending order of total hits.</p>
+      <p>Initiative determines the order of actions in combat and other time-sensitive situations. Characters can add 1d6 per spent AP to improve Intitiative at the start of each combat round.</p>
       <ul>
-        <li>Ties are resolved by comparing raw Initiative scores (higher acts first).</li>
-        <li>Cybernetic reflex enhancers or neural boosters may provide bonus dice to Initiative rolls.</li>
+        <li>Ties in Initiative means characters act simultaneously.</li>
+      
+      <h3>Willpower</h3>
+      <p><strong>Formula: Composure + Humanity</strong></p>
+      <p>Willpower can be spend to reroll a test and pick the better of the two rolls.</p>
+      <ul>
+       
+
+
       </ul>
     </div>
 
@@ -207,12 +218,12 @@
       <p>Each skill may have one Specialization, representing a focused area of expertise within that skill. A specialization grants a +2 dice bonus to any roll that directly applies to its field. Examples:</p>
       <ul>
         <li>Firearms (Pistols)</li>
-        <li>Hacking (Corporate Systems)</li>
-        <li>Medicine (Trauma Surgery)</li>
+        <li>Hacking (Drones)</li>
+        <li>Medicine (First Aid)</li>
         <li>Persuasion (Corporate Negotiation)</li>
-        <li>Driving (Motorcycles)</li>
+        <li>Vehicles (Motorcycles)</li>
       </ul>
-      <p>Specializations must be defined at character creation or gained through advancement and must be narrow enough to apply only in specific contexts.</p>
+      <p>Specializations can be bought for 2 XP and there can be only one specialization per skill.</p>
       <h3>Skill Ratings</h3>
       <table>
         <thead>
@@ -249,7 +260,7 @@
     </div>
 
      <div id="content-combat-system" class="content-block">
-      <h2>Combat System</h2>
+      <h2>Action System</h2>
       <p>Combat represents high-intensity situations such as firefights, brawls, or tactical operations. Time during combat is divided into <strong>Combat Rounds</strong>, each representing approximately five seconds of real time. All participants act in sequence according to their Initiative order, performing actions that cost <strong>Action Points (AP)</strong>.</p>
       <h3>Combat Round Structure</h3>
       <p>Each Combat Round follows the same sequence:</p>
@@ -262,11 +273,11 @@
           </ul>
         </li>
         <li><strong>Determine Initiative Order:</strong> All participants act in descending order of total Initiative (base + rolled dice). Ties are resolved by comparing base Initiative scores; if still tied, actions occur simultaneously.</li>
-        <li><strong>Take Actions:</strong> During their turn, each character may spend their remaining Action Points on movement, attacks, or other maneuvers until all AP are used or the round ends. A character can hold back Actions for defensive maneuvers.</li>
-        <li><strong>End of Round:</strong> Once all participants have acted, the round concludes. Action Points reset to 4, and a new round begins.</li>
+        <li><strong>Take Actions:</strong> During their turn, each character may spend their remaining Action Points on movement, attacks, or other maneuvers until all AP are used or the round ends. A character can hold back any amount of Actions for defensive maneuvers.</li>
+        <li><strong>End of Round:</strong> Once all participants have acted, the round concludes. Unused Action Points for Defense are lost. Action Points reset and a new round begins.</li>
       </ol>
       <h3>Action Points</h3>
-      <p>Each character begins a Combat Round with 4 Action Points (AP). Actions cost a number of AP depending on their complexity or time requirement. Players may combine actions freely as long as they have sufficient AP remaining.</p>
+      <p>Each character begins a Combat Round with 4 Action Points (AP). Actions cost a number of AP depending on their complexity or time requirement. Players may combine actions freely as long as they have sufficient AP remaining. Examples are:</p>
       <table>
         <thead>
           <tr>
@@ -279,27 +290,27 @@
           <tr>
             <td>Attack</td>
             <td>2</td>
-            <td>Make a standard attack using a weapon or unarmed strike.</td>
+            <td>Make a standard attack using a Firearm, a Melee weapon or unarmed strike.</td>
           </tr>
           <tr>
             <td>Take Aim</td>
             <td>1</td>
-            <td>Focus on a target; grants +3 die to the next attack made that round.</td>
+            <td>Focus on a target; grants +2 die to the next attack made with a firearm that round.</td>
           </tr>
           <tr>
-            <td>Move / Take Cover</td>
+            <td>Move</td>
             <td>1</td>
-            <td>Move a number of meters equal to Speed or dive behind cover.</td>
+            <td>Move a number of meters equal to Speed.</td>
           </tr>
           <tr>
             <td>Reload / Draw Weapon</td>
-            <td>2</td>
+            <td>3</td>
             <td>Reload a weapon or ready a new one.</td>
           </tr>
           <tr>
             <td>Dodge</td>
             <td>1</td>
-            <td>Add you Dodge Rating to a defense roll</td>
+            <td>Add you Dodge Rating to a defense roll and/or dive behind a cover within 2 metres.</td>
           </tr>
           <tr>
             <td>Special Action</td>
@@ -337,7 +348,7 @@
           </tr>
         </tbody>
       </table>
-      <p><strong>Example:</strong> A rifle with DMG 4 and PEN 2 hits a target wearing Armor 3. The armor’s effective protection is reduced to 1 (3 − 2). The defender’s armor then converts 1 point of Physical Damage into Stun Damage. The remaining 3 points apply as Physical Damage.</p>
+      
       <h3>Armor</h3>
       <p>Armor provides protection against Physical Damage by absorbing or dispersing kinetic and thermal energy. Each suit or layer of armor has an Armor Rating (AR) that represents its ability to reduce incoming harm.</p>
       <p><strong>Armor Rating Effect:</strong></p>
@@ -347,14 +358,26 @@
         <li>Any remaining Physical Damage after this conversion is applied normally.</li>
       </ul>
       <p><strong>Example:</strong> A target with AR 3 is hit by a pistol (DMG 3, PEN 0). All 3 points of Physical Damage are converted to Stun Damage instead of Physical Damage. If the same target is hit by a rifle (DMG 5, PEN 2), only 1 point of armor remains effective — converting 1 damage to Stun, while 4 Physical Damage is applied directly.</p>
+      
+      <h3>Shock Absorption</h3>
+      <p>Shock absorption negates an amount of stun damage completely.</p>
+      <p><strong>Shock absorption Rating Effect:</strong></p>
+      <ul>
+        <li>For each point of Shock Absorption, 1 point of Stun damage from a single attack is negated.</li>
+        <li>This applies to sources like a brawl attack, converted physical damage by armor or blast attacks.</li>
+        <li>It does not negate stun damage by drain or toxons for example.</li>
+      </ul>
+      
       <h3>Resolving Damage</h3>
       <ol>
         <li>Determine the net hits from the opposed roll (attacker vs. defender).</li>
-        <li>Add net hits to the weapon’s base Damage Rating (optional, if you use degrees of success to amplify damage).</li>
+        <li>Add net hits to the weapon’s base Damage Rating.</li>
         <li>Apply the weapon’s Penetration Rating, reducing the target’s effective Armor.</li>
         <li>The remaining Armor Rating converts 1 Physical Damage per point into Stun Damage.</li>
+        <li>Negate an amount of stun damage equal to your shock absorption.</li>
         <li>Apply the results as temporary reductions to the target’s Physical or Mental Attributes (as appropriate).</li>
       </ol>
+      <p><strong>Example:</strong> A rifle with DMG 4 and PEN 2 hits a target wearing Armor 3. The armor’s effective protection is reduced to 1 (3 − 2). The defender’s armor then converts 1 point of Physical Damage into Stun Damage. The remaining 3 points apply as Physical Damage.</p>
       <h3>Damage Types</h3>
       <table>
         <thead>

@@ -1,0 +1,488 @@
+Hacking regeln. 
+
+Mit Hacking versucht in der Regel ein Angreifer sich Zugriff 
+zu einem anderen System zu verschaffen.Hier gibt es 2 Arten,
+wireless greift ein andere Gerät direkt an und versucht es 
+zu übernehmen. Bei der anderen Methode stöpselt sich der 
+Hacker in ein geschlossenen Netzwerk, hier ist physischer 
+Zugang zu einem access point notwendig, hierzu gibt es noch 
+keine Regeln.
+
+Um ein Gerät über wireless zu hacken muss eine Verbindung zwischen
+beiden aufgebaut werden können. Jedes Gerät hat eine Signal 
+Reichweite(range). Innerhalb der geringsten Entfernung aller 
+Recihweiten kann eine Verbindung aufgebaut werden. Für
+2 Geräte mit zB 5 und 10km Reichweite könnten Innerhalb von 
+5km eine Verbindung aufgebaut werden. Für alle Geräte gilt,
+dass sich die Reichweite innerhalb von Städten halbiert.
+Geräte innerhalb dieser Reichweite können mit einem Programm
+gesichtet werden, darauf können dann weitere Aktionen 
+durchgeführt werden. Die Firewall Stärke eines Geräts gibt 
+in der Regel die Verteidigung gegen einen Angriff an, meist
+als Schwierigkeitsgrad. 
+Der Compute Wert gibt an wieviele und wie starke Programme
+geladen werden können. Cyberdecks als mobile Quantencomputer
+haben hier eine wesentlichen Vorteil gegenüber Standard
+Commlink. Jedes Programm benötigt 1 Compute pro level, das 
+Level des Programms wird dann zum dice pool für alle
+Angriife addiert.
+
+Firewall:
+
+Jedes ungenutze oder nicht anders vergebene compute eines 
+Gerätes wird automatisch zur firewall addiert. Ein commlink 
+mit firewall und compute gleich 2 hätte also eine effektive 
+firewall von 4, wenn keine anderen Progeamme ausgeführt werden 
+
+Hacking wird normalerweirse im slow oder standatd modus 
+durchgeführt, hier setzt der Hacker alle nötigen Programme 
+zusammen und lässt dann im wesentlichen eine KI den Angriff 
+abwickeln. Zuerst macht er einen einfachen Hackingwurf 
+und gibt an wieviel Compute er für einen Angriff nutzen 
+möchte. Das Setup des Angriffes dauert soviele Minute, wie 
+Compute benutzt werden soll. Die Erfolge des Hackingwurfes 
+werden notiert und dann zum Pool für den eigentilchen 
+Angriff addiert, der Angriffspool ist dann (Compute) + Erfolge 
+aus dem vorherigen Hackingwurf. 
+
+Die andere Metode ist über ein neurales Interface, 
+dauert das setup eine combat round für jeden compute wert 
+der eingesetzt werden soll. Dann wird ein WUrf aus 
+Hackingpool + Compute gewürfelt. 
+
+Ein Hackingangriff wird immer mit einem bestimmten Programm 
+durchgeführt, das den Effekt des Anriffs bestimmt. 
+Als erstes wird ind der Regel die Umgebung nach Geräten 
+gescannt, auf die dann weitere angriffe folgen können. 
+Die beim scanwurf erzielten Erfolge decken dann jedes Gerät 
+in Reichweite auf, dessen Firewall gleich oder kleiner der 
+Nummer der Erfolge ist. Hier erfährt der Angreifer aber nur 
+den Typ des Geräts und damit seine Werte. Auch kann er die 
+ungefähre Entfernung +- 1km abschätzen. 
+
+
+
+Jedes Gerät mit einer Signalreichweite und einem Firewall
+rating kann gehackt werden. Reine Wireless geräte haben 
+oft nur eine Reichweite von wenigen Metern, so dass Hacks
+nicht sinnvoll durchzuführen sind. Hack gegen reine 
+wireless Geräte werden in der Regeln über den zentralen
+Commlink geführt.
+
+
+Programme:
+
+Programme geben die Möglichkeiten, die ein Hacker hat. Alle 
+Aktionen werden als Programm ausgeführt.
+Programme werden in der Stärke des Compute Wert ausgeführt,
+einige Programme belegen dauerhalt Compute und reduzieren
+somit die maximale stärke des anderen programme.
+
+
+Liste der Programme
+
+1 Scan:
+
+Der user scannt und identifizert alle Gerate in Reichweite.
+Der User sieht jedes Gerät mit einem Firewall rating
+kleiner oder gleich der Erfolge.
+Dadurch werden Typ des Gerät und die ungefähre Entfernung 
+ausgelesen
+Kann nur mit einem cyberdeck und Drone Controller ausgeführt 
+werden.
+
+Gain reading access:
+
+Falls das gerät durch eine Scan erkannt wurde, kann der hacker 
+versuchen sich den ersten wirklichen zugang zum gerät zu verschaffen.
+Die beim Angriffwurf erzielten Erfolge müssen mindestens so hoch sein
+wie die firewall. Im flale eines Erfolges kann der ANgreifer Daten 
+auslesen wie Position, alle chats und medien, Kontakte usw. 
+Im Falle eines Mißerfolgs erhält der User des angegriffenen Geräts 
+eine Nachricht, die aber in der regel nicht unmittelbar gelesen 
+werden. Dies kann aber später nachvollzogen werden, dass ein Angriff 
+stattfand. 
+Kann nur mit einem Cyberdeck mit hacking_OS ausgeführt werden.
+
+
+
+Gain Admin access:
+
+Wenn einreading aces besteht kann danach ein weitere angriff ausgeführt 
+werden um admin access zu erhalten. Hier wird wieder ein Angriff 
+gewürfelt und die Anzahl der Erfolge sollten mindestens der firewall 
+entsprechen. Dadruch wird das Gerät effektiv übernommen. Ein Mißerfolg 
+sperrt das Geräte und wirft den Hacker komplett aus dem System. Es 
+können bis auf weiteres keine neuen Versuche gegen das Gerät 
+unternommen werden.
+Kann nur mit einem Cyberdeck mit hacking_OS ausgeführt werden.
+
+
+Slow down:
+
+Es wird ein Angriff gegen ein bekanntes Gerät gemacht, es muss kein 
+reading access bestehen. Dieses wird mit ein Flut an Anfragen 
+überlastest und verliert compute in Höhe der halben aufgerundeten 
+erfolge. Der eingesetzte Compute Wert gilt al belegt solange das 
+programm ausgeführt wird. 
+Kann nur mit einem Cyberdeck mit hacking_OS ausgeführt werden.
+
+Tactical Hud 
+
+Damit können verschiedene commlinks verbunden werden, die Daten 
+wie Position der Gegner, Munitionslevel, Daten vom Biomonitor usw. 
+eines teams untereinander geteilt werden. Dadurch weiß jedes 
+Mitglied im Verbund zB immer die Position aller gesichteteten 
+Gegner, auch wird eine KI Einschätzung der Gegner erstellt um 
+mögliche nächste Aktionen abzuschätzen. Dadurch werden Leute 
+im team nicht mehr flankiert (halber defense pool), solange 
+mindestens ein anderen teammitglied Sicht auf den angreifenden 
+Gegner hat. Benötigt 1 Compute.
+Kann nur mit einem Cyberdeck mit hacking_OS oder einem commlink 
+mit OS ausgeführt werden.
+
+Drohnenkontrolle 
+
+Mit jedem Gerät können Drohnen gestuert werden, dies kostet 
+1 compute pro aktiver drohne.
+
+
+Cyberdecks
+
+Cyberdecks sind tragbare Quantencomputer, die über weit größere 
+Rechenleistung verfügen und über ein spezielles Hacking OS 
+betrieben. Außerdem kann ein Cyberdeck über einen neuralen 
+Translator gesteuert werden und direkt durch neurale impulse 
+gesteuert werden. Cyberdecks können alles, was ein normaler 
+commlink oder drone controller kann.
+Aber nur mit cyberdecks können Angriffe zu Übernahme gegen 
+andere Systemem geführt werden.
+
+
+Kampfdrohnen;
+ 
+Hull: Hull is der Wert für Zähigkeit und Verteidigung. Aus dem Hull Wert 
+werden Armor (Hull = Armor) und ShockArmor (Hull/2) abgeleitet, Jeder 
+physische Schaden wird vom Hull Wert abgezogen und spiegelt Schaden an 
+Struktur und Armor wieder. 
+
+Auto: Der Auto Wert bestimmt die Intelligenz und Steuerunsfähigkeit einer 
+Drohne wieder. Alle Drohnen werden von eigener KI gesteuert, der User 
+gibt lediglich allgemeine Befehle an die Drohne, die sie dann selber 
+umsetzt. Aus dem Auto Wert werden Attack Pool (Auto), Defense Pool 
+(auto, manchmal auto/2, je nach Drohne), Action Points (Auto/2) und 
+Initiative (Auto) abgeleitet. Jeder Stun Schaden wird vom Auto Wert 
+abgezogen und spiegelt Schaden an den Systemen, der Sensorik oder 
+dem Gleichgewicht der Drohne wieder. 
+Die Drohne erholt 1 Stunschaden pro Combat round. 
+
+Ordnance: Gibt das Gewicht an, mit dem die Drohne ausgestattet werden kann. 
+Alle Waffen, Munition und Extras zählen zu diesem Wert. 
+
+Die anderen Werte wie signalrange, Firewall und speed sind die gleichen 
+Werte, die anderswo schon angegeben sind.
+
+Ein Spieler kann eine Drohne entweder direkt über ein AR interface steuern, 
+in dem Fall spielt der Spieler die Drohne anstatt sich selbst, während 
+er die Drohne steuert. Die Dicepolls sind aber nach wie vor vom Auto Wert 
+vorgegeben. Alle anderen aktiven Drohnen für die Compute eingesetzt wird, 
+werden GM gesteuert, der Spieler kann für 4 AP der Drohne allgemeine 
+Befehle geben oder Grundhaltungen einstellen (offensivm defensiv, Patrol...).
+Der GM steuert dann aber die Drohne anstatt des Spielers oder ermittelt 
+zufällig welche Ziele angegriffen werden. 
+Falls der Spieler über einen Drone translator verfügt, können alle aktiven 
+Drohnen, die vom entsprechenden Gerät mit compute gehostet werden, vom 
+Spieler selber gesteuert werden. Hierfür sind keine weiteren Aktionen 
+nötig. 
+
+Jede aktive Drohne kostet 1 Compute Wert von entsprechenden Gerät. Falls 
+dein Gerät gehackt wird kann der angreifende Hacker auf alle über das 
+Gerät aktivierten Drohnen zugreifen und entweder Daten auslesen 
+(reading access) oder die Befehle der Drohnen ändern (Admin access)
+
+
+Neue Module für den neural translator. 
+
+Für alle mentalen Attribute ein update des tranlator um Logik
+oder Intuition zu erhöhen. 0.1 humanity pro level und Bonus bes
+zum maximum von +3.
+
+Biomintor
+
+Überwacht alle wesentlichen Funktionen des Körpers und kann 
+kleinere Heilungen vornehmen. Kann mit einem drug dispenser 
+verbunden werden um automatische trigger zu setzen.
+stamina + 1.
+humanity - 0,1
+
+Nano Blutzellen
+
+Künstliche Nano Blutzellen unterstützen die Heilung und andere 
+Eigenschaften des Bluts. Der Träger kann 2 Schaden stamina
+ignorieren, wenn bestimmt wird ob er blutet. 
+stamina + 1
+humanity - 0,2
+
+Cybervorarm 
+
+Unterarm und Hand in cyberform. Hierzu gibt es verschiedene Modelle
+die unteschiedliche Effecte haben. Einige Ideen: Erhöhter auto_bonus,
+versteckte Kleinwaffe, ausfahrbare Klingen, eingebauter Commlink,
+Stärkebonus bei bestimmten Aufgaben.
+humanity - 0,5
+
+    Huawei faloconeer
+    Cybercvramr mit eingenautem Huawei Drohnencontroller. Kann mit Kabel 
+    an Vehicle OS angeschlossen werden. 
+
+    Eurotech Blademaster
+    vorarm mit ausfahrbarer langer Klingen
+
+    Basic Forearm
+    Simple Forearm with added +1 added strength for everything that 
+    requires gripping. Can hold some small gimmmicks at players and 
+    GMs discretion.
+
+    
+    Cyberdeck Forearm
+
+
+
+
+
+Cyberarm 
+
+Kompletter Arm in cyberform. Hierzu gibt es verschieden Modelle mit 
+unterschiedlichen Vorteilen. Im wesentlichen ähnliche Vorteile wie 
+beim Unterarm nur mehr und mit höheren Boni 
+humanity - 1
+
+
+Cyberunterbein
+
+Fuß und Schienenbein in cyberform. Hierzu gibt es verschieden Modelle 
+mit Vorteilen. Ideen. Sprungkraft, höhere Bewegung, micro thrusters,
+KLingen.
+
+
+Nahkampf - Unbewaffnet
+
+Wenn ein character innerhalb eines meters Recihweite eines anderen 
+ist, kann er einen Nahkampf Angriff durchführen. Dazu wählt er einen 
+Angriff aus und würfelt seine Angriffspool. 
+Hierzu gibt es verschiedene Aktionen, wie zB Strike (2AP) Takedown (3AP)
+oder Clinch (4AP)
+
+Der Verteidiger hat jetzt 3 Optionen: 
+
+Er hat keine AP mehr übrig oder will keine einsetzen, dann würfelt 
+er mit seinem halben Defense Pool 
+
+Er nutzt 1 AP für Dodge/take Cover. Er kann seinen vollen Defensepool 
++ Dodge würfeln wenn er auf offener Fläche ist und PLatz zum ausweichen 
+hat. In beengten Verhältnissen würfelt er halben Defense POol + Dodge.
+
+er nutzt 2 AP und kann damit einen opposed Close Cobat roll machen, mit 
+dem er auch Schaden am Angreifer verursachen kann.
+
+
+Nahkampf - Waffen 
+
+Ein Angriff mit Waffen wird ähnlich wie ein unbewaffneter Angriff 
+ausgeführt. Hier gibt es nur die Aktion Strike (2AP), mit der er 
+seinen Angriffs pool würfelt.
+
+Der Verteidiger kann mit 0 AP seinen halben Defense Pool würfeln, mit 
+1 AP ausweichen oder mit 2 AP zurückschlagen. 
+
+Waffen haben eine Reichweite, die einen Vorteil im Kampf ausmachen. 
+Jeder Reichweiten vorteil negiert einen Erfolg des Gegners, ein 
+Reichweiten vorteil von 2 (das maximum) negiert also 2 Erfolge in 
+jedem Verteidigungswurf. 
+
+Die Reichweite ist 0 für unbewaffneter Nahkampf, 1 für kleine Waffen wie 
+Messer, Beile, oder Lange Waffen in beengten Verhältnissen. Und 2 für 
+lange Waffen wie Schwerter oder Kampfäxte mit ausreichend Platz. 
+
+
+
+
+Nahkampf wird entweder als opposed roll Clos Combat gewürfetl oder 
+gegen defemse pool wenn nur ausgewichen werden soll. Schaden ist 
+Stärke durch 2 aufgerundet in stunschaden + net hits. Es gibt 3 
+Reichweiten, 0 für waffenlosen Nahkampf, 1 für messer und andere 
+kurze klingenwaffen oder Knüppel, sowie für lange Nahkampf Waffen 
+unter bengten Verhältnissen und 2 für lange Waffen mit ausreichend 
+Platz um sie einzusetzen, Jeder Reichweitenvorteil negiert einen 
+Erfolg des Gegners. 
+Nahkaomfwaffen haben einen Schadensbonus der zu Str/2 addiert wird 
+und können sowohl physichen als auch stunschaden verursachen. 
+Messer +1 physisch, Schwert + 2 oder +3 physische usw. 
+
+
+Willpower ist gleich composure + humanity, gleiche regeln wie bei vampire.
+
+
+Schaden und Heilung
+
+Physischer schaden wird immer von physischen attributen abgezogen. Die reduziert 
+unmittelbar alle daraus abgeleitenen Werte, wie skillbases oder abgeleitete 
+Werte wie Defense Pool oder Initiative. 
+
+Fällt ein Wert eines physischen Attributes auf 0, erleidet der Charakter einen 
+grundlegenden Ausfall einer Fähigkeit. 
+
+Als Schaden an Stamina zählt jeder Schaden an den Organen, den großen Arterien, 
+Schaden durch Gifte, Erstickungen, Schaden durch Ertrinken oder ähnliches.
+Fällt Stamina auf 0, gilt der Charakter als klinische tot und muss innerhalb 
+weniger Minuten behandelt werden oder er stirbt permenant. 
+
+Als Schaden an Stärke zählt Schaden an den Armen und den großen Muskeln im 
+Oberkörper. 
+Fällt Stärke auf 0, kann der Charakter seine Arme nicht mehr nutzen und kann 
+keine Angriffe mehr ausführen. Dies kann auch den Verlust eines Arms oder einer 
+Hand bedeuten. 
+
+Als Schaden an Agility zählt Schaden an den Beinen, sowie Sehnen und Gelenken. 
+Fällt Agility auf 0, kann sich der Charakter nicht mehr aufrecht bewegen, 
+er kann nur noch mit einer Geschwindigkeit von 1 kriechen. Er gilt immer als 
+flankiert und würfelt nur noch den halben (und deutlich reduzierten) Defense 
+Pool. 
+
+Als Schaden an Reaktion zählt Schaden am Kopf und dem Nervensystem und 
+Wirbelsäule. 
+Fällt Reaktion auf 0 ist der Charakter vollständig handlungsunfähig, entweder 
+bewußtlos durch ein Hirntrauma oder sonstwie bewegungsunfähig. 
+
+Sonderregel 1: 
+
+Jedes mal, wenn ein Attribut auf 0 fällt und damit vollständig ausfällt erleidet 
+der Charakter zusätzlich einen Punkt stamina Schaden, der den entsprechenden 
+Schaden an Arterien wiederspiegelt. 
+
+Sonderregel 2: 
+
+Jedes mal, wenn ein Charakter durch einen Angriff stamina Schaden erleidet, entsteht 
+eine Blutung. Dies gilt nur für Schaden, der nicht durch Gifte, Ertrinken o.ä. 
+verursacht wurde (meist Kugeln oder KLingen). Wenn ein Charakter blutet erleidet 
+er einen weiteren Punkt stamina Schaden alle 12 Kampfrunden. 
+Erleider der Charakter im folgenden durch einen weiteren Angriff nochmal stamina 
+schaden verkürzt sich die Zeit auf 6 Kampfrunden, in der ein weitere Stamina 
+Schaden entsteht. 
+Eine weitere verschlimmerung gibt es nicht. 
+
+Heilung: 
+
+Heilung erfolgt entweder duch einen skillroll auf medicine, durch nanorepair bots 
+oder durch Magie.
+
+Medicine skill roll:
+
+First Aid.
+
+Dies meint einen first aid roll, bei dem die gerade enstandenen Verletzungen 
+unmittelbar behandelt werden. Der behandelte Charakter sagt an, welches Attribut 
+er behandeln möchte und macht einen medicine roll. Er muss mindestens soviele 
+Erfolge würfeln, wie der charakter an Punkten in dem Attribut verloren hat. 
+Gelingt ihm dies, heilt er 1 Punkt Schaden an dem Attribut. 
+Alternativ kann er ansagen, eine Blutung zu stoppen, dazu benötigt er 1 Erfolg 
+für eine Blutung Stufe 1 (12 Kampfrunden) oder 2 Erfolge für eine Blutung 
+Stufe 2 (6 Kampfrunden). 
+Eine Blutung zu stoppen dauert 2 volle Kampfrunden, eine Attribut zu heilen dauert 
+12 volle Kampfrunden (1 Minute). 
+Behandelt sich der Verletzte selbst, wirft er nur seinen halben medicine pool. 
+
+Dies setzt vorraus, dass der Behandelnde über ein standard first aid kit 
+verfügt.
+
+Es kann nur ein Attribut behandelt werden, dass nicht auf 0 gesunken ist. Ist 
+ein Attribut erstmal auf 0 gesunken und damit völlig zerstört, ist eine 
+kompliziertere Behandlung im Krankenhaus nötig.
+
+
+Nano Repair bots:
+
+Dies sind teure Einweg Injektionen von Nanobots, die Schaden an Gewebe reparieren.
+Jede Dosis heilt 1 Punkt Schaden an einem Attribut innerhalb einer Minute. Es 
+können damit nur Attribute geheilt werden, die noch nicht auf 0 gefallen sind. 
+Sie können auch auf eine Blutung aufgetragen werden um sie innerhalb einer 
+Kampfrunde zu stoppen. Die Nanobots können beliebig oft hintereinander auf ein 
+Attribut angewendet werden. 
+
+
+
+Magie:
+
+Her gibt es noch keine Regeln
+
+
+Stun / Mentaler Schaden
+
+Neben physischen Schaden gibt es noch Betäubingsschaden, dieser wird ähnlich wie 
+der physische Schaden von den Attributen abgezogen, in diesem Fall aber den 
+geistigen (Intuition, Logix, Compusure). Pro Punkt Schaden muss ein Attribut um 
+1 gesenkt werden. 
+
+Fällt eines dieser Attribute auf 0 verliert der Charakter alle weiteren Handlungen 
+in der Kampfrunde und kann erst wieder handeln, wenn alle geistigen Attribute 
+wieder mindestens den Wert 1 erreicht haben. 
+
+Fällt Intuition auf 0 ist der charakter entweder geblendet oder sonstwie 
+disorientiert (ihm wird schwarz vor Augen). 
+Fällt Logic auf 0 ist der charakter verwirrt und kognitiv handlungsunfähig. 
+
+Fällt Composure auf 0 ist der Charakter gelähmt, er fällt in eine Art Schockstarre. 
+
+
+Heilunge
+
+Am Anfang jeder Kampfrunde regeneriert jeder Charakter einen Punkt in einem 
+beliebigen gesistigen Attribut. 
+
+
+
+Kampfmanöver. In jeder Waffenkategorie können bestimmte manöver ausgeführt werden. 
+diese können auch andere attribute als skillbase nutzen. Auch können situative Mods 
+angewendet werden wie in vampire. 
+
+Ein Beispiel wäre "called Shot" (3AP) bei dem man ein körperteil gezielt treffen kann. 
+Für Beine und Torso mit -1 success malus und bei Kopf und Arm -2 success malus.
+Die skillbase ist composure_logic. 
+
+Ein anderes wäre takedown. Der Angreifer macht 1 schaden pro nethit und bringt den 
+gegner in eine nachteilige prone position. skillbase ist agility_strength.
+
+
+
+Judowurf (3 AP). Der Angreifer fällt mit dem target zu Boden und macht mehr schaden.
+Gewinnt er den Wurf macht er (Str/2) Schaden und fällt mit dem Gegner zu Boden.
+ Er befindet sich dann in einer dominanten Bodenposition und kann Angriffe auf die 
+physischen attriubte strength und agility ausführen (Arm and leg locks).
+Der Verteidiger kann sich mit einem gewonnenen Clinch/Grapple Wurf wieder befreien 
+und aufstehen.
+Attribute sind Stamina und Strength. Nur mit Spezialisierung Unarmed nutzbar
+
+
+
+<waffe blockieren (2AP): Wenn der Angreifer gewinnt kann er die Waffen greifen und blockieren.
+Klingenwaffen zählen als + 1 Reichweite wenn der Malus bestimmt wird. Wenn der Wurf gelingt 
+gilt keine Reichweitenbonus mehr für folgende Tests. Der Verteidiger kann für 2 AP versuchen, 
+sich loszureißen. Ein Erfolg reicht um die Waffe wieder frei zu bekommen. 
+Attribute sind agility und strength. 
+
+Entwaffen (2AP): Hat der Angreider die Waffe blockiert, kann er mit einem einfachen Erfolg 
+ohne den Reichweitenmalus die Waffe zu Boden werfen oder, falls der Angreifer mindestens
+ so viele net hits wie der Recihweitenvorteil hat, die Waffe übernehmen. 
+ Attribute sind strength und stamina.
+
+ Gun Jitsu Attack (2AP)
+
+ When using a pistol in close combat you can roll your close combat pool but use the 
+ damage of your weapon instead. You can use the called shot freely to gain the called 
+ shot ability to target a single attribute (-1 für Torso und Beine, -2 für Arme und 
+ Kopf). 
+
+
+Called MeleeStrike (3 AP): Der Angreifer kann mit einer Waffe ein bestimmtes Attribut 
+attackieren, je nach Art des Schadens entweder ein physisches oder geistiges ( bei Stunschaden).
+
